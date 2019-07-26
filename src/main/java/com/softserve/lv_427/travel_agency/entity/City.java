@@ -1,13 +1,14 @@
 package com.softserve.lv_427.travel_agency.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "City")
-@Data
+@Table(name = "city")
+@Getter
+@Setter
 @NoArgsConstructor
 public class City {
   @Id
@@ -17,5 +18,10 @@ public class City {
   @Column(name = "city_name")
   private String cityName;
 
-  @ManyToOne private Country country;
+  @ManyToOne
+  @JoinColumn(name = "country_id")
+  private Country country;
+
+  @OneToMany(mappedBy = "city")
+  private List<Hotel> hotels;
 }

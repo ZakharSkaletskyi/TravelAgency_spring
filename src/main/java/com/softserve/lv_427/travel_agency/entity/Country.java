@@ -1,14 +1,14 @@
 package com.softserve.lv_427.travel_agency.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Country")
-@Data
+@Table(name = "country")
+@Getter
+@Setter
 @NoArgsConstructor
 public class Country {
   @Id
@@ -18,6 +18,12 @@ public class Country {
   @Column(name = "country_name")
   private String countryName;
 
-  @OneToMany(mappedBy = "id")
+  @ManyToOne
+  private Visa visa;
+
+  @OneToMany(mappedBy = "country")
   private List<City> cities;
+
+  @ManyToMany(mappedBy = "countries")
+  private List<Client> visitors;
 }
