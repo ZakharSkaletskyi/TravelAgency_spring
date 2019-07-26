@@ -1,9 +1,10 @@
 package com.softserve.lv_427.travel_agency.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "room_book_archive")
@@ -15,17 +16,19 @@ public class RoomBookArchive {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @Column(name = "order_start")
+  @Column(name = "order_start", nullable = false)
+  @Type(type = "date")
   private Date orderStart;
 
-  @Column(name = "order_end")
+  @Column(name = "order_end", nullable = false)
+  @Type(type = "date")
   private Date orderEnd;
 
-  @ManyToOne
-  @JoinColumn(name = "room_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "room_id", nullable = false)
   private Room room;
 
-  @ManyToOne
-  @JoinColumn(name = "client_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "client_id", nullable = false)
   private Client client;
 }

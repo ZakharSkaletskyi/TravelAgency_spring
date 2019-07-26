@@ -1,11 +1,9 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
-import com.softserve.lv_427.travel_agency.dao.CountryDao;
 import com.softserve.lv_427.travel_agency.dao.impl.CountryDaoImpl;
-import com.softserve.lv_427.travel_agency.entity.Country;
+import com.softserve.lv_427.travel_agency.service.AutoPopulateDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CountryServiceImpl {
@@ -16,12 +14,5 @@ public class CountryServiceImpl {
   public CountryServiceImpl(CountryDaoImpl dao, AutoPopulateDB populateDB) {
     this.dao = dao;
     this.populateDB = populateDB;
-  }
-
-  @Transactional
-  public void get() {
-    populateDB.populate();
-    Country country = dao.test(1);
-    System.out.println(country);
   }
 }

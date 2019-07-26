@@ -3,6 +3,7 @@ package com.softserve.lv_427.travel_agency.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,12 +16,12 @@ public class Visa {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @Column(name = "visa_name")
+  @Column(name = "visa_name", nullable = false, length = 30)
   private String visaName;
 
-  @OneToMany(mappedBy = "visa")
-  private List<Country> countries;
+  @OneToMany(mappedBy = "visa", fetch = FetchType.LAZY)
+  private List<Country> countries = new ArrayList<>();
 
-  @ManyToMany(mappedBy = "visas")
-  private List<Client> clients;
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "visas")
+  private List<Client> clients = new ArrayList<>();
 }

@@ -18,7 +18,6 @@ public class AboutController {
 
   @RequestMapping(value = "/about", method = RequestMethod.GET)
   public ModelAndView mainPage() {
-    service.get();
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("about");
     return modelAndView;
