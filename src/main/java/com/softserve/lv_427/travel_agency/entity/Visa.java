@@ -17,7 +17,7 @@ public class Visa {
   private int id;
 
   @Column(name = "visa_name", nullable = false, length = 30)
-  private String visaName;
+  private String name;
 
   @OneToMany(mappedBy = "visa", fetch = FetchType.LAZY)
   private List<Country> countries = new ArrayList<>();

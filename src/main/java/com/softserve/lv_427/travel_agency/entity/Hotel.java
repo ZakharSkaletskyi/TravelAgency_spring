@@ -17,7 +17,7 @@ public class Hotel {
   private int id;
 
   @Column(name = "hotel_name", nullable = false, length = 30)
-  private String hotelName;
+  private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "city_id", nullable = false)
