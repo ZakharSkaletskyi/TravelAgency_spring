@@ -22,6 +22,30 @@ class VisaServiceImpl implements VisaService {
 
   @Override
   @Transactional
+  public void add(Visa visa) {
+    dao.add(visa);
+  }
+
+  @Override
+  @Transactional
+  public Visa getById(int id) {
+    return dao.getById(id);
+  }
+
+  @Override
+  @Transactional
+  public void delete(Visa visa) {
+    dao.delete(visa);
+  };
+
+  @Override
+  @Transactional
+  public void edit(Visa visa) {
+    dao.edit(visa);
+  };
+
+  @Override
+  @Transactional
   public int getId(String name) throws SQLException, ClassNotFoundException {
     return dao.getId(name);
   }

@@ -11,7 +11,15 @@ public interface VisaService {
 
   int getVisasCountForTheClient(int clientId) throws SQLException;
 
-List<Visa> getVisasForTheClient(int clientId) throws SQLException,ClassNotFoundException;
+  List<Visa> getVisasForTheClient(int clientId) throws SQLException, ClassNotFoundException;
 
-int CountVisaForCountry(int countryId) throws SQLException;
+  int CountVisaForCountry(int countryId) throws SQLException;
+
+  void add(Visa visa);
+
+  Visa getById(int id);
+
+  void delete(Visa visa);
+
+  void edit(Visa visa);
 }

@@ -13,43 +13,41 @@ import com.softserve.lv_427.travel_agency.service.ClientService;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-  private ClientDao clientDAO;
+  private ClientDao dao;
 
   @Autowired
-  public ClientServiceImpl(ClientDao clientDAO) {
-    this.clientDAO = clientDAO;
+  public ClientServiceImpl(ClientDao dao) {
+    this.dao = dao;
   }
 
   @Override
   @Transactional
   public Client getById(int id) {
-    // TODO Auto-generated method stub
-    return clientDAO.getById(id);
+    return dao.getById(id);
   }
 
   @Override
   @Transactional
   public void add(Client client) {
-    // TODO Auto-generated method stub
-
+    dao.add(client);
   }
 
   @Override
   @Transactional
   public List<Client> getAllClients() {
-    return clientDAO.getAllClient();
+    return dao.getAllClient();
   }
 
   @Override
   @Transactional
   public int getClientId(String firstName, String lastName)
       throws SQLException, ClassNotFoundException {
-    return clientDAO.getClientId(firstName, lastName);
+    return dao.getClientId(firstName, lastName);
   }
 
   @Override
   @Transactional
   public Client getClient(int id) throws SQLException, ClassNotFoundException {
-    return clientDAO.getClient(id);
+    return dao.getClient(id);
   }
 }

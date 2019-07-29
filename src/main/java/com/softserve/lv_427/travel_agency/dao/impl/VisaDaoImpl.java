@@ -95,6 +95,5 @@ public class VisaDaoImpl implements VisaDao {
             .uniqueResult();
 
     return count.intValue();
-
   }
 }
