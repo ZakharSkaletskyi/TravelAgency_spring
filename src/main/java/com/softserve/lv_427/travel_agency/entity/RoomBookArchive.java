@@ -1,10 +1,8 @@
 package com.softserve.lv_427.travel_agency.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "room_book_archive")
@@ -17,12 +15,10 @@ public class RoomBookArchive {
   private int id;
 
   @Column(name = "order_start", nullable = false)
-  @Type(type = "date")
-  private Date orderStart;
+  private String orderStart;
 
   @Column(name = "order_end", nullable = false)
-  @Type(type = "date")
-  private Date orderEnd;
+  private String orderEnd;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "room_id", nullable = false)

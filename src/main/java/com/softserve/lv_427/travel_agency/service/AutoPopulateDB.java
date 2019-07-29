@@ -183,32 +183,32 @@ public class AutoPopulateDB {
     number2_8.setHotel(gonville);
 
     RoomBook roomBook1 = new RoomBook();
-    roomBook1.setOrderStart(new SimpleDateFormat("yyyy-MM-dd").parse("2019-01-06"));
-    roomBook1.setOrderEnd(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-31"));
+    roomBook1.setOrderStart("2019-01-06");
+    roomBook1.setOrderEnd("2019-07-31");
     roomBook1.setClient(nazar);
     roomBook1.setRoom(number2_1);
 
     RoomBook roomBook2 = new RoomBook();
-    roomBook2.setOrderStart(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-03"));
-    roomBook2.setOrderEnd(new SimpleDateFormat("yyyy-MM-dd").parse("2019-08-01"));
+    roomBook2.setOrderStart("2019-07-03");
+    roomBook2.setOrderEnd("2019-08-01");
     roomBook2.setClient(zakhar);
     roomBook2.setRoom(number1_1);
 
     RoomBook roomBook3 = new RoomBook();
-    roomBook3.setOrderStart(new SimpleDateFormat("yyyy-MM-dd").parse("2019-06-24"));
-    roomBook3.setOrderEnd(new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-15"));
+    roomBook3.setOrderStart("2019-06-24");
+    roomBook3.setOrderEnd("2019-09-15");
     roomBook3.setClient(alexandr);
     roomBook3.setRoom(number2_2);
 
     RoomBookArchive roomBookArchive1 = new RoomBookArchive();
-    roomBookArchive1.setOrderStart(new SimpleDateFormat("yyyy-MM-dd").parse("2019-01-23"));
-    roomBookArchive1.setOrderEnd(new SimpleDateFormat("yyyy-MM-dd").parse("2019-03-25"));
+    roomBookArchive1.setOrderStart("2019-01-23");
+    roomBookArchive1.setOrderEnd("2019-03-25");
     roomBookArchive1.setClient(alexandr);
     roomBookArchive1.setRoom(number1_1);
 
     RoomBookArchive roomBookArchive2 = new RoomBookArchive();
-    roomBookArchive2.setOrderStart(new SimpleDateFormat("yyyy-MM-dd").parse("2019-01-10"));
-    roomBookArchive2.setOrderEnd(new SimpleDateFormat("yyyy-MM-dd").parse("2019-02-15"));
+    roomBookArchive2.setOrderStart("2019-01-10");
+    roomBookArchive2.setOrderEnd("2019-02-15");
     roomBookArchive2.setClient(zakhar);
     roomBookArchive2.setRoom(number2_1);
 

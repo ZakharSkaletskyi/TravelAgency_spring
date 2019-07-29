@@ -5,16 +5,12 @@ import com.softserve.lv_427.travel_agency.dao.CountryDao;
 import com.softserve.lv_427.travel_agency.entity.City;
 import com.softserve.lv_427.travel_agency.entity.Client;
 import com.softserve.lv_427.travel_agency.entity.Country;
-import com.softserve.lv_427.travel_agency.entity.Visa;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 @Repository
@@ -59,7 +55,7 @@ public class CountryDaoImpl implements CountryDao {
   @Override
   public List<Country> findAll() {
     Session session = sessionFactory.getCurrentSession();
-    return session.createQuery("from Country").list();
+    return session.createQuery("from Country", Country.class).list();
   }
 
   @Override
