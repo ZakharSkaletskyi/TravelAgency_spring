@@ -38,6 +38,18 @@ public class ClientDaoImpl implements ClientDao {
     Session session = sessionFactory.getCurrentSession();
     session.persist(client);
   }
+
+  @Override
+  public void delete(Client client) {
+    Session session = sessionFactory.getCurrentSession();
+    session.delete(client);
+  }
+
+  @Override
+  public void edit(Client client) {
+    Session session = sessionFactory.getCurrentSession();
+    session.update(client);
+  }
   /**
    * Method that find and return client id by his firstName and lastName.
    *
@@ -50,12 +62,12 @@ public class ClientDaoImpl implements ClientDao {
   public int getClientId(String firstName, String lastName)
       throws SQLException, ClassNotFoundException {
     Session session = sessionFactory.getCurrentSession();
-    return
-        session
-            .createQuery("SELECT id FROM Client WHERE first_name = ?1 AND last_name = ?2", Integer.class)
-            .setParameter(1, firstName)
-            .setParameter(2, lastName)
-            .uniqueResult();
+    return session
+        .createQuery(
+            "SELECT id FROM Client WHERE first_name = ?1 AND last_name = ?2", Integer.class)
+        .setParameter(1, firstName)
+        .setParameter(2, lastName)
+        .uniqueResult();
   }
 
   /**
@@ -70,35 +82,12 @@ public class ClientDaoImpl implements ClientDao {
   public Client getClient(int id) throws SQLException, ClassNotFoundException {
     Session session = sessionFactory.getCurrentSession();
     Client client =
-        
-            session
-                .createQuery("SELECT * FROM Client WHERE id = ?1", Client.class)
-                .setParameter(1, id)
-                .getResultList()
-                .get(0);
+        session
+            .createQuery("SELECT * FROM Client WHERE id = ?1", Client.class)
+            .setParameter(1, id)
+            .getResultList()
+            .get(0);
     if (client == null) throw new ClassNotFoundException("In DB no row with id " + id);
     return client;
   }
-
-  //  public List<Client> findAll() throws SQLException {
-  //	    PreparedStatement preparedStatement =
-  //	        connection.prepareStatement("SELECT * FROM travel_agency.client");
-  //
-  //	    ResultSet resultSet = preparedStatement.executeQuery();
-  //
-  //	    ArrayList<Client> clients = new ArrayList<>();
-  //	    while (resultSet.next()) {
-  //	      clients.add(
-  //	          new Client(
-  //	              resultSet.getInt(ID),
-  //	              resultSet.getString(FIRST_NAME),
-  //	              resultSet.getString(LAST_NAME),
-  //	              resultSet.getString(PHONE_NUMBER)));
-  //	    }
-  //	    return clients;
-  //	  }
-  //
-  //
-  //
-
 }

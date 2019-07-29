@@ -29,19 +29,19 @@ public class Main {
 //            e.printStackTrace();
 //        }
 //    }
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-  public static void main(String[] args) {
-    // TODO Auto-generated method stub
-      Session session = sessionFactory.getCurrentSession();
-
-	  ClientDao dao= new ClientDaoImpl();
-	  ClientService serv =new ClientServiceImpl();
-	  System.out.println("ClientDao: "+dao.toString());
-	  System.out.println("Client Service"+serv.getAllClients());
-  }
+//    private SessionFactory sessionFactory;
+//
+//    @Autowired
+//    public void setSessionFactory(SessionFactory sessionFactory) {
+//        this.sessionFactory = sessionFactory;
+//    }
+//  public static void main(String[] args) {
+//    // TODO Auto-generated method stub
+//      Session session = sessionFactory.getCurrentSession();
+//
+//	  ClientDao dao= new ClientDaoImpl();
+//	  ClientService serv =new ClientServiceImpl();
+//	  System.out.println("ClientDao: "+dao.toString());
+//	  System.out.println("Client Service"+serv.getAllClients());
+//  }
 }

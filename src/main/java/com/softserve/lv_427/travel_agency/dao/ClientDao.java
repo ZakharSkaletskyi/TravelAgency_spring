@@ -16,7 +16,12 @@ public interface ClientDao {
 
   public Client getById(int id);
 
-public int getClientId(String firstName,String lastName) throws SQLException,ClassNotFoundException;
+  public void delete(Client client);
 
-public Client getClient(int id) throws SQLException,ClassNotFoundException;
+  public void edit(Client client);
+
+  public int getClientId(String firstName, String lastName)
+      throws SQLException, ClassNotFoundException;
+
+  public Client getClient(int id) throws SQLException, ClassNotFoundException;
 }

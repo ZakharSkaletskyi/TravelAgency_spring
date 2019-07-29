@@ -3,7 +3,6 @@ package com.softserve.lv_427.travel_agency.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Table(name = "room_book_archive")
@@ -15,17 +14,17 @@ public class RoomBookArchive {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @Column(name = "order_start")
-  private Date orderStart;
+  @Column(name = "order_start", nullable = false)
+  private String orderStart;
 
-  @Column(name = "order_end")
-  private Date orderEnd;
+  @Column(name = "order_end", nullable = false)
+  private String orderEnd;
 
-  @ManyToOne
-  @JoinColumn(name = "room_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "room_id", nullable = false)
   private Room room;
 
-  @ManyToOne
-  @JoinColumn(name = "client_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "client_id", nullable = false)
   private Client client;
 }

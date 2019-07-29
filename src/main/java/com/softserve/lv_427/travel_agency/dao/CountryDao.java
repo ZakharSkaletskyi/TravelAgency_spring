@@ -1,15 +1,24 @@
 package com.softserve.lv_427.travel_agency.dao;
 
-import java.util.List;
-
 import com.softserve.lv_427.travel_agency.entity.City;
 import com.softserve.lv_427.travel_agency.entity.Country;
 
-public interface CountryDao {
+import java.util.List;
 
-  List<City> test(int id);
+public interface CountryDao {
+  void add(Country country);
 
   Country getById(int id);
 
-  void add(Country country);
+  void delete(Country country);
+
+  void edit(Country country);
+
+  int getId(String countryName);
+
+  List<Country> getVisitedCountries(int clientId);
+
+  List<City> getCitiesByCountryId(int id);
+
+  List<Country> findAll();
 }
