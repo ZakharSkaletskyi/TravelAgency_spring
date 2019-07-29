@@ -14,7 +14,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>
@@ -31,7 +30,8 @@
         HotelService hotelService = new HotelServiceImpl();
     %>
 
-    <p>К-сть кімнат: <b><%=roomService.getRoomCount(Integer.parseInt(session.getAttribute("hotelId").toString()))%></b></p>
+    <p>К-сть кімнат: <b><%=roomService.getRoomCount(Integer.parseInt(session.getAttribute("hotelId").toString()))%>
+    </b></p>
 
     <% if ((session.getAttribute("start_date") == null) && (session.getAttribute("end_date") == null)) { %>
     <form action="/hotel" method="post">
