@@ -39,4 +39,5 @@ public class ClientDaoImpl implements ClientDao {
     Session session = sessionFactory.getCurrentSession();
     session.update(client);
   }
+
 }

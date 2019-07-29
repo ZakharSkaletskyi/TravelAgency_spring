@@ -39,4 +39,5 @@ public class HotelDaoImpl implements HotelDao {
     Session session = sessionFactory.getCurrentSession();
     session.update(hotel);
   }
+
 }

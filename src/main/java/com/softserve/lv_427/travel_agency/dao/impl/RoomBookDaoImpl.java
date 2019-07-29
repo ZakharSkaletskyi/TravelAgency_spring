@@ -39,4 +39,9 @@ public class RoomBookDaoImpl implements RoomBookDao {
     Session session = sessionFactory.getCurrentSession();
     session.update(roomBook);
   }
+
+  @Override
+  public void movePastBookingToArchive() {
+
+  }
 }
