@@ -1,8 +1,6 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
-import com.softserve.lv_427.travel_agency.dao.CountryDao;
 import com.softserve.lv_427.travel_agency.dao.impl.CountryDaoImpl;
-import com.softserve.lv_427.travel_agency.entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +16,10 @@ public class CountryServiceImpl {
     this.populateDB = populateDB;
   }
 
-  @Transactional
-  public void get() {
-    populateDB.populate();
-    Country country = dao.test(1);
-    System.out.println(country);
-  }
+//  @Transactional
+//  public void get() {
+//    populateDB.populate();
+////    Country country = dao.test(1);
+//   // System.out.println(country);
+//  }
 }
