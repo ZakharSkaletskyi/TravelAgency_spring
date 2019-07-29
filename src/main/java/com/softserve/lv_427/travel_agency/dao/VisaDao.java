@@ -20,4 +20,6 @@ public interface VisaDao {
   int getVisasCountForTheClient(int clientId) throws SQLException;
 
   List<Visa> getVisasForTheClient(int clientId) throws SQLException, ClassNotFoundException;
+
+  int CountVisaForCountry(int countryId) throws SQLException;
 }

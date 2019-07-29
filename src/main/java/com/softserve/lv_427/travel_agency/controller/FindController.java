@@ -24,10 +24,8 @@ public class FindController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public ModelAndView mainPage() {
-    //    List<Client> clients = clientService.getAllClients(); // ///test
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("index");
-    //    modelAndView.addObject("clients", clients); // ///test
     return modelAndView;
   }
 
@@ -37,7 +35,6 @@ public class FindController {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("find/find");
     modelAndView.addObject("clients", clients);
-    // modelAndView.addObject("date", date.getLocalDate().getClass());
     return modelAndView;
   }
 
@@ -48,28 +45,36 @@ public class FindController {
     System.out.println("test");
     System.out.println(dateStart);
     System.out.println(dateEnd.toString());
-   
-    
-    {//////////////////////////test
-    	
-    		
-    	
-    	try {
-    		
-        	
-   System.out.println(visaService.getId("J Q"));
-   System.out.println(visaService.getId("British tourist"));
-   
-   System.out.println(visaService.getVisasCountForTheClient(clientId));
-      
-    } catch (ClassNotFoundException | SQLException e) {
-      // TODO Auto-generated catch block
-    e.printStackTrace();
-    } 
-    	
-    	
-    }
-    
+
+    //        { ////////////////////////// test
+    //          try {
+    //        	  System.out.println(visaService.CountVisaForCountry(4));
+    //        	  System.out.println(visaService.CountVisaForCountry(3));
+    //        	  System.out.println(visaService.CountVisaForCountry(2));
+
+    //            System.out.println(visaService.getId("J Q"));
+    //            System.out.println(visaService.getId("British tourist2"));
+    //
+    //            System.out.println(visaService.getVisasCountForTheClient(11));
+    //            System.out.println(visaService.getVisasCountForTheClient(12));
+    //            System.out.println(visaService.getVisasCountForTheClient(1));
+    //
+    //            System.out.println(visaService.getVisasForTheClient(11));
+    //            visaService.getVisasForTheClient(11).forEach(s->System.out.print(s.getVisaName()+"
+    //     |"));
+    //            System.out.println();
+    //            System.out.println(visaService.getVisasForTheClient(12));
+    //            visaService.getVisasForTheClient(12).forEach(s->System.out.print(s.getVisaName()+"
+    //     |"));
+    //            System.out.println();
+    //            System.out.println(visaService.getVisasForTheClient(1));
+    //
+    //          } catch (SQLException e) {
+    //            // TODO Auto-generated catch block
+    //            e.printStackTrace();
+    //          }
+    //        }
+
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("redirect:/find_country");
     return modelAndView;

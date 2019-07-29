@@ -18,8 +18,7 @@ public class Country {
   @Column(name = "country_name")
   private String countryName;
 
-  @ManyToOne
-  private Visa visa;
+  @ManyToOne private Visa visa;
 
   @OneToMany(mappedBy = "country")
   private List<City> cities;
