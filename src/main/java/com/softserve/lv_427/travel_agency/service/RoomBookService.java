@@ -11,5 +11,5 @@ public interface RoomBookService {
 
     void edit(RoomBook roomBook);
 
-    void movePastBookingToArchive();
+    void managePastBookingToArchive();
 }

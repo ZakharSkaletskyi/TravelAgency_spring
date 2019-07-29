@@ -12,4 +12,6 @@ public interface RoomBookDao {
   void edit(RoomBook roomBook);
 
   void movePastBookingToArchive();
+
+  void deletePastBookingToArchive();
 }
