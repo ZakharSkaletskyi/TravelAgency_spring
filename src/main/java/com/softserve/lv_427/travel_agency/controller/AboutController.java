@@ -11,12 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AboutController {
-//	  final CountryServiceImpl service;
-//
-//	  @Autowired
-//	  public AboutController(CountryServiceImpl service) {
-//	    this.service = service;
-//	  }
+	@Autowired private CountryServiceImpl service;
+
   @RequestMapping(value = "/about", method = RequestMethod.GET)
   public ModelAndView mainPage() {
     ModelAndView modelAndView = new ModelAndView();

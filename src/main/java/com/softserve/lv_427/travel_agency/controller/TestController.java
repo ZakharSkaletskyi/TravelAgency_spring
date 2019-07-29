@@ -3,6 +3,7 @@ package com.softserve.lv_427.travel_agency.controller;
 import com.softserve.lv_427.travel_agency.dao.impl.HotelDaoImpl;
 import com.softserve.lv_427.travel_agency.entity.*;
 import com.softserve.lv_427.travel_agency.service.AutoPopulateDB;
+import com.softserve.lv_427.travel_agency.service.CountryService;
 import com.softserve.lv_427.travel_agency.service.RoomBookService;
 import com.softserve.lv_427.travel_agency.service.impl.CityServiceImpl;
 import com.softserve.lv_427.travel_agency.service.impl.CountryServiceImpl;
@@ -19,17 +20,17 @@ import java.util.List;
 
 @Controller
 public class TestController {
-	 @Autowired private  AutoPopulateDB service;
-  @Autowired private  CountryServiceImpl countryService;
-  @Autowired private  CityServiceImpl cityService;
-  @Autowired private  HotelServiceImpl hotelService;
+//	 @Autowired private final  AutoPopulateDB service;
+ // @Autowired private final CountryServiceImpl countryService;
+//  @Autowired private final CityServiceImpl cityService;
+//  @Autowired private final HotelServiceImpl hotelService;
 
 
 
-  @RequestMapping(value = "/populate", method = RequestMethod.GET)
-  public void mainPage() throws ParseException {
-    service.populate();
-  }
+//  @RequestMapping(value = "/populate", method = RequestMethod.GET)
+//  public void mainPage() throws ParseException {
+//    service.populate();
+//  }
 
   @RequestMapping(value = "/test", method = RequestMethod.GET)
   public void test() throws ParseException {
