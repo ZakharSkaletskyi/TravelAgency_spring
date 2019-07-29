@@ -17,7 +17,7 @@ public class Room {
   private int id;
 
   @Column(name = "room_number", nullable = false)
-  private int roomNumber;
+  private int number;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "hotel_id", nullable = false)

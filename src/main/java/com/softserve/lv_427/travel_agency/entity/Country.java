@@ -17,7 +17,7 @@ public class Country {
   private int id;
 
   @Column(name = "country_name", unique = true, nullable = false, length = 30)
-  private String countryName;
+  private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Visa visa;
