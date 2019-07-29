@@ -14,9 +14,7 @@ public interface RoomDao {
 
   void edit(Room room);
 
-  List<Room> getAvailableRoomsOnDateInHotel(Date startDate, Date endDate, int hotelId);
-
-  int getId(int number, int hotelId);
+  List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId);
 
   int getLoadingRoomsPeriod(String startDate, String endDate, int roomId);
 

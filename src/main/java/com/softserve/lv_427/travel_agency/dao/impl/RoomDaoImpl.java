@@ -48,7 +48,7 @@ public class RoomDaoImpl implements RoomDao {
   }
 
   @Override
-  public List<Room> getAvailableRoomsOnDateInHotel(Date startDate, Date endDate, int hotelId) {
+  public List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId) {
     Session session = sessionFactory.getCurrentSession();
 
     List<Room> roomList =
@@ -71,15 +71,6 @@ public class RoomDaoImpl implements RoomDao {
     return roomList;
   }
 
-  @Override
-  public int getId(int number, int hotelId) {
-    Session session = sessionFactory.getCurrentSession();
-    return session
-        .createQuery("Select room.id from Room where id = ?1 and hotel.id = ?2", Integer.class)
-        .setParameter(1, number)
-        .setParameter(2, hotelId)
-        .uniqueResult();
-  }
 
   @Override
   public int getLoadingRoomsPeriod(String startDate, String endDate, int roomId) {

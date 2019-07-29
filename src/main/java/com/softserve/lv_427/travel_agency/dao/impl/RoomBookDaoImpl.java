@@ -41,7 +41,5 @@ public class RoomBookDaoImpl implements RoomBookDao {
   }
 
   @Override
-  public void movePastBookingToArchive() {
-
-  }
+  public void movePastBookingToArchive() {}
 }
