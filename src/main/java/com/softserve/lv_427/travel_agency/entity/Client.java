@@ -1,7 +1,6 @@
 package com.softserve.lv_427.travel_agency.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

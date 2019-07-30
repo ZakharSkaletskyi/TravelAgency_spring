@@ -14,11 +14,11 @@ public interface CountryDao {
 
   void edit(Country country);
 
-  List findAll();
-
   int getId(String countryName);
 
   List<Country> getVisitedCountries(int clientId);
 
   List<City> getCitiesByCountryId(int id);
+
+  List<Country> findAll();
 }
