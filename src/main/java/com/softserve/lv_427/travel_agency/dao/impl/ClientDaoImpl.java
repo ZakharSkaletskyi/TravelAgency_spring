@@ -99,27 +99,16 @@ public class ClientDaoImpl implements ClientDao {
     List<Country> countries =
         session
             .createQuery(
-                "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr  ", Country.class) // change
-            // .setParameter(1, clientId)
+                "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ", Country.class) // change
+             .setParameter(1, clientId)
             .list();
+   // System.out.println("ClientDao");
+    //countries.forEach(s -> System.out.println(s.getName() + " | ")); ///////////////
     if (countries == null)
       throw new ClassNotFoundException("In DB no avaible countries for clientId= " + clientId);
     return countries;
   }
 
-  // "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id = ?1 ",
-  //                "FROM country c JOIN visa. v LEFT JOIN v.clients clns WHERE clns.id = ?1",
-  // "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1"
+ // "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ", Country.class) // change
 
-  // public List<Country> getAvailableCountries(int clientId)
-  //  throws SQLException, ClassNotFoundException {
-  // List<Country> countries = new ArrayList<>();
-  // List<Visa> visas = visaService.getVisasForTheClient(clientId);
-  //
-  // for (Visa visa : visas) {
-  //  countries.add(countryService.findById(visa.getCountryId()));
-  // }
-  //
-  // return countries;
-  // }
 }

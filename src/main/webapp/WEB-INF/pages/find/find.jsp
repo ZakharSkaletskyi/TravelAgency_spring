@@ -18,7 +18,9 @@
 <body>
 	<jsp:include page="../modules/_header.jsp" />
 	<div style="padding-left: 15px">
+
 		<form action="/find_country" method="GET">
+
 			<h2>Знайти готель</h2>
 			<form:select path="clients" name="selectedClient">
 				<c:forEach var="name" items="${clients}">
@@ -36,7 +38,6 @@
 			<h3>Дата виїзду</h3>
 			<input type="date" name="dateEnd" value="2019-08-03"
 				min=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>>
-
 			<br> <input type="submit" value="Знайти">
 		</form>
 	</div>

@@ -25,7 +25,7 @@
 			<form:select path="countries" name="selectedCountry">
 				<c:forEach var="country" items="${countries}">
 					<form:option value="${country.id}"
-						label="${country.firstName} ${v.lastName}" />
+						label="${country.name}" />
 				</c:forEach>
 			</form:select>
 			<button type="submit">Знайти</button>

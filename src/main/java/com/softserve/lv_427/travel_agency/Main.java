@@ -29,13 +29,28 @@ public class Main {
 //            e.printStackTrace();
 //        }
 //    }
-//    private SessionFactory sessionFactory;
-//
-//    @Autowired
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-//  public static void main(String[] args) {
+    private SessionFactory sessionFactory;
+    @Autowired private ClientService clientService;
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+  public static void main(String[] args) {
+//	  Session s = sessionFactory.getCurrentSession();
+//	
+//      Session session = null;
+//      try {
+//          session = HibernateUtil.getSessionFactory().openSession();
+//          Transaction transaction = session.beginTransaction();
+//          session.delete(element);
+//          transaction.commit();
+//      } finally {
+//           if ((session != null) && (session.isOpen())) {
+//                session.close();
+//       }    }
+
+      
 //    // TODO Auto-generated method stub
 //      Session session = sessionFactory.getCurrentSession();
 //
@@ -43,5 +58,5 @@ public class Main {
 //	  ClientService serv =new ClientServiceImpl();
 //	  System.out.println("ClientDao: "+dao.toString());
 //	  System.out.println("Client Service"+serv.getAllClients());
-//  }
+  }
 }
