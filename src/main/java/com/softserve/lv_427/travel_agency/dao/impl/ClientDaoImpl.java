@@ -2,6 +2,11 @@ package com.softserve.lv_427.travel_agency.dao.impl;
 
 import com.softserve.lv_427.travel_agency.dao.ClientDao;
 import com.softserve.lv_427.travel_agency.entity.Client;
+import com.softserve.lv_427.travel_agency.entity.Country;
+
+import java.sql.SQLException;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,4 +94,35 @@ public class ClientDaoImpl implements ClientDao {
     if (client == null) throw new ClassNotFoundException("In DB no row with id " + id);
     return client;
   }
+
+  @Override
+  public List<Country> getAvailableCountries(int clientId)
+      throws ClassNotFoundException { // int progress
+    Session session = sessionFactory.getCurrentSession();
+    List<Country> countries =
+        session
+            .createQuery(
+                "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr  ", Country.class) // change
+            // .setParameter(1, clientId)
+            .list();
+    if (countries == null)
+      throw new ClassNotFoundException("In DB no avaible countries for clientId= " + clientId);
+    return countries;
+  }
+
+  // "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id = ?1 ",
+  //                "FROM country c JOIN visa. v LEFT JOIN v.clients clns WHERE clns.id = ?1",
+  // "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1"
+
+  // public List<Country> getAvailableCountries(int clientId)
+  //  throws SQLException, ClassNotFoundException {
+  // List<Country> countries = new ArrayList<>();
+  // List<Visa> visas = visaService.getVisasForTheClient(clientId);
+  //
+  // for (Visa visa : visas) {
+  //  countries.add(countryService.findById(visa.getCountryId()));
+  // }
+  //
+  // return countries;
+  // }
 }

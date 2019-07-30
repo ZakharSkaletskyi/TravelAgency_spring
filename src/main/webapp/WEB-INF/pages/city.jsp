@@ -10,7 +10,7 @@
 <html>
 <head>
     <title> ${city.name} </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css"/>
     <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
@@ -18,10 +18,10 @@
     <h1>${city.name}</h1>
     <p class="description">${city.countryName}</p>
     <h2>Готелі</h2>
-    <form action="${pageContext.request.contextPath}/hotel" method="get">
-        <select name="name">
+    <form action="${pageContext.request.contextPath}/hotel" method="POST">
+        <select name="hotelId">
             <c:forEach var="hotel" items="${city.hotels}">
-                <option>${hotel.name}</option>
+                <option value="${hotel.id}">${hotel.name}</option>
             </c:forEach>
         </select>
         <button type="submit">Відкрити

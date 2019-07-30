@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,46 +38,76 @@ public class FindController {
     modelAndView.addObject("clients", clients);
     return modelAndView;
   }
+  
+  
+  
+  
 
-  @RequestMapping(value = "/find", method = RequestMethod.POST)
-  public ModelAndView findPagePost(
-      @RequestParam("dateStart") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateStart,
-      @RequestParam("dateStart") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateEnd) {
-    System.out.println("test");
-    System.out.println(dateStart);
-    System.out.println(dateEnd.toString());
+//  @RequestMapping(value = "/find", method = RequestMethod.POST)  //not used
+//  public ModelAndView findPagePost(
+//      @RequestParam("selectedClient") int selectedClient,
+//      @RequestParam("dateStart") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateStart,
+//      @RequestParam("dateEnd") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateEnd) {
+//    System.out.println("test");
+//    System.out.println(dateStart);
+//    System.out.println(dateEnd.toString());
+//    System.out.println("selectedClient=" + selectedClient);
+//    ModelAndView modelAndView = new ModelAndView();
+//    //modelAndView.setViewName("find/find_country");
+//
+//    
+//    modelAndView.setViewName("redirect:/find_country");
+//    modelAndView.addObject("selectedClient", selectedClient);
+//    modelAndView.addObject("dateStart", dateStart);
+//    modelAndView.addObject("dateEnd", dateEnd);
+//    modelAndView.setViewName("redirect:/find_country");
+//  
+//
+//    return modelAndView;
+//  }
 
-    //        { ////////////////////////// test
-    //          try {
-    //        	  System.out.println(visaService.CountVisaForCountry(4));
-    //        	  System.out.println(visaService.CountVisaForCountry(3));
-    //        	  System.out.println(visaService.CountVisaForCountry(2));
+//  @RequestMapping(value = "/find_country", method = RequestMethod.GET)
+//  public ModelAndView findCountryPage() {
+//    ModelAndView modelAndView = new ModelAndView();
+//    modelAndView.setViewName("find/find_country");
+//    return modelAndView;
+//  }
 
-    //            System.out.println(visaService.getId("J Q"));
-    //            System.out.println(visaService.getId("British tourist2"));
-    //
-    //            System.out.println(visaService.getVisasCountForTheClient(11));
-    //            System.out.println(visaService.getVisasCountForTheClient(12));
-    //            System.out.println(visaService.getVisasCountForTheClient(1));
-    //
-    //            System.out.println(visaService.getVisasForTheClient(11));
-    //            visaService.getVisasForTheClient(11).forEach(s->System.out.print(s.getVisaName()+"
-    //     |"));
-    //            System.out.println();
-    //            System.out.println(visaService.getVisasForTheClient(12));
-    //            visaService.getVisasForTheClient(12).forEach(s->System.out.print(s.getVisaName()+"
-    //     |"));
-    //            System.out.println();
-    //            System.out.println(visaService.getVisasForTheClient(1));
-    //
-    //          } catch (SQLException e) {
-    //            // TODO Auto-generated catch block
-    //            e.printStackTrace();
-    //          }
-    //        }
-
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("redirect:/find_country");
-    return modelAndView;
-  }
+//  @RequestMapping(value = "/edit/{selectedClient}{dateStart}{dateEnd}", method = RequestMethod.GET)
+//  public ModelAndView editPage(@PathVariable("selectedClient") int id,@PathVariable("dateStart")  LocalDate dateStart,@PathVariable("dateEnd") LocalDate dateEnd) {
+//     System.out.println(dateStart
+//     ModelAndView modelAndView = new ModelAndView();
+//     modelAndView.setViewName("find/find_country");
+//      //modelAndView.addObject("film", film);
+//      return modelAndView;
+//  }
 }
+
+//        { ////////////////////////// test
+//          try {
+//        	  System.out.println(visaService.CountVisaForCountry(4));
+//        	  System.out.println(visaService.CountVisaForCountry(3));
+//        	  System.out.println(visaService.CountVisaForCountry(2));
+
+//            System.out.println(visaService.getId("J Q"));
+//            System.out.println(visaService.getId("British tourist2"));
+//
+//            System.out.println(visaService.getVisasCountForTheClient(11));
+//            System.out.println(visaService.getVisasCountForTheClient(12));
+//            System.out.println(visaService.getVisasCountForTheClient(1));
+//
+//            System.out.println(visaService.getVisasForTheClient(11));
+//            visaService.getVisasForTheClient(11).forEach(s->System.out.print(s.getVisaName()+"
+//     |"));
+//            System.out.println();
+//            System.out.println(visaService.getVisasForTheClient(12));
+//            visaService.getVisasForTheClient(12).forEach(s->System.out.print(s.getVisaName()+"
+//     |"));
+//            System.out.println();
+//            System.out.println(visaService.getVisasForTheClient(1));
+//
+//          } catch (SQLException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//          }
+//        }

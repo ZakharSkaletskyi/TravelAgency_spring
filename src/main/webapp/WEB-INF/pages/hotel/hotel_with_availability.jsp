@@ -10,7 +10,7 @@
 <html>
 <head>
     <title> ${hotelDto.hotelName} </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css"/>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
@@ -21,16 +21,17 @@
     <p style="font-size: 12px;">
         Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :
         <c:forEach var="room" items="${hotelDto.availableRooms}">
-    <c:out value="${room.number}"/><p>
-    </c:forEach>
-</p>
+            <c:out value="${room.number}"/>
+        </c:forEach>
+    </p>
 
-    <form action="/hotel/stat" method="get">
+    <form action="/hotel/statistic" method="POST">
+        <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+
         <p>Cтатистика</p>
         <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
             до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
         </p>
-        <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
         <button type="submit">Отримати</button>
     </form>
 </div>

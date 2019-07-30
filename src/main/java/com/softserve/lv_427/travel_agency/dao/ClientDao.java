@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 import com.softserve.lv_427.travel_agency.entity.Client;
+import com.softserve.lv_427.travel_agency.entity.Country;
 
 public interface ClientDao {
   public List<Client> getAllClient();
@@ -24,4 +25,6 @@ public interface ClientDao {
       throws SQLException, ClassNotFoundException, SQLException;
 
   public Client getClient(int id) throws SQLException, ClassNotFoundException;
+
+  List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException;
 }

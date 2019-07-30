@@ -1,90 +1,54 @@
 package com.softserve.lv_427.travel_agency.controller;
 
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelDto;
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelWithAvailabilityDto;
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelWithStatisticDto;
-import com.softserve.lv_427.travel_agency.entity.Hotel;
-import com.softserve.lv_427.travel_agency.service.CityService;
 import com.softserve.lv_427.travel_agency.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/hotel")
 public class HotelController {
   private final HotelService hotelService;
-  private final CityService cityService;
 
   @Autowired
-  public HotelController(HotelService hotelService, CityService cityService) {
+  public HotelController(HotelService hotelService) {
     this.hotelService = hotelService;
-    this.cityService = cityService;
   }
 
   @GetMapping
-  public ModelAndView getHotel(@RequestParam String name) {
-    ModelAndView modelAndView = new ModelAndView();
-    HotelDto dto = hotelService.getHotelDtoById(name);
+  public String getAllHotels(ModelMap model) {
+    model.addAttribute("hotels", hotelService.getAll());
 
-    modelAndView.setViewName("hotel/hotel");
-    modelAndView.addObject("hotelDto", dto);
-
-    return modelAndView;
+    return "hotel/hotels";
   }
 
-  @GetMapping("/availability")
-  public ModelAndView getHotelAvailability(
-      @RequestParam String hotelName, String startDateAvail, String endDateAvail) {
-    ModelAndView modelAndView = new ModelAndView();
-    HotelWithAvailabilityDto dto =
-        hotelService.getHotelWithAvailabilityDtoById(hotelName, startDateAvail, endDateAvail);
+  @PostMapping
+  public String getHotel(@RequestParam int hotelId, ModelMap model) {
+    model.addAttribute("hotelDto", hotelService.getHotelDtoById(hotelId));
 
-    modelAndView.setViewName("hotel/hotel_with_availability");
-    modelAndView.addObject("hotelDto", dto);
-
-    return modelAndView;
+    return "hotel/hotel";
   }
 
-  @GetMapping("/stat")
-  public ModelAndView getHotelStat(
-      @RequestParam String hotelName, String startDateStat, String endDateStat) {
-    ModelAndView modelAndView = new ModelAndView();
-    HotelWithStatisticDto dto =
-        hotelService.getHotelWithStatisticDtoById(hotelName, startDateStat, endDateStat);
+  @PostMapping("/availability")
+  public String getHotelWithAvailability(
+      @RequestParam int hotelId, String startDateAvail, String endDateAvail, ModelMap model) {
+    model.addAttribute(
+        "hotelDto",
+        hotelService.getHotelDtoWithAvailabilityById(hotelId, startDateAvail, endDateAvail));
 
-    modelAndView.setViewName("hotel/hotel_with_stat");
-    modelAndView.addObject("hotelDto", dto);
-
-    return modelAndView;
+    return "hotel/hotel_with_availability";
   }
 
-  @GetMapping(value = "/all")
-  public ModelAndView getAllHotels() {
-    List<Hotel> hotels = hotelService.getAll();
+  @PostMapping("/statistic")
+  public String getHotelWithStatistic(
+      @RequestParam int hotelId, String startDateStat, String endDateStat, ModelMap model) {
+    model.addAttribute(
+        "hotelDto", hotelService.getHotelDtoWithStatisticById(hotelId, startDateStat, endDateStat));
 
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("hotel/hotels");
-    modelAndView.addObject("hotels", hotels);
-
-    return modelAndView;
+    return "hotel/hotel_with_stat";
   }
-
-//  @PostMapping(value = "/all")
-//  public ModelAndView getAllHotelsInCity(@RequestParam String cityName) {
-//    int cityId = cityService.getId(cityName);
-//    List<Hotel> hotels = cityService.getHotels(cityId);
-//
-//    ModelAndView modelAndView = new ModelAndView();
-//    modelAndView.setViewName("hotel/hotels");
-//    modelAndView.addObject("hotels", hotels);
-//
-//    return modelAndView;
-//  }
 }
