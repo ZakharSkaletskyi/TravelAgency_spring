@@ -16,10 +16,10 @@ import java.util.List;
 @Repository
 public class CountryDaoImpl implements CountryDao {
 
-	@Autowired private SessionFactory sessionFactory;
-	@Autowired private ClientDao clientDao;
+  @Autowired private SessionFactory sessionFactory;
+  @Autowired private ClientDao clientDao;
 
-   @Override
+  @Override
   public void add(Country country) {
     Session session = sessionFactory.getCurrentSession();
     session.persist(country);

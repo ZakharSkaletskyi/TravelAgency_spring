@@ -45,6 +45,7 @@ public class HotelDaoImpl implements HotelDao {
     session.update(hotel);
   }
 
+
   @Override
   public List<Hotel> getAll() {
     Session session = sessionFactory.getCurrentSession();

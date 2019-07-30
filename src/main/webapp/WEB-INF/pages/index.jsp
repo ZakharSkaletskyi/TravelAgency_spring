@@ -1,14 +1,23 @@
-<%@page pageEncoding="UTF-8" %>
-<html style="padding: 0;">
+<%--
+  Created by IntelliJ IDEA.
+  User: Nazar
+  Date: 25.07.2019
+  Time: 9:33
+  To change this template use File | Settings | File Templates.
+--%>
+<%@page pageEncoding="UTF-8"%>
+<html>
 <head>
-    <title>TourAgency</title>
+<title>TourAgency</title>
+<link rel="stylesheet"
+	href="/res/style.css" />
+<jsp:include page="modules/_header.jsp" />
 </head>
-<body style="padding: 0; margin: 0">
-<jsp:include page="modules/_header.jsp"/>
-<div style="padding-left: 15px">
-    <h2>Привіт, наш любий друг</h2>
-    <p>З нами подорожувати легко. Приєднуйся до нас</p>
-  
-</div>
+<body>
+	<div class="content">
+		<h1>Привіт, наш любий друг</h1>
+		<p class="description">З нами подорожувати легко. Приєднуйся до
+			нас</p>
+	</div>
 </body>
 </html>

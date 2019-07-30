@@ -4,8 +4,15 @@ import com.softserve.lv_427.travel_agency.dao.RoomBookDao;
 import com.softserve.lv_427.travel_agency.entity.RoomBook;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.management.Query;
+import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Repository
 public class RoomBookDaoImpl implements RoomBookDao {
@@ -38,5 +45,36 @@ public class RoomBookDaoImpl implements RoomBookDao {
   public void edit(RoomBook roomBook) {
     Session session = sessionFactory.getCurrentSession();
     session.update(roomBook);
+  }
+
+  @Override
+  public void movePastBookingToArchive() {
+    Session session = sessionFactory.getCurrentSession();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar cal = Calendar.getInstance();
+    String date = dateFormat.format(cal.getTime());
+
+    session
+        .createQuery(
+            "INSERT INTO room_book_archive "
+                + "(order_start, order_end, room.id, client.id)"
+                + "select order_start, order_end, room.id, client.id"
+                + " FROM room_book WHERE order_end < ?1 ")
+        .setParameter(1, date);
+  }
+
+  @Override
+  public void deletePastBookingToArchive() {
+    Session session = sessionFactory.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar cal = Calendar.getInstance();
+    String date = dateFormat.format(cal.getTime());
+
+    session
+        .createQuery("DELETE FROM room_book WHERE order_end < ?1")
+        .setParameter(1, date)
+        .executeUpdate();
+    tx.commit();
   }
 }
