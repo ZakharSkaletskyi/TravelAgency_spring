@@ -8,19 +8,19 @@ import org.springframework.web.servlet.ModelAndView;
 import com.softserve.lv_427.travel_agency.service.impl.ClientServiceImpl;
 
 public class ClientController {
-//	 final ClientServiceImpl service;
+	 final ClientServiceImpl service;
 
-//	  @Autowired
-//	  public ClientController(ClientServiceImpl service) {
-//	    this.service = service;
-//	  }
-//	  @RequestMapping(value = "/find", method = RequestMethod.GET)
-//	  public ModelAndView mainPage() {
-//	    service.getAllClients();
-//	    ModelAndView modelAndView = new ModelAndView();
-//	    modelAndView.setViewName("about");
-//	    return modelAndView;
-//	  }
+	  @Autowired
+	  public ClientController(ClientServiceImpl service) {
+	    this.service = service;
+	  }
+	  @RequestMapping(value = "/find", method = RequestMethod.GET)
+	  public ModelAndView mainPage() {
+	    service.getAllClients();
+	    ModelAndView modelAndView = new ModelAndView();
+	    modelAndView.setViewName("about");
+	    return modelAndView;
+	  }
 
 	  
 }
