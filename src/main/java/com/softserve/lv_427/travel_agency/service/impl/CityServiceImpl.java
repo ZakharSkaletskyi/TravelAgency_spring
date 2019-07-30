@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
 import com.softserve.lv_427.travel_agency.dao.CityDao;
+import com.softserve.lv_427.travel_agency.dto.CityDto;
 import com.softserve.lv_427.travel_agency.entity.City;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.service.CityService;
@@ -65,5 +66,19 @@ public class CityServiceImpl implements CityService {
   @Transactional
   public List<Hotel> getHotels(int cityId) {
     return dao.getHotels(cityId);
+  }
+
+  @Transactional
+  public CityDto getCityDto(String cityName) {
+    CityDto dto = new CityDto();
+    int cityId = getId(cityName);
+    String countryName = getById(cityId).getCountry().getName();
+    List<Hotel> hotels = getHotels(cityId);
+
+    dto.setName(cityName);
+    dto.setCountryName(countryName);
+    dto.setHotels(hotels);
+
+    return dto;
   }
 }

@@ -5,32 +5,25 @@
   Time: 10:02
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.CountryService" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CountryServiceImpl" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.model.Country" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Країни</title>
+    <title> Countries </title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
+    <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
-<jsp:include page="modules/_header.jsp"/>
-<div style="padding-left: 15px">
-    <h2>Країни</h2>
-    <form action="/countries" method="post">
-        <select name="hotel">
-            <%
-                CountryService countryService = new CountryServiceImpl();
-
-                List<Country> countries = countryService.getCountryList();
-
-                for (Country country : countries) { %>
-            <option><%=country.getCountryName()%>
-            </option>
-            <% } %>
+<div class="content">
+    <h2>Countries</h2>
+    <form action = "/country" method = "GET">
+        <select name = "name">
+            <c:forEach var="country" items="${countries}">
+                <option>${country.name}</option>
+            </c:forEach>
         </select>
+
+        <button type="submit">Відкрити</button>
     </form>
 </div>
 </body>
