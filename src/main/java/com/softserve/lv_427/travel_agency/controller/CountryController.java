@@ -1,17 +1,13 @@
 package com.softserve.lv_427.travel_agency.controller;
 
-import com.softserve.lv_427.travel_agency.dto.CountryDto;
-import com.softserve.lv_427.travel_agency.entity.City;
-import com.softserve.lv_427.travel_agency.entity.Country;
 import com.softserve.lv_427.travel_agency.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/country")
@@ -24,24 +20,16 @@ public class CountryController {
   }
 
   @GetMapping
-  public ModelAndView getCountry(@RequestParam String name) {
-    ModelAndView modelAndView = new ModelAndView();
-      CountryDto countryDto = countryService.getCountryDto(name);
+  public String getAllCountries(ModelMap model) {
+    model.addAttribute("countries", countryService.findAll());
 
-    modelAndView.addObject("country", countryDto);
-    modelAndView.setViewName("country");
-
-    return modelAndView;
+    return "countries";
   }
 
-  @GetMapping(value = "/all")
-  public ModelAndView getAllCountries() {
-    ModelAndView modelAndView = new ModelAndView();
-    List<Country> countries = countryService.findAll();
+  @PostMapping
+  public String getCountry(@RequestParam int countryId, ModelMap model) {
+    model.addAttribute("country", countryService.getCountryDto(countryId));
 
-    modelAndView.addObject("countries", countries);
-    modelAndView.setViewName("countries");
-
-    return modelAndView;
+    return "country";
   }
 }

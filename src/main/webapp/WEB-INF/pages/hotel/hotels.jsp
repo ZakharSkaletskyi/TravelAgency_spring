@@ -16,14 +16,13 @@
 <body>
 <div class="content">
     <h2>Hotels</h2>
-    <form action="/hotel" method="get">
-        <select name="name">
+    <form action="/hotel" method="POST">
+        <select name="hotelId">
             <c:forEach var="hotel" items="${hotels}">
-                <option>${hotel.name}</option>
+                <option value="${hotel.id}">${hotel.name}</option>
             </c:forEach>
         </select>
-        <button type="submit">Відкрити
-        </button>
+        <button type="submit">Відкрити</button>
     </form>
 </div>
 </body>

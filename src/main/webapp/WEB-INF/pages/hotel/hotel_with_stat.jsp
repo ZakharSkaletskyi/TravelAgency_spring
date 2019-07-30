@@ -10,7 +10,7 @@
 <html>
 <head>
     <title> ${hotelDto.hotelName} </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css"/>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
@@ -18,12 +18,13 @@
     <h1>Hotel "${hotelDto.hotelName}"</h1>
     <p class="description">${hotelDto.countryName}, ${hotelDto.cityName}</p>
 
-    <form action="/hotel/availability" method="get">
+    <form action="/hotel/availability" method="POST">
+        <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+
         <p>Перевірити доступні кімнати</p>
         <p>З: <input type="date" name="startDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
             до: <input type="date" name="endDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
         </p>
-        <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
         <button type="submit">Перевірити</button>
     </form>
 

@@ -16,10 +16,10 @@
 <body>
 <div class="content">
     <h2>Cities</h2>
-    <form action = "/city" method = "GET">
-        <select name = "name">
+    <form action = "/city" method = "POST">
+        <select name = "cityId">
             <c:forEach var="city" items="${cities}">
-                <option>${city.name}</option>
+                <option value="${city.id}">${city.name}</option>
             </c:forEach>
         </select>
 

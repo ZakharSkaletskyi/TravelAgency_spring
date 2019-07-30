@@ -1,11 +1,8 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelDto;
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelWithAvailabilityDto;
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelWithStatisticDto;
+import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
-import com.softserve.lv_427.travel_agency.entity.Room;
 import com.softserve.lv_427.travel_agency.service.HotelService;
 import com.softserve.lv_427.travel_agency.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,39 +80,34 @@ public class HotelServiceImpl implements HotelService {
 
   @Transactional
   @Override
-  public HotelDto getHotelDtoById(String hotelName) {
+  public HotelDto getHotelDtoById(int hotelId) {
     HotelDto dto = new HotelDto();
-    int hotelId = getId(hotelName);
     Hotel hotel = getById(hotelId);
-    String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    String countryName = getById(hotelId).getCity().getCountry().getName();
-    String cityName = getById(hotelId).getCity().getName();
 
+    dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
-    dto.setCountryName(countryName);
-    dto.setCityName(cityName);
-    dto.setCurrentDate(currentDate);
+    dto.setCountryName(hotel.getCity().getCountry().getName());
+    dto.setCityName(hotel.getCity().getName());
+    dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
     return dto;
   }
 
   @Transactional
   @Override
-  public HotelWithAvailabilityDto getHotelWithAvailabilityDtoById(
-      String hotelName, String startDate, String endDate) {
-    HotelWithAvailabilityDto dto = new HotelWithAvailabilityDto();
-    int hotelId = getId(hotelName);
+  public HotelDto getHotelDtoWithAvailabilityById(
+          int hotelId, String startDate, String endDate) {
+    HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
-    String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    String countryName = getById(hotelId).getCity().getCountry().getName();
-    String cityName = getById(hotelId).getCity().getName();
+
     //    List<Room> rooms = roomService.getAvailableRoomsOnDateInHotel(startDate, endDate,
     // hotelId);
 
+    dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
-    dto.setCountryName(countryName);
-    dto.setCityName(cityName);
-    dto.setCurrentDate(currentDate);
+    dto.setCountryName(hotel.getCity().getCountry().getName());
+    dto.setCityName(hotel.getCity().getName());
+    dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
     //    dto.setAvailableRooms(rooms);
@@ -126,32 +117,28 @@ public class HotelServiceImpl implements HotelService {
 
   @Transactional
   @Override
-  public HotelWithStatisticDto getHotelWithStatisticDtoById(
-      String hotelName, String startDate, String endDate) {
-    HotelWithStatisticDto dto = new HotelWithStatisticDto();
-    int hotelId = getId(hotelName);
+  public HotelDto getHotelDtoWithStatisticById(
+          int hotelId, String startDate, String endDate) {
+    HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
 
-    String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    int countOfClient = getClientCountForPeriod(hotelId, startDate, endDate);
-    int averageBookTime = getAverageBookTime(hotelId, startDate, endDate);
-    String countryName = getById(hotelId).getCity().getCountry().getName();
-    String cityName = getById(hotelId).getCity().getName();
     //    List<Integer[]> roomLoading = new ArrayList<>();
 
     //    for (int i = 0; i < roomService.getRoomCount(hotelId); i++) {
     //      roomLoading.add(roomService.getLoadingRoomsPeriod(startDate, endDate, i));
     //    }
 
+    dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
-    dto.setCountryName(countryName);
-    dto.setCityName(cityName);
-    dto.setCurrentDate(currentDate);
+    dto.setCountryName(hotel.getCity().getCountry().getName());
+    dto.setCityName(hotel.getCity().getName());
+    dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
-    dto.setCountOfClient(countOfClient);
-    dto.setAverageBookTime(averageBookTime);
+    dto.setCountOfClient(getClientCountForPeriod(hotelId, startDate, endDate));
+    dto.setAverageBookTime(getAverageBookTime(hotelId, startDate, endDate));
     //    dto.setRoomLoading(roomLoading);
     return dto;
+
   }
 }

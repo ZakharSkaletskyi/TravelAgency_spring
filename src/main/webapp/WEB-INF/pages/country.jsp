@@ -17,10 +17,10 @@
 <div class="content">
     <h1>${country.name}</h1>
     <h2>Міста</h2>
-    <form action = "/city" method = "GET">
-        <select name = "name">
+    <form action = "/city" method = "POST">
+        <select name = "cityId">
             <c:forEach var="city" items="${country.cities}">
-                <option>${city.name}</option>
+                <option value="${city.id}">${city.name}</option>
             </c:forEach>
         </select>
 

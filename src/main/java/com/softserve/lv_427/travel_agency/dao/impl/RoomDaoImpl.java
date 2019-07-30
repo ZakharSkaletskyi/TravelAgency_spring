@@ -81,7 +81,7 @@ public class RoomDaoImpl implements RoomDao {
                 .createQuery(
                     "SELECT orderStart, orderEnd FROM RoomBookArchive WHERE "
                         + "(orderStart >= ?1  AND orderEnd <= ?2 AND room.id IN "
-                        + "(SELECT id FROM Room where room_id = ?3))",
+                        + "(SELECT id FROM Room where room.id = ?3))",
                     Object[].class)
                 .setParameter(1, startDate)
                 .setParameter(2, endDate)
@@ -100,7 +100,7 @@ public class RoomDaoImpl implements RoomDao {
   public int getRoomCount(int hotelId) {
     Session session = sessionFactory.getCurrentSession();
     return session
-        .createQuery("select count (id) from room" + "where hotel.id = ?1", Integer.class)
+        .createQuery("select count (id) from Room where hotel.id = ?1", Integer.class)
         .setParameter(1, hotelId)
         .uniqueResult();
   }

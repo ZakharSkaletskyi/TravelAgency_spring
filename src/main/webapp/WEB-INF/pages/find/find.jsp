@@ -27,7 +27,7 @@
 		</form:select>
 		
 		<form action="/find" method="POST">
-			<h3>Дата заїзду  edit!!!</h3>
+			<h3>Дата заїзду</h3>
 			  <input type="date" name="dateStart"
                value=
                    <%= new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) %>
@@ -40,7 +40,6 @@
 
         <br>
         <input type="submit" value="Знайти">
-        <button type="submit">Знайти</button>
 		</form>
 </body>
 </html>

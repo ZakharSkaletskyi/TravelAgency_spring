@@ -18,9 +18,9 @@
     <p class="logo">TourAgency "Сонечко"</p>
     <div class="navigation">
         <a href="/find"> Знайти готель </a>
-        <a href="/country/all"> Країни </a>
-        <a href="/city/all"> Міста </a>
-        <a href="/hotel/all"> Готелі </a>
+        <a href="/country"> Країни </a>
+        <a href="/city"> Міста </a>
+        <a href="/hotel"> Готелі </a>
         <a href="/about"> Про нас </a>
         <a href="/profile"> Профіль </a>
     </div>
