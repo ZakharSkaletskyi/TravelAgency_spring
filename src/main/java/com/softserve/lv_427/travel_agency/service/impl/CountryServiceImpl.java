@@ -1,6 +1,6 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
-// import com.softserve.lv_427.travel_agency.dto.CountryDto;
+import com.softserve.lv_427.travel_agency.dto.CountryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,15 +66,15 @@ public class CountryServiceImpl implements CountryService {
     return dao.getCitiesByCountryId(id);
   }
 
-  //  @Transactional
-  //  public CountryDto getCountryDto(String countryName) {
-  //    CountryDto dto = new CountryDto();
-  //    int countryId = getId(countryName);
-  //    List<City> cities = getCitiesByCountryId(countryId);
-  //
-  //    dto.setName(countryName);
-  //    dto.setCities(cities);
-  //
-  //    return dto;
-  //  }
+  @Transactional
+  public CountryDto getCountryDto(String countryName) {
+    CountryDto dto = new CountryDto();
+    int countryId = getId(countryName);
+    List<City> cities = getCitiesByCountryId(countryId);
+
+    dto.setName(countryName);
+    dto.setCities(cities);
+
+    return dto;
+  }
 }

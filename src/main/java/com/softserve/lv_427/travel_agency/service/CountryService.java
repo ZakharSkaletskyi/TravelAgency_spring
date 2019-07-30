@@ -1,6 +1,6 @@
 package com.softserve.lv_427.travel_agency.service;
 
-// import com.softserve.lv_427.travel_agency.dto.CountryDto;
+import com.softserve.lv_427.travel_agency.dto.CountryDto;
 import com.softserve.lv_427.travel_agency.entity.City;
 import com.softserve.lv_427.travel_agency.entity.Country;
 
@@ -23,5 +23,5 @@ public interface CountryService {
 
   List<City> getCitiesByCountryId(int id);
 
-  // CountryDto getCountryDto(String countryName);
+  CountryDto getCountryDto(String countryName);
 }
