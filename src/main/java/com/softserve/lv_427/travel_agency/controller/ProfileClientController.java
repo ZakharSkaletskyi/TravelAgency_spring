@@ -1,25 +1,32 @@
 package com.softserve.lv_427.travel_agency.controller;
 
-import com.softserve.lv_427.travel_agency.service.impl.ClientServiceImpl;
+import com.softserve.lv_427.travel_agency.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
+@RequestMapping(value = "/profile")
 public class ProfileClientController {
-    private final ClientServiceImpl service;
+  private final ClientService clientService;
 
-    @Autowired
-    public ProfileClientController(ClientServiceImpl service) {
-        this.service = service;
-    }
+  @Autowired
+  public ProfileClientController(ClientService clientService) {
+    this.clientService = clientService;
+  }
 
-    @GetMapping(value = "/profile")
-    public ModelAndView profile() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("profile");
-        return modelAndView;
-    }
+  @GetMapping
+  public ModelAndView profile() {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("profile");
+    return modelAndView;
+  }
+
+  //  @PostMapping
+  //  public String getClientInfo(@RequestParam int clientId, ModelMap model) {
+  //    model.addAttribute("clientCountries", clientService.getById(clientId));
+  //
+  //    return "clientCountries";
+  //  }
 }
