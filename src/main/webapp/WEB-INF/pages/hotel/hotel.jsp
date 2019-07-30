@@ -14,25 +14,26 @@
 </head>
 <body>
 <div style="padding-left: 15px">
-<h2>Hotel "${hotelDto.hotelName}"</h2>
+    <h2>Hotel "${hotelDto.hotelName}"</h2>
+    <p>${hotelDto.countryName}, ${hotelDto.cityName}</p>
 
-<form action="/hotel/availability" method="get">
-    <p>Перевірити доступні кімнати</p>
-    <p>З: <input type="date" name="startDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
-        до: <input type="date" name="endDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
-    </p>
-    <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
-    <button type="submit">Перевірити</button>
-</form>
+    <form action="/hotel/availability" method="get">
+        <p>Перевірити доступні кімнати</p>
+        <p>З: <input type="date" name="startDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+            до: <input type="date" name="endDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+        </p>
+        <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
+        <button type="submit">Перевірити</button>
+    </form>
 
-<form action="/hotel/stat" method="get">
-    <p>Cтатистика</p>
-    <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
-        до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
-    </p>
-    <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
-    <button type="submit">Отримати</button>
-</form>
+    <form action="/hotel/stat" method="get">
+        <p>Cтатистика</p>
+        <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
+            до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
+        </p>
+        <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
+        <button type="submit">Отримати</button>
+    </form>
 </div>
 </body>
 </html>

@@ -9,6 +9,8 @@ import java.util.List;
 @Setter
 public class HotelWithStatisticDto {
     String hotelName;
+    String countryName;
+    String cityName;
     String currentDate;
     String startDate;
     String endDate;

@@ -9,5 +9,7 @@ import java.util.Date;
 @Setter
 public class HotelDto {
     String hotelName;
+    String countryName;
+    String cityName;
     String currentDate;
 }

@@ -29,7 +29,8 @@ public interface HotelService {
   HotelDto getHotelDtoById(String hotelName);
 
   HotelWithAvailabilityDto getHotelWithAvailabilityDtoById(
-          String hotelName, String startDate, String endDate);
+      String hotelName, String startDate, String endDate);
 
-  HotelWithStatisticDto getHotelWithStatisticDtoById(String hotelName, String startDate, String endDate);
+  HotelWithStatisticDto getHotelWithStatisticDtoById(
+      String hotelName, String startDate, String endDate);
 }

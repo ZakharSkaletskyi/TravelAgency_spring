@@ -14,30 +14,31 @@
 </head>
 <body>
 <div style="padding-left: 15px">
-<h2>Hotel "${hotelDto.hotelName}"</h2>
+    <h2>Hotel "${hotelDto.hotelName}"</h2>
+    <p>${hotelDto.countryName}, ${hotelDto.cityName}</p>
 
-<form action="/hotel/availability" method="get">
-    <p>Перевірити доступні кімнати</p>
-    <p>З: <input type="date" name="startDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
-        до: <input type="date" name="endDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
-    </p>
-    <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
-    <button type="submit">Перевірити</button>
-</form>
+    <form action="/hotel/availability" method="get">
+        <p>Перевірити доступні кімнати</p>
+        <p>З: <input type="date" name="startDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+            до: <input type="date" name="endDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+        </p>
+        <input type="hidden" name="hotelName" value="${hotelDto.hotelName}"/>
+        <button type="submit">Перевірити</button>
+    </form>
 
-<p>Статистика за період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b></p>
-<ul>
-    <li> Кількість клієнтів: ${hotelDto.countOfClient} </li>
-    <li> Середній час бронювання: ${hotelDto.averageBookTime} днів </li>
-    <li>
-        Завантаженість кімнат:
-        <ul>
-            <c:forEach var="roomLoad" items="${hotelDto.roomLoading}">
-                <li>${roomLoad[0]} / ${roomLoad[1]} </li>
-            </c:forEach>
-        </ul>
-    </li>
-</ul>
+    <p>Статистика за період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b></p>
+    <ul>
+        <li> Кількість клієнтів: ${hotelDto.countOfClient} </li>
+        <li> Середній час бронювання: ${hotelDto.averageBookTime} днів</li>
+        <li>
+            Завантаженість кімнат:
+            <ul>
+                <c:forEach var="roomLoad" items="${hotelDto.roomLoading}">
+                    <li>${roomLoad[0]} / ${roomLoad[1]} </li>
+                </c:forEach>
+            </ul>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

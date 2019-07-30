@@ -89,8 +89,12 @@ public class HotelServiceImpl implements HotelService {
     int hotelId = getId(hotelName);
     Hotel hotel = getById(hotelId);
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    String countryName = getById(hotelId).getCity().getCountry().getName();
+    String cityName = getById(hotelId).getCity().getName();
 
     dto.setHotelName(hotel.getName());
+    dto.setCountryName(countryName);
+    dto.setCityName(cityName);
     dto.setCurrentDate(currentDate);
 
     return dto;
@@ -104,13 +108,18 @@ public class HotelServiceImpl implements HotelService {
     int hotelId = getId(hotelName);
     Hotel hotel = getById(hotelId);
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-//    List<Room> rooms = roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId);
+    String countryName = getById(hotelId).getCity().getCountry().getName();
+    String cityName = getById(hotelId).getCity().getName();
+    //    List<Room> rooms = roomService.getAvailableRoomsOnDateInHotel(startDate, endDate,
+    // hotelId);
 
     dto.setHotelName(hotel.getName());
+    dto.setCountryName(countryName);
+    dto.setCityName(cityName);
     dto.setCurrentDate(currentDate);
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
-//    dto.setAvailableRooms(rooms);
+    //    dto.setAvailableRooms(rooms);
 
     return dto;
   }
@@ -126,19 +135,23 @@ public class HotelServiceImpl implements HotelService {
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     int countOfClient = getClientCountForPeriod(hotelId, startDate, endDate);
     int averageBookTime = getAverageBookTime(hotelId, startDate, endDate);
-//    List<Integer[]> roomLoading = new ArrayList<>();
+    String countryName = getById(hotelId).getCity().getCountry().getName();
+    String cityName = getById(hotelId).getCity().getName();
+    //    List<Integer[]> roomLoading = new ArrayList<>();
 
-//    for (int i = 0; i < roomService.getRoomCount(hotelId); i++) {
-      //      roomLoading.add(roomService.getLoadingRoomsPeriod(startDate, endDate, i));
-//    }
+    //    for (int i = 0; i < roomService.getRoomCount(hotelId); i++) {
+    //      roomLoading.add(roomService.getLoadingRoomsPeriod(startDate, endDate, i));
+    //    }
 
     dto.setHotelName(hotel.getName());
+    dto.setCountryName(countryName);
+    dto.setCityName(cityName);
     dto.setCurrentDate(currentDate);
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
     dto.setCountOfClient(countOfClient);
     dto.setAverageBookTime(averageBookTime);
-//    dto.setRoomLoading(roomLoading);
+    //    dto.setRoomLoading(roomLoading);
     return dto;
   }
 }

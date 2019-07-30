@@ -76,14 +76,15 @@ public class HotelController {
     return modelAndView;
   }
 
-  @PostMapping(value = "/all")
-  public ModelAndView getAllHotelsInCity(@RequestParam Integer cityId) {
-    List<Hotel> hotels = cityService.getHotels(cityId);
-
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("hotel/hotels");
-    modelAndView.addObject("hotels", hotels);
-
-    return modelAndView;
-  }
+//  @PostMapping(value = "/all")
+//  public ModelAndView getAllHotelsInCity(@RequestParam String cityName) {
+//    int cityId = cityService.getId(cityName);
+//    List<Hotel> hotels = cityService.getHotels(cityId);
+//
+//    ModelAndView modelAndView = new ModelAndView();
+//    modelAndView.setViewName("hotel/hotels");
+//    modelAndView.addObject("hotels", hotels);
+//
+//    return modelAndView;
+//  }
 }
