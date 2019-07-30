@@ -10,12 +10,13 @@
 <html>
 <head>
     <title> ${hotelDto.hotelName} </title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
-<div style="padding-left: 15px">
-    <h2>Hotel "${hotelDto.hotelName}"</h2>
-    <p>${hotelDto.countryName}, ${hotelDto.cityName}</p>
+<div class="content">
+    <h1>Hotel "${hotelDto.hotelName}"</h1>
+    <p class="description">${hotelDto.countryName}, ${hotelDto.cityName}</p>
 
     <form action="/hotel/availability" method="get">
         <p>Перевірити доступні кімнати</p>

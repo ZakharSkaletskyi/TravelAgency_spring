@@ -10,10 +10,11 @@
 <html>
 <head>
     <title>Про нас</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
 </head>
 <body>
 <jsp:include page="modules/_header.jsp"/>
-<div style="padding-left: 15px">
+<div class="content">
     <h2>Про нас</h2>
     <p>На ринку уже понад <b>10</b> років.</p>
     <p><b>16</b> задоволених клієнтів</p>

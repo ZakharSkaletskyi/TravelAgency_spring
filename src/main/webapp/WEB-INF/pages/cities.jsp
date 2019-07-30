@@ -10,10 +10,11 @@
 <html>
 <head>
     <title> Cities </title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
     <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
-<div style="padding-left: 15px">
+<div class="content">
     <h2>Cities</h2>
     <form action = "/city" method = "GET">
         <select name = "name">

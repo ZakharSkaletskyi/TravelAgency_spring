@@ -10,12 +10,13 @@
 <html>
 <head>
     <title> ${country.name} </title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
     <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
-<div style="padding-left: 15px">
-    <h2>${country.name}</h2>
-    <h3>Міста</h3>
+<div class="content">
+    <h1>${country.name}</h1>
+    <h2>Міста</h2>
     <form action = "/city" method = "GET">
         <select name = "name">
             <c:forEach var="city" items="${country.cities}">

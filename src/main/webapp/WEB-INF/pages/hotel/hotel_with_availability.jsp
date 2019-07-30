@@ -10,12 +10,13 @@
 <html>
 <head>
     <title> ${hotelDto.hotelName} </title>
-    <p>${hotelDto.countryName}, ${hotelDto.cityName}</p>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
-<div style="padding-left: 15px">
-    <h2>Hotel "${hotelDto.hotelName}"</h2>
+<div class="content">
+    <h1>Hotel "${hotelDto.hotelName}"</h1>
+    <p class="description">${hotelDto.countryName}, ${hotelDto.cityName}</p>
 
     <p style="font-size: 12px;">
         Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :

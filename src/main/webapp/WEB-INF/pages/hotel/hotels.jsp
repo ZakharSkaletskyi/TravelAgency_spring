@@ -10,28 +10,19 @@
 <html>
 <head>
     <title> Hotels </title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
-<div style="padding-left: 15px">
+<div class="content">
     <h2>Hotels</h2>
     <form action="/hotel" method="get">
-        <select name="name" style="
-    width: auto;
-    height: 25px;
-    border-radius: 5px;
-    display: block;
-    border: 1px solid #aaa;">
+        <select name="name">
             <c:forEach var="hotel" items="${hotels}">
                 <option>${hotel.name}</option>
             </c:forEach>
         </select>
-        <button type="submit" style=" margin-top: 5px;
-    background-color: lightgray;
-    width: auto;
-    height: 25px;
-    border-radius: 5px;
-    border: 2px solid gray;">Відкрити
+        <button type="submit">Відкрити
         </button>
     </form>
 </div>

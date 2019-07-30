@@ -9,12 +9,13 @@
 <html>
 <head>
     <title>TourAgency</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css"/>
     <jsp:include page="modules/_header.jsp"/>
 </head>
-<body style="padding: 0; margin: 0">
-<div style="padding-left: 15px">
-    <h2>Привіт, наш любий друг</h2>
-    <p>З нами подорожувати легко. Приєднуйся до нас</p>
+<body>
+<div class="content">
+    <h1>Привіт, наш любий друг</h1>
+    <p class="description">З нами подорожувати легко. Приєднуйся до нас</p>
 </div>
 </body>
 </html>

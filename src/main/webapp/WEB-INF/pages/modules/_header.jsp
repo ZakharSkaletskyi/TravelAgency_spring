@@ -13,20 +13,16 @@
     <title>Header</title>
 </head>
 
-<body style="padding: 0; margin: 0">
+<body>
 <header>
-    <div style="background: #E0E0E0; height: 55px; padding: 5px;">
-        <div style="float: left">
-            <h1>TourAgency "Сонечко"</h1>
-        </div>
-        <div style="float: right; padding: 10px; text-align: right; font-size: 15px">
-            <a href="/find" style="padding-left: 15px"> Знайти готель </a>
-            <a href="/country/all" style="padding-left: 15px"> Країни </a>
-            <a href="/city/all" style="padding-left: 15px"> Міста </a>
-            <a href="/hotel/all" style="padding-left: 15px"> Готелі </a>
-            <a href="/about" style="padding-left: 15px"> Про нас </a>
-            <a href="/profile" style="padding-left: 15px"> Профіль </a>
-        </div>
+    <p class="logo">TourAgency "Сонечко"</p>
+    <div class="navigation">
+        <a href="/find"> Знайти готель </a>
+        <a href="/country/all"> Країни </a>
+        <a href="/city/all"> Міста </a>
+        <a href="/hotel/all"> Готелі </a>
+        <a href="/about"> Про нас </a>
+        <a href="/profile"> Профіль </a>
     </div>
 </header>
 
