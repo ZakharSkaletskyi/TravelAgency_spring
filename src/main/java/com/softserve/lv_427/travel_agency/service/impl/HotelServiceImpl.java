@@ -7,21 +7,25 @@ import com.softserve.lv_427.travel_agency.dto.hotel.HotelWithStatisticDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
 import com.softserve.lv_427.travel_agency.service.HotelService;
+import com.softserve.lv_427.travel_agency.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class HotelServiceImpl implements HotelService {
   private final HotelDao dao;
+  private final RoomService roomService;
 
   @Autowired
-  public HotelServiceImpl(HotelDao dao) {
+  public HotelServiceImpl(HotelDao dao, RoomService roomService) {
     this.dao = dao;
+    this.roomService = roomService;
   }
 
   @Override
@@ -80,8 +84,9 @@ public class HotelServiceImpl implements HotelService {
 
   @Transactional
   @Override
-  public HotelDto getHotelDtoById(int hotelId) {
+  public HotelDto getHotelDtoById(String hotelName) {
     HotelDto dto = new HotelDto();
+    int hotelId = getId(hotelName);
     Hotel hotel = getById(hotelId);
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
@@ -94,18 +99,18 @@ public class HotelServiceImpl implements HotelService {
   @Transactional
   @Override
   public HotelWithAvailabilityDto getHotelWithAvailabilityDtoById(
-          String hotelName, String startDate, String endDate) {
+      String hotelName, String startDate, String endDate) {
     HotelWithAvailabilityDto dto = new HotelWithAvailabilityDto();
     int hotelId = getId(hotelName);
     Hotel hotel = getById(hotelId);
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    //    List<Room> rooms = roomDao.getAvailableRooms(String startDate, String endDate);
+//    List<Room> rooms = roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId);
 
     dto.setHotelName(hotel.getName());
     dto.setCurrentDate(currentDate);
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
-    //    dto.setAvailableRooms(rooms);
+//    dto.setAvailableRooms(rooms);
 
     return dto;
   }
@@ -121,8 +126,11 @@ public class HotelServiceImpl implements HotelService {
     String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     int countOfClient = getClientCountForPeriod(hotelId, startDate, endDate);
     int averageBookTime = getAverageBookTime(hotelId, startDate, endDate);
+//    List<Integer[]> roomLoading = new ArrayList<>();
 
-    //    List<Integer[]> roomLoading = roomDao.getLoading()
+//    for (int i = 0; i < roomService.getRoomCount(hotelId); i++) {
+      //      roomLoading.add(roomService.getLoadingRoomsPeriod(startDate, endDate, i));
+//    }
 
     dto.setHotelName(hotel.getName());
     dto.setCurrentDate(currentDate);

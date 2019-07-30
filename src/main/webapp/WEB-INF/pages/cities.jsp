@@ -5,35 +5,23 @@
   Time: 10:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.CountryService" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CountryServiceImpl" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.model.Country" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.CityService" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CityServiceImpl" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.model.City" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Міста</title>
+    <title> Cities </title>
+    <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
-<jsp:include page="modules/_header.jsp"/>
 <div style="padding-left: 15px">
-    <h2>Міста</h2>
-    <form action="/cities" method="post">
-        <select name="hotel">
-            <%
-                CityService cityService = new CityServiceImpl();
-
-                List<City> cities = cityService.getCityList();
-
-                for (City city : cities) { %>
-            <option><%=city.getCityName()%>
-            </option>
-            <% } %>
+    <h2>Hotels</h2>
+    <form action = "/hotel" method = "get">
+        <select name = "name">
+            <c:forEach var="hotel" items="${hotels}">
+                <option>${hotel.name}</option>
+            </c:forEach>
         </select>
+        <button type="submit">Відкрити</button>
     </form>
 </div>
 </body>

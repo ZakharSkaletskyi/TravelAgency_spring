@@ -16,7 +16,7 @@
 <div style="padding-left: 15px">
 <h2>Hotel "${hotelDto.hotelName}"</h2>
 
-<form action="/hotel/availability" method="post">
+<form action="/hotel/availability" method="get">
     <p>Перевірити доступні кімнати</p>
     <p>З: <input type="date" name="startDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
         до: <input type="date" name="endDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
@@ -25,7 +25,7 @@
     <button type="submit">Перевірити</button>
 </form>
 
-<form action="/hotel/stat" method="post">
+<form action="/hotel/stat" method="get">
     <p>Cтатистика</p>
     <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
         до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>

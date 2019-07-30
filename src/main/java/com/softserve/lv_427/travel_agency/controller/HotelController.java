@@ -29,9 +29,9 @@ public class HotelController {
   }
 
   @GetMapping
-  public ModelAndView getHotel(@RequestParam Integer hotelId) {
+  public ModelAndView getHotel(@RequestParam String name) {
     ModelAndView modelAndView = new ModelAndView();
-    HotelDto dto = hotelService.getHotelDtoById(hotelId);
+    HotelDto dto = hotelService.getHotelDtoById(name);
 
     modelAndView.setViewName("hotel/hotel");
     modelAndView.addObject("hotelDto", dto);
@@ -39,7 +39,7 @@ public class HotelController {
     return modelAndView;
   }
 
-  @PostMapping("/availability")
+  @GetMapping("/availability")
   public ModelAndView getHotelAvailability(
       @RequestParam String hotelName, String startDateAvail, String endDateAvail) {
     ModelAndView modelAndView = new ModelAndView();
@@ -52,7 +52,7 @@ public class HotelController {
     return modelAndView;
   }
 
-  @PostMapping("/stat")
+  @GetMapping("/stat")
   public ModelAndView getHotelStat(
       @RequestParam String hotelName, String startDateStat, String endDateStat) {
     ModelAndView modelAndView = new ModelAndView();
@@ -71,7 +71,7 @@ public class HotelController {
 
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("hotel/hotels");
-    modelAndView.addObject("hotelsList", hotels);
+    modelAndView.addObject("hotels", hotels);
 
     return modelAndView;
   }
@@ -82,7 +82,7 @@ public class HotelController {
 
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("hotel/hotels");
-    modelAndView.addObject("hotelsList", hotels);
+    modelAndView.addObject("hotels", hotels);
 
     return modelAndView;
   }

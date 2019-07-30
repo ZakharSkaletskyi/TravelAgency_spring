@@ -51,7 +51,7 @@ public class RoomServiceImpl implements RoomService {
   @Override
   @Transactional
   public int getLoadingRoomsPeriod(String startDate, String endDate, int roomId) {
-    return getLoadingRoomsPeriod(startDate, endDate, roomId);
+    return dao.getLoadingRoomsPeriod(startDate, endDate, roomId);
   }
 
   @Override

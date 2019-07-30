@@ -54,7 +54,7 @@ public class RoomDaoImpl implements RoomDao {
     List<Room> roomList =
         session
             .createQuery(
-                "select id from Room"
+                "from RoomBook"
                     + " WHERE ((orderStart> ?1 AND orderStart < ?2)"
                     + " OR (orderStart < ?3 AND orderEnd > ?4)"
                     + " OR (orderEnd > ?5 AND orderEnd < ?6))"

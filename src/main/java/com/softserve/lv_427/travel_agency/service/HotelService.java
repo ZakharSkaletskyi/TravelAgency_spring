@@ -26,7 +26,7 @@ public interface HotelService {
 
   int getAverageBookTime(int hotel_id, String dateStart, String dateEnd);
 
-  HotelDto getHotelDtoById(int hotelId);
+  HotelDto getHotelDtoById(String hotelName);
 
   HotelWithAvailabilityDto getHotelWithAvailabilityDtoById(
           String hotelName, String startDate, String endDate);

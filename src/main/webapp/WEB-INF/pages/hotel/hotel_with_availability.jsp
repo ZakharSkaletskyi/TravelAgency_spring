@@ -23,7 +23,7 @@
     </c:forEach>
 </p>
 
-<form action="/hotel/stat" method="post">
+<form action="/hotel/stat" method="get">
     <p>Cтатистика</p>
     <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
         до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
