@@ -67,13 +67,11 @@ public class CountryServiceImpl implements CountryService {
   }
 
   @Transactional
-  public CountryDto getCountryDto(String countryName) {
+  public CountryDto getCountryDto(int countryId) {
     CountryDto dto = new CountryDto();
-    int countryId = getId(countryName);
-    List<City> cities = getCitiesByCountryId(countryId);
 
-    dto.setName(countryName);
-    dto.setCities(cities);
+    dto.setName(getById(countryId).getName());
+    dto.setCities(getCitiesByCountryId(countryId));
 
     return dto;
   }

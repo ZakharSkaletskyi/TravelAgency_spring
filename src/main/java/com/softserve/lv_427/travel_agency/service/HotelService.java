@@ -1,8 +1,6 @@
 package com.softserve.lv_427.travel_agency.service;
 
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelDto;
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelWithAvailabilityDto;
-import com.softserve.lv_427.travel_agency.dto.hotel.HotelWithStatisticDto;
+import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 
 import java.util.List;
@@ -26,11 +24,9 @@ public interface HotelService {
 
   int getAverageBookTime(int hotel_id, String dateStart, String dateEnd);
 
-  HotelDto getHotelDtoById(String hotelName);
+  HotelDto getHotelDtoById(int hotelId);
 
-  HotelWithAvailabilityDto getHotelWithAvailabilityDtoById(
-      String hotelName, String startDate, String endDate);
+  HotelDto getHotelDtoWithAvailabilityById(int hotelId, String startDate, String endDate);
 
-  HotelWithStatisticDto getHotelWithStatisticDtoById(
-      String hotelName, String startDate, String endDate);
+  HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate);
 }

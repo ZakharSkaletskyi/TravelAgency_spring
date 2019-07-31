@@ -1,50 +1,35 @@
 package com.softserve.lv_427.travel_agency.controller;
 
-import com.softserve.lv_427.travel_agency.dto.CityDto;
-import com.softserve.lv_427.travel_agency.dto.CountryDto;
-import com.softserve.lv_427.travel_agency.entity.City;
 import com.softserve.lv_427.travel_agency.service.CityService;
-import com.softserve.lv_427.travel_agency.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/city")
 public class CityController {
   private final CityService cityService;
-  private final CountryService countryService;
 
   @Autowired
-  public CityController(CityService cityService, CountryService countryService) {
+  public CityController(CityService cityService) {
     this.cityService = cityService;
-    this.countryService = countryService;
   }
 
   @GetMapping
-  public ModelAndView getCity(@RequestParam String name) {
-    ModelAndView modelAndView = new ModelAndView();
-    CityDto cityDto = cityService.getCityDto(name);
+  public String getAllCities(ModelMap model) {
+    model.addAttribute("cities", cityService.findAll());
 
-    modelAndView.addObject("city", cityDto);
-    modelAndView.setViewName("city");
-
-    return modelAndView;
+    return "cities";
   }
 
-  @GetMapping(value = "/all")
-  public ModelAndView getAllCities() {
-    ModelAndView modelAndView = new ModelAndView();
-    List<City> cities = cityService.findAll();
+  @PostMapping
+  public String getCity(@RequestParam int cityId, ModelMap model) {
+    model.addAttribute("city", cityService.getCityDto(cityId));
 
-    modelAndView.addObject("cities", cities);
-    modelAndView.setViewName("cities");
-
-    return modelAndView;
+    return "city";
   }
 }

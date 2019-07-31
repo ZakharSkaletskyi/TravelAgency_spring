@@ -69,13 +69,12 @@ public class CityServiceImpl implements CityService {
   }
 
   @Transactional
-  public CityDto getCityDto(String cityName) {
+  public CityDto getCityDto(int cityId) {
     CityDto dto = new CityDto();
-    int cityId = getId(cityName);
     String countryName = getById(cityId).getCountry().getName();
     List<Hotel> hotels = getHotels(cityId);
 
-    dto.setName(cityName);
+    dto.setName(getById(cityId).getName());
     dto.setCountryName(countryName);
     dto.setHotels(hotels);
 

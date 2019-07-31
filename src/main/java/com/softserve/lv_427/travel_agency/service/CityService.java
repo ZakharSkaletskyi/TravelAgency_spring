@@ -23,5 +23,5 @@ public interface CityService {
 
   List<Hotel> getHotels(int cityId);
 
-  CityDto getCityDto(String cityName);
+  CityDto getCityDto(int cityId);
 }
