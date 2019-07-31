@@ -18,7 +18,7 @@
 	<jsp:include page="../modules/_header.jsp" />
 	<div style="padding-left: 15px">
 		<h2>Країни</h2>
-		<form action="/find_city" method="GET">
+		<form action="/find_city?dateStart=${dateStart}&dateEnd=${dateEnd}" method="GET">
 			<p style="font-size: 8px; color: red;">
 				*Доступні країни для <b><%=session.getAttribute("client")%> </b>
 			</p>

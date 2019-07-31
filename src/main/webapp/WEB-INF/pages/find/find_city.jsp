@@ -6,9 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="java.util.List" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CountryServiceImpl" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.model.City" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CityServiceImpl" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page pageEncoding="UTF-8" %>
 <html>
@@ -19,7 +17,7 @@
 <jsp:include page="../modules/_header.jsp"/>
 <div style="padding-left: 15px">
     <h2>Міста</h2>
-    <form action="/find_city" method="post">
+    <form action="/find_city" method="get">
         <p style="font-size: 8px; color: red;">
             *Доступні міста для <b><%=session.getAttribute("client")%>
         </b>
@@ -31,17 +29,17 @@
         </b>
 
         </p>
-        <select name="city">
-            <%
-                List<City> cities = new CityServiceImpl().getCityWithAvailableHotels
-                        (session.getAttribute("startDate").toString(),
-                                session.getAttribute("endDate").toString(),
-                                new CountryServiceImpl().getCountryIdByName(session.getAttribute("country").toString()));
-                for (City city : cities) { %>
-            <option><%=city.getCityName()%>
-            </option>
-            <% } %>
-        </select>
+      
+        <form action="/find_city" method="GET">
+			<p style="font-size: 8px; color: red;">
+				*Доступні міста ля обраного клієнта в період з ${dateStart} по ${dateEnd} }  
+			</p>
+			<form:select path="countries" name="selectedCity">
+				<c:forEach var="city" items="${cities}">
+					<form:option value="${city.id}"
+						label="${city.name}" />
+				</c:forEach>
+			</form:select>
 
         <button type="submit">Знайти</button>
     </form>
