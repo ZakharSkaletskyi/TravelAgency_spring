@@ -3,6 +3,7 @@ package com.softserve.lv_427.travel_agency.service.impl;
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
 import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
+import com.softserve.lv_427.travel_agency.entity.Room;
 import com.softserve.lv_427.travel_agency.service.HotelService;
 import com.softserve.lv_427.travel_agency.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,13 +96,9 @@ public class HotelServiceImpl implements HotelService {
 
   @Transactional
   @Override
-  public HotelDto getHotelDtoWithAvailabilityById(
-          int hotelId, String startDate, String endDate) {
+  public HotelDto getHotelDtoWithAvailabilityById(int hotelId, String startDate, String endDate) {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
-
-    //    List<Room> rooms = roomService.getAvailableRoomsOnDateInHotel(startDate, endDate,
-    // hotelId);
 
     dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
@@ -110,15 +107,14 @@ public class HotelServiceImpl implements HotelService {
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
-    //    dto.setAvailableRooms(rooms);
+//    dto.setAvailableRooms(roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId));
 
     return dto;
   }
 
   @Transactional
   @Override
-  public HotelDto getHotelDtoWithStatisticById(
-          int hotelId, String startDate, String endDate) {
+  public HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate) {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
 
@@ -139,6 +135,5 @@ public class HotelServiceImpl implements HotelService {
     dto.setAverageBookTime(getAverageBookTime(hotelId, startDate, endDate));
     //    dto.setRoomLoading(roomLoading);
     return dto;
-
   }
 }

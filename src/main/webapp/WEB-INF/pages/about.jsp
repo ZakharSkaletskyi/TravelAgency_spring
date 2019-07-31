@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Про нас</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css" />
 </head>
 <body>
 <jsp:include page="modules/_header.jsp"/>

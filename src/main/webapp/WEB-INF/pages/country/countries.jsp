@@ -10,8 +10,8 @@
 <html>
 <head>
     <title> Countries </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
-    <jsp:include page="modules/_header.jsp"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css" />
+    <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
 <div class="content">

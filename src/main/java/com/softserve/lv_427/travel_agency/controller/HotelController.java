@@ -40,7 +40,7 @@ public class HotelController {
         "hotelDto",
         hotelService.getHotelDtoWithAvailabilityById(hotelId, startDateAvail, endDateAvail));
 
-    return "hotel/hotel_with_availability";
+    return "hotel/hotel";
   }
 
   @PostMapping("/statistic")
@@ -49,6 +49,6 @@ public class HotelController {
     model.addAttribute(
         "hotelDto", hotelService.getHotelDtoWithStatisticById(hotelId, startDateStat, endDateStat));
 
-    return "hotel/hotel_with_stat";
+    return "hotel/hotel";
   }
 }

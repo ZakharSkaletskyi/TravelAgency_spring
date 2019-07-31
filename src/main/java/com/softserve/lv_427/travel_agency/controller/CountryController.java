@@ -23,13 +23,13 @@ public class CountryController {
   public String getAllCountries(ModelMap model) {
     model.addAttribute("countries", countryService.findAll());
 
-    return "countries";
+    return "country/countries";
   }
 
   @PostMapping
   public String getCountry(@RequestParam int countryId, ModelMap model) {
     model.addAttribute("country", countryService.getCountryDto(countryId));
 
-    return "country";
+    return "country/country";
   }
 }
