@@ -54,11 +54,12 @@ public class RoomDaoImpl implements RoomDao {
     List<Room> roomList =
         session
             .createQuery(
-                "SELECT c from RoomBook "
-                    + " WHERE ((orderStart> ?1 AND orderStart < ?2)"
+                "select p.room from RoomBook as p INNER JOIN Room as rm WHERE "
+                    + " p.roomId = rm.Id AND "
+                    + " (orderStart> ?1 AND orderStart < ?2)"
                     + " OR (orderStart < ?3 AND orderEnd > ?4)"
-                    + " OR (orderEnd > ?5 AND orderEnd < ?6))"
-                    + " c JOIN  c.roomId v Left join v.room rm WHERE rm.hotel_id = ?7",
+                    + " OR (orderEnd > ?5 AND orderEnd < ?6)"
+                    + " AND rm.hotel_id = ?7)",
                 Room.class)
             .setParameter(1, startDate)
             .setParameter(2, endDate)
@@ -66,11 +67,10 @@ public class RoomDaoImpl implements RoomDao {
             .setParameter(4, endDate)
             .setParameter(5, startDate)
             .setParameter(6, endDate)
-            .setParameter(7, hotelId)
+            .setParameter(7, hotelId)git
             .list();
     return roomList;
   }
-
 
   @Override
   public int getLoadingRoomsPeriod(String startDate, String endDate, int roomId) {
