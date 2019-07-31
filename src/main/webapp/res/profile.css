@@ -6,6 +6,14 @@ body {
     font: small-caps bold 16px/1 cursive;
 }
 
+p, .visa, .country {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 25px;
+    font-weight: normal;
+}
+
 h1 {
     font-size: 35px;
     margin-top: 15px;
@@ -17,21 +25,6 @@ h2 {
     font-size: 30px;
     margin-bottom: 5px;
     margin-top: 5px;
-}
-p {
-    font-weight: normal;
-    font-size: 35px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    margin-left: 25px;
-}
-
-.visa, .country {
-    font-weight: normal;
-    font-size: 25px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    margin-left: 25px;
 }
 
 header {

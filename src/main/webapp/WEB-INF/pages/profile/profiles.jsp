@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Профіль</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/profile.css"/>
     <jsp:include page="../modules/_header.jsp"/></head>
 <body>
 
