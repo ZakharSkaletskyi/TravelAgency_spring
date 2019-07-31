@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>TourAgency</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css"/>
+    <link rel="stylesheet" href="/res/css/index.css"/>
     <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
