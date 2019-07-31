@@ -87,7 +87,7 @@ public class ClientDaoImpl implements ClientDao {
     Session session = sessionFactory.getCurrentSession();
     Client client =
         session
-            .createQuery("SELECT * FROM Client WHERE id = ?1", Client.class)
+            .createQuery("FROM Client WHERE id = ?1", Client.class)
             .setParameter(1, id)
             .getResultList()
             .get(0);

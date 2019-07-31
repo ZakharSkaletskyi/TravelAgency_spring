@@ -12,7 +12,7 @@ import java.util.List;
 public class ProfileClientDTO {
     private String firstName;
     private String lastName;
-    private long phoneNumber;
+    private String phoneNumber;
     private List<Country> countries;
     private List<Visa> visas;
 

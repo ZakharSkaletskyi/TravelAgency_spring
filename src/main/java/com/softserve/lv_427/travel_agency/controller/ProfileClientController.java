@@ -1,12 +1,12 @@
 package com.softserve.lv_427.travel_agency.controller;
 
-import com.softserve.lv_427.travel_agency.entity.Client;
 import com.softserve.lv_427.travel_agency.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.sql.SQLException;
 
 @Controller
 @RequestMapping(value = "/profile")
@@ -19,26 +19,18 @@ public class ProfileClientController {
   }
 
   @GetMapping
-  public ModelAndView profile() {
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("profile");
-    return modelAndView;
-  }
+  public String getAllClient (ModelMap model) {
+    model.addAttribute(
+            "clients", clientService.getAllClients());
 
-  @PostMapping("/profile")
-  public String getAllClients(
-          @RequestParam  ModelMap model) {
-//    model.addAttribute(
-//            "ProfileClientDTO", clientService.add(((Client)new Object()));
-
-    return "profile/profile_with_stat";
+    return "profile/profiles";
   }
-  @PostMapping("/statistic")
+  @PostMapping
   public String getClientStatistic(
-          @RequestParam int clientId, ModelMap model) {
-//    model.addAttribute(
-//            "ProfileClientDTO", clientService.);
+          @RequestParam int clientId, ModelMap model) throws SQLException, ClassNotFoundException {
+    model.addAttribute(
+            "ProfileClientDTO", clientService.getProfileClientDTO(clientId));
 
-    return "profile/profile_with_stat";
+    return "profile/profile";
   }
 }
