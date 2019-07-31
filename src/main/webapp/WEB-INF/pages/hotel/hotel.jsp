@@ -10,33 +10,52 @@
 <html>
 <head>
     <title> ${hotelDto.hotelName} </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css"/>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
-<div class = "content">
-    <h1>Hotel "${hotelDto.hotelName}"</h1>
-    <p class="description">${hotelDto.countryName}, ${hotelDto.cityName}</p>
+<div class="content">
+    <div class="hotel">
+        <div class="about-hotel">
+            <h1 class="hotel-name">${hotelDto.hotelName}</h1>
+            <span class="hotel-location">${hotelDto.countryName}, ${hotelDto.cityName}</span>
+            <div class="hotel-description">
+                <h2>Про готель</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto at commodi delectus
+                    dolorem
+                    harum illum inventore molestiae numquam odio, officia possimus quasi qui quisquam vero. Incidunt
+                    laborum
+                    possimus quo.</p>
+            </div>
 
-    <form action="/hotel/availability" method="POST">
-        <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+            <form action="/hotel/availability" method="POST">
+                <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
 
-        <p>Перевірити доступні кімнати</p>
-        <p>З: <input type="date" name="startDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
-            до: <input type="date" name="endDateAvail" value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
-        </p>
-        <button type="submit">Перевірити</button>
-    </form>
+                <h2>Перевірити доступні кімнати</h2>
+                <div class="hotel-form">
+                    <p>З: <input type="date" name="startDateAvail"
+                                 value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+                        до: <input type="date" name="endDateAvail"
+                                   value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+                    </p>
+                    <button type="submit">Перевірити</button>
+                </div>
+            </form>
 
-    <form action="/hotel/statistic" method="POST">
-        <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+            <form action="/hotel/statistic" method="POST">
+                <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
 
-        <p>Cтатистика</p>
-        <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
-            до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
-        </p>
-        <button type="submit">Отримати</button>
-    </form>
+                <h2>Cтатистика</h2>
+                <div class="hotel-form">
+                    <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
+                        до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
+                    </p>
+                    <button type="submit">Отримати</button>
+                </div>
+            </form>
+        </div>
+        <img src="../../../res/hotel.jpg" alt="${hotelDto.hotelName}" width="500">
+    </div>
 </div>
 </body>
 </html>

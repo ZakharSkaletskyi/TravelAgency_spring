@@ -15,25 +15,40 @@
 </head>
 <body>
 <div class="content">
-    <h1>Hotel "${hotelDto.hotelName}"</h1>
-    <p class="description">${hotelDto.countryName}, ${hotelDto.cityName}</p>
+    <div class="hotel">
+        <div class="about-hotel">
+            <h1 class="hotel-name">${hotelDto.hotelName}</h1>
+            <span class="hotel-location">${hotelDto.countryName}, ${hotelDto.cityName}</span>
+            <div class="hotel-description">
+                <h2>Про готель</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto at commodi delectus
+                    dolorem
+                    harum illum inventore molestiae numquam odio, officia possimus quasi qui quisquam vero. Incidunt
+                    laborum
+                    possimus quo.</p>
+            </div>
 
-    <p style="font-size: 12px;">
-        Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :
-        <c:forEach var="room" items="${hotelDto.availableRooms}">
-            <c:out value="${room.number}"/>
-        </c:forEach>
-    </p>
+            <p style="font-size: 12px;">
+                Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :
+                <c:forEach var="room" items="${hotelDto.availableRooms}">
+                    <c:out value="${room.number}"/>
+                </c:forEach>
+            </p>
 
-    <form action="/hotel/statistic" method="POST">
-        <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+            <form action="/hotel/statistic" method="POST">
+                <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
 
-        <p>Cтатистика</p>
-        <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
-            до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
-        </p>
-        <button type="submit">Отримати</button>
-    </form>
+                <h2>Cтатистика</h2>
+                <div class="hotel-form">
+                    <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
+                        до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
+                    </p>
+                    <button type="submit">Отримати</button>
+                </div>
+            </form>
+        </div>
+        <img src="../../../res/hotel.jpg" alt="${hotelDto.hotelName}" width="500" height="600">
+    </div>
 </div>
 </body>
 </html>
