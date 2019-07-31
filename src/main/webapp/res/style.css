@@ -1,5 +1,9 @@
 body {
     margin: 0px;
+    background-image: url(silver-2143730_1920.jpg);
+    background-size: auto;
+    color: black;
+    font: small-caps bold 16px/1 cursive;
 }
 
 h1 {
@@ -74,4 +78,5 @@ button {
     margin-top: 0px;
     height: 30%;
     margin-bottom: 0;
+    color: black;
 }

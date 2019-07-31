@@ -15,7 +15,7 @@
 
 <body>
 <header>
-    <p class="logo">TourAgency "Сонечко"</p>
+    <p class="logo">TourAgency "PACMAN"</p>
     <div class="navigation">
         <a href="/find"> Знайти готель </a>
         <a href="/country"> Країни </a>
