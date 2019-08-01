@@ -14,7 +14,7 @@
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
-<button class="buttonBack" onclick="goBack()">Список користувачів</button>
+<button class="buttonBack" onclick="goBack()">Список клієнтів</button>
 <script>
     function goBack() {
         window.history.back();
