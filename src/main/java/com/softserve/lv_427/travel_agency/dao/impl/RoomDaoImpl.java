@@ -48,7 +48,7 @@ public class RoomDaoImpl implements RoomDao {
   }
 
   @Override
-  public List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId) {
+  public List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId ) {
     Session session = sessionFactory.getCurrentSession();
 
     return session
