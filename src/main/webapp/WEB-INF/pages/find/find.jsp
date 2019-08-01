@@ -16,7 +16,7 @@
 <html>
 <head>
     <title>Знайти готель</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css"/>
+    <link rel="stylesheet" href="/res/css/index.css"/>
 
 </head>
 <body>
