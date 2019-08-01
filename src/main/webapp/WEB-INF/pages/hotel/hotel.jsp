@@ -48,7 +48,7 @@
                 <div class="hotel-availability">
                     Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :
                     <c:forEach var="room" items="${hotelDto.availableRooms}">
-                        <c:out value="${room.number}"/>
+                        ${room.number},
                     </c:forEach>
                 </div>
             </c:if>

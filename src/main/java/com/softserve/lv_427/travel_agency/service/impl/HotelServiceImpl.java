@@ -107,7 +107,7 @@ public class HotelServiceImpl implements HotelService {
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
-//    dto.setAvailableRooms(roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId));
+    dto.setAvailableRooms(roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId));
 
     return dto;
   }
