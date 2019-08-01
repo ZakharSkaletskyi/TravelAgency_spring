@@ -1,5 +1,6 @@
 package com.softserve.lv_427.travel_agency.controller;
 
+import com.softserve.lv_427.travel_agency.Validator;
 import com.softserve.lv_427.travel_agency.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/hotel")
 public class HotelController {
   private final HotelService hotelService;
+  private Validator validator = new Validator();
 
   @Autowired
   public HotelController(HotelService hotelService) {
@@ -36,6 +38,7 @@ public class HotelController {
   @PostMapping("/availability")
   public String getHotelWithAvailability(
       @RequestParam int hotelId, String startDateAvail, String endDateAvail, ModelMap model) {
+    validator.validateDateForAvailability(startDateAvail, endDateAvail);
     model.addAttribute(
         "hotelDto",
         hotelService.getHotelDtoWithAvailabilityById(hotelId, startDateAvail, endDateAvail));

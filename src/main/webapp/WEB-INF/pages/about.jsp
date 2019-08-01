@@ -10,11 +10,11 @@
 <html>
 <head>
     <title>Сонечко - Про нас</title>
+    <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
-<jsp:include page="modules/_header.jsp"/>
 <div class="content">
-    <h1>Про нас</h1>
+    <h1 class="header">Про нас</h1>
     <p>На ринку уже понад <b>10</b> років.</p>
 
     <p><b>${aboutDto.countOfClient}</b> задоволених клієнтів</p>
