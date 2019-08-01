@@ -3,7 +3,6 @@ package com.softserve.lv_427.travel_agency.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.softserve.lv_427.travel_agency.dto.ProfileClientDTO;
 import com.softserve.lv_427.travel_agency.entity.Client;
 import com.softserve.lv_427.travel_agency.entity.Country;
 
@@ -25,5 +24,5 @@ public interface ClientService {
 
   List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException;
 
-  ProfileClientDTO getProfileClientDTO(int clientID) throws ClassNotFoundException, SQLException;
+  int getCountOfClients();
 }

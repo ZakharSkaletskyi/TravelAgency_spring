@@ -27,4 +27,6 @@ public interface ClientDao {
   public Client getClient(int id) throws SQLException, ClassNotFoundException;
 
   List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException;
+
+  int getCountOfClients();
 }

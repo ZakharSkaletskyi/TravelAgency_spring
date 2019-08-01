@@ -9,9 +9,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title> Countries </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css" />
-    <jsp:include page="modules/_header.jsp"/>
+    <title>Сонечко - Countries </title>
+    <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
 <div class="content">

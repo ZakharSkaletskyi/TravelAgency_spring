@@ -48,25 +48,25 @@ public class RoomDaoImpl implements RoomDao {
   }
 
   @Override
-  public List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId ) {
+  public List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId) {
     Session session = sessionFactory.getCurrentSession();
 
     return session
-            .createQuery(g
-                    "SELECT r from Hotel h join h.rooms r join r.roomBooks rb where "
-                            + " ((rb.orderStart < ?1 AND rb.orderEnd > ?2)"
-                            + " OR (rb.orderStart > ?3 AND rb.orderEnd < ?4)"
-                            + " OR (rb.orderEnd < ?5 AND rb.orderEnd < ?6))"
-                            + " AND h.id = ?7",
-                    Room.class)
-            .setParameter(1, startDate)
-            .setParameter(2, endDate)
-            .setParameter(3, startDate)
-            .setParameter(4, endDate)
-            .setParameter(5, startDate)
-            .setParameter(6, endDate)
-            .setParameter(7, hotelId)
-            .list();
+        .createQuery(
+            "SELECT r from Hotel h join h.rooms r join r.roomBooks rb where "
+                + " ((rb.orderStart < ?1 AND rb.orderStart > ?2)"
+                + " OR (rb.orderStart > ?3 AND rb.orderEnd < ?4)"
+                + " OR (rb.orderEnd < ?5 AND rb.orderEnd < ?6))"
+                + " AND h.id = ?7",
+            Room.class)
+        .setParameter(1, startDate)
+        .setParameter(2, endDate)
+        .setParameter(3, startDate)
+        .setParameter(4, endDate)
+        .setParameter(5, startDate)
+        .setParameter(6, endDate)
+        .setParameter(7, hotelId)
+        .list();
   }
 
   @Override
