@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Профіль</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/profile.css"/>
+    <link rel="stylesheet" href="../../../res/css/index.css"/>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
@@ -21,27 +21,27 @@
     }
 </script>
 <br/>
+    <div class="profileContent">
+        <p class ="infoParam">Ім'я</p>
+            <p class ="info">${ProfileClientDTO.firstName}</p>
+        <p class ="infoParam">Прізвище</p>
+            <p class ="info">${ProfileClientDTO.lastName}</p>
+        <p class ="infoParam">Номер телефону</p>
+            <p class ="info">${ProfileClientDTO.phoneNumber}</p>
+        <p class ="infoParam">Список країн,які відвідав клієнт</p>
+            <div class="country">
+                <c:forEach var="country" items="${ProfileClientDTO.countries}">
+                    <option value="${country.id}">${country.name}</option>
+                </c:forEach>
+            </div>
 
-<h1>Ім'я</h1>
-<p>${ProfileClientDTO.firstName}</p>
-<h1>Прізвище</h1>
-<p>${ProfileClientDTO.lastName}</p>
-<h1>Номер телефону</h1>
-<p>${ProfileClientDTO.phoneNumber}</p>
-<h1>Список країн,які відвідав клієнт</h1>
-<div class="country">
-    <c:forEach var="country" items="${ProfileClientDTO.countries}">
-        <option value="${country.id}">${country.name}</option>
-    </c:forEach>
-</div>
-
-<h1>Список віз</h1>
-<div class="visa">
-    <c:forEach var="visa" items="${ProfileClientDTO.visas}">
-        <option value="${visa.id}">${visa.name}</option>
-    </c:forEach>
-</div>
-
+        <p class ="infoParam">Список віз</p>
+            <div class="visa">
+                <c:forEach var="visa" items="${ProfileClientDTO.visas}">
+                    <option value="${visa.id}">${visa.name}</option>
+                </c:forEach>
+            </div>
+    </div>
 <br/>
 </body>
 </html>

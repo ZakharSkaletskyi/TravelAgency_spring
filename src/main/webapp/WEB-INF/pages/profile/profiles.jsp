@@ -14,13 +14,15 @@
     <jsp:include page="../modules/_header.jsp"/></head>
 <body>
 
-<form action="/profile" method="Post">
-    <select name="clientId">
-        <c:forEach var="client" items="${clients}">
-            <option value="${client.id}">${client.firstName} ${client.lastName}</option>
-        </c:forEach>
-    </select>
-    <button type="submit">Відкрити</button>
-</form>
+<div class="profileContent" >
+    <form action="/profile" method="Post">
+        <select name="clientId">
+            <c:forEach var="client" items="${clients}">
+                <option value="${client.id}">${client.firstName} ${client.lastName}</option>
+            </c:forEach>
+        </select>
+        <button type="submit">Відкрити</button>
+    </form>
+</div>
 </body>
 </html>
