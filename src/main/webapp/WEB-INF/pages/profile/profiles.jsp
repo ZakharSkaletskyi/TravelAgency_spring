@@ -15,13 +15,16 @@
 <body>
 
 <div class="profileContent" >
-    <form action="/profile" method="Post">
+    <p>Виберіть клієнта по якому хочете отримати статистику</p>
+    <form action="/profile" method="Post" class="listClient">
         <select name="clientId">
             <c:forEach var="client" items="${clients}">
                 <option value="${client.id}">${client.firstName} ${client.lastName}</option>
             </c:forEach>
         </select>
-        <button type="submit">Відкрити</button>
+        <div class="submitClient">
+            <button type="submit" class="buttonBack">Відкрити</button>
+        </div>
     </form>
 </div>
 </body>

@@ -14,7 +14,7 @@
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
-<button onclick="goBack()">Список користувачів</button>
+<button class="buttonBack" onclick="goBack()">Список користувачів</button>
 <script>
     function goBack() {
         window.history.back();
@@ -41,6 +41,7 @@
                     <option value="${visa.id}">${visa.name}</option>
                 </c:forEach>
             </div>
+        <img src="../../../res/img/alien.jpg" alt="alien" class="alien" align="right">
     </div>
 <br/>
 </body>
