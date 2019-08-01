@@ -35,9 +35,10 @@
                     <h2>Перевірити доступні кімнати</h2>
                     <div class="hotel-form">
                         <p>З: <input type="date" name="startDateAvail"
-                                     value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+                                     value=${hotelDto.currentDate} min= ${hotelDto.currentDate} max=${hotelDto.maxDate}>
                             до: <input type="date" name="endDateAvail"
-                                       value=${hotelDto.currentDate} min= ${hotelDto.currentDate}>
+                                       value=${hotelDto.currentDate} min= ${hotelDto.currentDate}
+                                       max=${hotelDto.maxDate}>
                         </p>
                         <button type="submit">Перевірити</button>
                     </div>
@@ -46,6 +47,7 @@
 
             <c:if test="${hotelDto.availableRooms != null}">
                 <div class="hotel-availability">
+                    <hr>
                     Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :
                     <c:forEach var="room" items="${hotelDto.availableRooms}">
                         ${room.number},
@@ -59,8 +61,11 @@
 
                     <h2>Cтатистика</h2>
                     <div class="hotel-form">
-                        <p>З: <input type="date" name="startDateStat" value= ${hotelDto.currentDate}>
-                            до: <input type="date" name="endDateStat" value= ${hotelDto.currentDate}>
+                        <p>З: <input type="date" name="startDateStat"
+                                     value=${hotelDto.currentDate} min=${hotelDto.minDate} max=${hotelDto.currentDate}>
+                            до: <input type="date" name="endDateStat"
+                                       value=${hotelDto.currentDate} min=${hotelDto.minDate}
+                                       max=${hotelDto.currentDate}>
                         </p>
                         <button type="submit">Отримати</button>
                     </div>
@@ -69,6 +74,7 @@
 
             <c:if test="${hotelDto.countOfClient != null}">
                 <div class="hotel-statistic">
+                    <hr>
                     Статистика за період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b>
                     <ul>
                         <li> Кількість клієнтів: ${hotelDto.countOfClient} </li>

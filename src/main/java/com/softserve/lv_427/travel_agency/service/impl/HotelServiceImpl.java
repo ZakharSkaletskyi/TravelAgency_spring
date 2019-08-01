@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -85,11 +86,20 @@ public class HotelServiceImpl implements HotelService {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
 
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, 1);
+    Date nextYear = cal.getTime();
+
+    cal.add(Calendar.YEAR, -2);
+    Date twoYearsAgo = cal.getTime();
+
     dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
     dto.setCountryName(hotel.getCity().getCountry().getName());
     dto.setCityName(hotel.getCity().getName());
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+    dto.setMinDate(new SimpleDateFormat("yyyy-MM-dd").format(twoYearsAgo));
+    dto.setMaxDate(new SimpleDateFormat("yyyy-MM-dd").format(nextYear));
 
     return dto;
   }
@@ -100,11 +110,16 @@ public class HotelServiceImpl implements HotelService {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
 
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, -2);
+    Date twoYearsAgo = cal.getTime();
+
     dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
     dto.setCountryName(hotel.getCity().getCountry().getName());
     dto.setCityName(hotel.getCity().getName());
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+    dto.setMinDate(new SimpleDateFormat("yyyy-MM-dd").format(twoYearsAgo));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
     dto.setAvailableRooms(roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId));
@@ -118,6 +133,10 @@ public class HotelServiceImpl implements HotelService {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
 
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, 1);
+    Date nextYear = cal.getTime();
+
     //    List<Integer[]> roomLoading = new ArrayList<>();
 
     //    for (int i = 0; i < roomService.getRoomCount(hotelId); i++) {
@@ -129,6 +148,7 @@ public class HotelServiceImpl implements HotelService {
     dto.setCountryName(hotel.getCity().getCountry().getName());
     dto.setCityName(hotel.getCity().getName());
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+    dto.setMaxDate(new SimpleDateFormat("yyyy-MM-dd").format(nextYear));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
     dto.setCountOfClient(getClientCountForPeriod(hotelId, startDate, endDate));

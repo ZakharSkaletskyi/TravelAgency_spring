@@ -49,6 +49,7 @@ public class HotelController {
   @PostMapping("/statistic")
   public String getHotelWithStatistic(
       @RequestParam int hotelId, String startDateStat, String endDateStat, ModelMap model) {
+    validator.validateDateForStatistic(startDateStat, endDateStat);
     model.addAttribute(
         "hotelDto", hotelService.getHotelDtoWithStatisticById(hotelId, startDateStat, endDateStat));
 

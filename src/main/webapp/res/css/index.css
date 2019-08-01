@@ -25,6 +25,11 @@ header {
     padding: 15px;
 }
 
+hr {
+    color: #A4A4A4;
+    border-width: medium;
+}
+
 .flex-content {
     display: flex;
     flex-direction: row;
@@ -83,7 +88,7 @@ header {
 .description {
     display: flex;
     flex-direction: column;
-    color:black;
+    color: black;
 }
 
 .content h2 {
@@ -111,7 +116,7 @@ header {
 }
 
 .content button:hover {
-    background-color:#DADADA;
+    background-color: #DADADA;
 }
 
 .content input, select {
