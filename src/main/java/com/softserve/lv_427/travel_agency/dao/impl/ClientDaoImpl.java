@@ -107,6 +107,15 @@ public class ClientDaoImpl implements ClientDao {
     return countries;
   }
 
+  @Override
+  public int getCountOfClients() {
+    Session session = sessionFactory.getCurrentSession();
+    return session.createQuery("SELECT COUNT(id) FROM Client", Long.class)
+            .uniqueResult()
+            .intValue();
+
+  }
+
   // "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id = ?1 ",
   //                "FROM country c JOIN visa. v LEFT JOIN v.clients clns WHERE clns.id = ?1",
   // "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1"

@@ -54,6 +54,8 @@ header {
     margin-top: 0px;
     height: 30%;
     margin-bottom: 0;
+    text-decoration: none;
+    color: black;
 }
 
 .content {

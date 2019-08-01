@@ -69,4 +69,10 @@ public class ClientServiceImpl implements ClientService {
   public List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException {
     return dao.getAvailableCountries(clientId);
   }
+
+  @Override
+  @Transactional
+  public int getCountOfClients() {
+    return dao.getCountOfClients();
+  }
 }

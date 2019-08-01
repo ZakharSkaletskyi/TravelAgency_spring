@@ -8,8 +8,7 @@
 <%@page pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>TourAgency</title>
-    <link rel="stylesheet" href="/res/css/index.css"/>
+    <title>Сонечко</title>
     <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>

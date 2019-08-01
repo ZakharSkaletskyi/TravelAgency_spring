@@ -22,4 +22,6 @@ public interface VisaService {
   void delete(Visa visa);
 
   void edit(Visa visa);
+
+  List<Visa> findAll();
 }

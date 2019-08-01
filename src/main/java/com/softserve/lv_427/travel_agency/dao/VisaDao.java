@@ -15,6 +15,8 @@ public interface VisaDao {
 
   void edit(Visa visa);
 
+  List<Visa> findAll();
+
   int getId(String name) throws SQLException, ClassNotFoundException;
 
   int getVisasCountForTheClient(int clientId) throws SQLException;

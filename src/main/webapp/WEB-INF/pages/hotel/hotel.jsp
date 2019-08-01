@@ -9,8 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title> ${hotelDto.hotelName} </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css"/>
+    <title>Сонечко - ${hotelDto.hotelName} </title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/hotel.css"/>
     <jsp:include page="../modules/_header.jsp"/>
 </head>

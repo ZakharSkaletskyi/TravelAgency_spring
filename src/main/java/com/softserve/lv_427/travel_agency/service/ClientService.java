@@ -23,4 +23,6 @@ public interface ClientService {
   void edit(Client client);
 
   List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException;
+
+  int getCountOfClients();
 }
