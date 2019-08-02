@@ -6,18 +6,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="java.util.List" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CountryServiceImpl" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.model.City" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CityServiceImpl" %>
+<%--<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CountryServiceImpl" %>--%>
+<%--<%@ page import="com.sofserve.lv_427.tourfirm.model.City" %>--%>
+<%--<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.CityServiceImpl" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Міста</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css"/>
 </head>
 <body>
 <jsp:include page="../modules/_header.jsp"/>
-<div style="padding-left: 15px">
+<div class="content">
     <h2>Міста</h2>
     <form action="/find_city" method="post">
         <p style="font-size: 8px; color: red;">
@@ -26,6 +27,7 @@
             в <b><%=session.getAttribute("country")%>
         </b>
             в період <b><%=session.getAttribute("startDate")%>
+
         </b>
             до <b><%=session.getAttribute("endDate")%>
         </b>
