@@ -24,20 +24,20 @@ public class Client {
   @Column(name = "phone_number", nullable = false, length = 15)
   private String phoneNumber;
 
-  @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "client")
   private List<RoomBook> roomBooks = new ArrayList<>();
 
-  @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "client")
   private List<RoomBookArchive> roomBookArchives = new ArrayList<>();
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "client_visa",
       joinColumns = {@JoinColumn(name = "client_id", nullable = false, updatable = false)},
       inverseJoinColumns = {@JoinColumn(name = "visa_id", nullable = false, updatable = false)})
   private List<Visa> visas = new ArrayList<>();
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "client_country",
       joinColumns = {@JoinColumn(name = "client_id", nullable = false, updatable = false)},

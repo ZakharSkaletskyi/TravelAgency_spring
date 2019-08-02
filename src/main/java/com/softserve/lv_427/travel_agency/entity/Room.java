@@ -20,13 +20,13 @@ public class Room {
   @Column(name = "room_number", nullable = false)
   private int number;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "hotel_id", nullable = false)
   private Hotel hotel;
 
-  @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "room")
   private List<RoomBook> roomBooks = new ArrayList<>();
 
-  @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "room")
   private List<RoomBookArchive> roomBookArchives = new ArrayList<>();
 }

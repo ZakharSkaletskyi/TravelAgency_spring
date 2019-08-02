@@ -1,5 +1,6 @@
 package com.softserve.lv_427.travel_agency.controller;
 
+import com.softserve.lv_427.travel_agency.exception.FieldNotFoundException;
 import com.softserve.lv_427.travel_agency.exception.InvalidDatesException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,26 @@ public class GlobalControllerExceptionHandler {
   @ExceptionHandler(InvalidDatesException.class)
   public ModelAndView getException(InvalidDatesException e) {
     ModelAndView model = new ModelAndView();
+    model.addObject("message", e.getMessage());
+    model.setViewName("error");
+
+    return model;
+  }
+
+  @ExceptionHandler(FieldNotFoundException.class)
+  public ModelAndView getFieldNotFound(FieldNotFoundException e) {
+    ModelAndView model = new ModelAndView();
+
+    model.addObject("message", e.getMessage());
+    model.setViewName("error");
+
+    return model;
+  }
+
+  @ExceptionHandler(NullPointerException.class)
+  public ModelAndView getNullPointer(NullPointerException e) {
+    ModelAndView model = new ModelAndView();
+
     model.addObject("message", e.getMessage());
     model.setViewName("error");
 

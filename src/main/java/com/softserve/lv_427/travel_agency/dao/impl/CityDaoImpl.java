@@ -2,12 +2,15 @@ package com.softserve.lv_427.travel_agency.dao.impl;
 
 import com.softserve.lv_427.travel_agency.dao.CityDao;
 import com.softserve.lv_427.travel_agency.entity.City;
+import com.softserve.lv_427.travel_agency.entity.Country;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
+import com.softserve.lv_427.travel_agency.exception.FieldNotFoundException;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,8 +31,15 @@ public class CityDaoImpl implements CityDao {
 
   @Override
   public City getById(int id) {
-    Session session = sessionFactory.getCurrentSession();
-    return session.get(City.class, id);
+    try (Session session = sessionFactory.openSession()) {
+      City city = session.get(City.class, id);
+
+      if (city == null) {
+        throw new FieldNotFoundException("There is no city with this name");
+      }
+
+      return city;
+    }
   }
 
   @Override
@@ -85,8 +95,7 @@ public class CityDaoImpl implements CityDao {
             .list();
 
     return session
-        .createQuery(
-            "from City where country.id = ?1 AND id IN (:cityIds)", City.class)
+        .createQuery("from City where country.id = ?1 AND id IN (:cityIds)", City.class)
         .setParameter(1, countryId)
         .setParameterList("cityIds", cityIds)
         .list();
