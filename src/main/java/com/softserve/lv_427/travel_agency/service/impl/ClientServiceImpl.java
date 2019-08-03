@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.softserve.lv_427.travel_agency.dto.ProfileClientDTO;

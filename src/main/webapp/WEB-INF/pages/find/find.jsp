@@ -16,11 +16,10 @@
 <html>
 <head>
     <title>Знайти готель</title>
-    <link rel="stylesheet" href="/res/css/index.css"/>
-
+    <link rel="stylesheet" href="../../../res/css/index.css"/>
 </head>
 <body>
-<div style="padding-left: 15px">
+<div class="content">
     <form action="/find_country" method="GET">
         <h2>Знайти готель</h2>
         <form:select path="clients" name="selectedClient">
