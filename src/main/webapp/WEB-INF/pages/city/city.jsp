@@ -17,7 +17,9 @@
     <div class="flex-content city">
         <div class="city-about">
             <h1 class="header">${city.name}</h1>
-            <span class="location city-location">${city.countryName}</span>
+            <span class="location hotel-location">
+                <a href="/country?id=${city.country.id}">${city.country.name}</a>
+            </span>
             <div class="description">
                 <h2>Про місто</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto at commodi delectus
@@ -28,8 +30,8 @@
             </div>
 
             <h2>Готелі</h2>
-            <form action="${pageContext.request.contextPath}/hotel" method="POST">
-                <select name="hotelId">
+            <form action="${pageContext.request.contextPath}/hotel" method="GET">
+                <select name="id">
                     <c:forEach var="hotel" items="${city.hotels}">
                         <option value="${hotel.id}">${hotel.name}</option>
                     </c:forEach>

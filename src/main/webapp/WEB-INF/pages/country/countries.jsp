@@ -15,8 +15,8 @@
 <body>
 <div class="content">
     <h2>Countries</h2>
-    <form action = "/country" method = "POST">
-        <select name="countryId">
+    <form action = "/country" method = "GET">
+        <select name="id">
             <c:forEach var="country" items="${countries}">
                 <option value="${country.id}">${country.name}</option>
             </c:forEach>

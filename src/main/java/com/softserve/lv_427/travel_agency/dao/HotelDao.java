@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.dao;
 
 import com.softserve.lv_427.travel_agency.entity.Hotel;
+import com.softserve.lv_427.travel_agency.entity.Room;
 
 import java.util.List;
 
@@ -15,11 +16,13 @@ public interface HotelDao {
 
   List<Hotel> getAll();
 
-  int getId(String name);
-
   int getClientCountForPeriod(int hotel_id, String dateStart, String dateEnd);
 
   List<Hotel> getAvailableHotelsOnDates(String startDate, String endDate);
 
   int getAverageBookTime(int hotel_id, String dateStart, String dateEnd);
+
+  List<Room> getRoomsByHotel(int hotelId);
+
+  //  int getId(String name);
 }

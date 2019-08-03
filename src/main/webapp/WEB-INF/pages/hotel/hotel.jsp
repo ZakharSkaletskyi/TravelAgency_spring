@@ -18,7 +18,10 @@
     <div class="flex-content hotel">
         <div class="hotel-about">
             <h1 class="header hotel-name">${hotelDto.hotelName}</h1>
-            <span class="location hotel-location">${hotelDto.countryName}, ${hotelDto.cityName}</span>
+            <span class="location hotel-location">
+                <a href="/country?id=${hotelDto.country.id}">${hotelDto.country.name}</a>,
+                <a href="/city?id=${hotelDto.city.id}">${hotelDto.city.name}</a>
+            </span>
             <div class="description hotel-description">
                 <h2>Про готель</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto at commodi delectus
@@ -30,7 +33,7 @@
 
             <c:if test="${hotelDto.availableRooms == null}">
                 <form action="/hotel/availability" method="POST">
-                    <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+                    <input type="hidden" name="id" value="${hotelDto.hotelId}"/>
 
                     <h2>Перевірити доступні кімнати</h2>
                     <div class="hotel-form">
@@ -50,14 +53,14 @@
                     <hr>
                     Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :
                     <c:forEach var="room" items="${hotelDto.availableRooms}">
-                        ${room.number},
+                        ${room.number}
                     </c:forEach>
                 </div>
             </c:if>
 
             <c:if test="${hotelDto.countOfClient == null}">
                 <form action="/hotel/statistic" method="POST">
-                    <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+                    <input type="hidden" name="id" value="${hotelDto.hotelId}"/>
 
                     <h2>Cтатистика</h2>
                     <div class="hotel-form">
@@ -82,8 +85,10 @@
                         <li>
                             Завантаженість кімнат:
                             <ul>
+                                <c:set var="count" value="1"/>
                                 <c:forEach var="roomLoad" items="${hotelDto.roomLoading}">
-                                    <li>${roomLoad[0]} / ${roomLoad[1]} </li>
+                                    <li>room ${count}: ${roomLoad[0]} / ${roomLoad[1]} </li>
+                                    <c:set var="count" value="${count + 1}"/>
                                 </c:forEach>
                             </ul>
                         </li>

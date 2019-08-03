@@ -13,3 +13,11 @@
 .hotel-statistic, .hotel-availability{
     font-size: 25px;
 }
+
+.hotel-statistic ul {
+    font-size: 20px;
+}
+
+.hotel-statistic ul li {
+    margin-top: 5px;
+}

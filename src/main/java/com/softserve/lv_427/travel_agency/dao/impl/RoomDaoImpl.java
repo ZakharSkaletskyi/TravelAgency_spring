@@ -2,6 +2,7 @@ package com.softserve.lv_427.travel_agency.dao.impl;
 
 import com.softserve.lv_427.travel_agency.dao.RoomDao;
 import com.softserve.lv_427.travel_agency.entity.Room;
+import com.softserve.lv_427.travel_agency.service.external.DaysService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ import java.util.List;
 @Repository
 public class RoomDaoImpl implements RoomDao {
   private SessionFactory sessionFactory;
+  private final DaysService daysService;
+
+  @Autowired
+  public RoomDaoImpl(DaysService daysService) {
+    this.daysService = daysService;
+  }
 
   @Autowired
   public void setSessionFactory(SessionFactory sessionFactory) {
@@ -51,32 +58,14 @@ public class RoomDaoImpl implements RoomDao {
   public List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId) {
     Session session = sessionFactory.getCurrentSession();
 
-//    return session.createQuery("SELECT r from Hotel h join h.rooms r join r.roomBooks rb where "
-//                    + " (rb. > ?2 OR rb.orderEnd < ?1)"
-//                    + " AND h.id = ?3",
-//            // + " ((rb.orderStart < ?1 AND rb.orderStart > ?2)"
-//            //                + " OR (rb.orderStart > ?3 AND rb.orderEnd < ?4)"
-//            //                + " OR (rb.orderEnd < ?5 AND rb.orderEnd < ?6))"
-//            //                + " AND h.id = ?7",
-//            Room.class)
-
-
     return session
         .createQuery(
             "SELECT r from Hotel h join h.rooms r left join r.roomBooks rb where "
                 + " (rb.orderStart > ?2 OR rb.orderEnd < ?1"
                 + "OR rb.orderStart is null) AND h.id = ?3",
-            // + " ((rb.orderStart < ?1 AND rb.orderStart > ?2)"
-            //                + " OR (rb.orderStart > ?3 AND rb.orderEnd < ?4)"
-            //                + " OR (rb.orderEnd < ?5 AND rb.orderEnd < ?6))"
-            //                + " AND h.id = ?7",
             Room.class)
         .setParameter(1, startDate)
         .setParameter(2, endDate)
-//        .setParameter(3, startDate)
-//        .setParameter(4, endDate)
-//        .setParameter(5, startDate)
-//        .setParameter(6, endDate)
         .setParameter(3, hotelId)
         .list();
   }
@@ -89,8 +78,7 @@ public class RoomDaoImpl implements RoomDao {
             session
                 .createQuery(
                     "SELECT orderStart, orderEnd FROM RoomBookArchive WHERE "
-                        + "(orderStart >= ?1  AND orderEnd <= ?2 AND room.id IN "
-                        + "(SELECT id FROM Room where room.id = ?3))",
+                        + "orderStart >= ?1  AND orderEnd <= ?2 AND room.id = ?3",
                     Object[].class)
                 .setParameter(1, startDate)
                 .setParameter(2, endDate)
@@ -98,7 +86,7 @@ public class RoomDaoImpl implements RoomDao {
                 .list());
     List<Integer> dateDifference = new ArrayList<>();
     for (Object[] date : roomsLoading) {
-      dateDifference.add(getDaysFromPeriod((String) date[0], (String) date[1]));
+      dateDifference.add(daysService.getDaysFromPeriod((String) date[0], (String) date[1]));
     }
     return dateDifference.size() > 0
         ? dateDifference.stream().mapToInt(Integer::intValue).sum()
@@ -109,25 +97,9 @@ public class RoomDaoImpl implements RoomDao {
   public int getRoomCount(int hotelId) {
     Session session = sessionFactory.getCurrentSession();
     return session
-        .createQuery("select count (id) from Room where hotel.id = ?1", Integer.class)
+        .createQuery("select count (id) from Room where hotel.id = ?1", Long.class)
         .setParameter(1, hotelId)
-        .uniqueResult();
-  }
-
-  public int getDaysFromPeriod(String dateStart, String dateEnd) {
-    int[] firstDay = get3Int(dateStart);
-    int[] lastDay = get3Int(dateEnd);
-    LocalDate start = LocalDate.of(firstDay[0], firstDay[1], firstDay[2]);
-    LocalDate end = LocalDate.of(lastDay[0], lastDay[1], lastDay[2]);
-    return (int) ChronoUnit.DAYS.between(start, end);
-  }
-
-  public int[] get3Int(String s) {
-    String[] s1 = s.split("-");
-    int[] n = new int[3];
-    for (int i = 0; i < 3; i++) {
-      n[i] = Integer.parseInt(s1[i]);
-    }
-    return n;
+        .uniqueResult()
+        .intValue();
   }
 }

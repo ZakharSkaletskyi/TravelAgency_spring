@@ -1,4 +1,4 @@
-package com.softserve.lv_427.travel_agency.service;
+package com.softserve.lv_427.travel_agency.service.external;
 
 import com.softserve.lv_427.travel_agency.dao.impl.*;
 import com.softserve.lv_427.travel_agency.entity.*;

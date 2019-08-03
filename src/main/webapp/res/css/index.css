@@ -183,21 +183,30 @@ hr {
 }
 
 .content button {
-    border: 2px solid #A4A4A4;
     background-color: #EFEFEF;
-    margin-left: 10px;
+    border: 2px solid #A4A4A4;
+    color: black;
+    padding: 9px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     font-size: 20px;
+    margin: 4px 5px;
+    /*-webkit-transition-duration: 0.4s;*/
+    /*transition-duration: 0.4s;*/
     cursor: pointer;
+    left: 25%;
     border-radius: 5px;
-    padding: 5px;
 }
 
 .content button:hover {
-    background-color: #DADADA;
+    background-color: #555555;
+    color: white;
+    border: 2px solid #555555;
 }
 
 .content input, select {
-    padding: 5px;
+    padding: 9px 20px;
     font-size: 20px;
     border-radius: 5px;
     border: 2px solid #A4A4A4;
@@ -222,4 +231,13 @@ hr {
 
 .error-image {
     width: 20%;
+}
+
+.location a {
+    text-decoration: none;
+    color: #A4A4A4;
+}
+
+.location a:hover {
+    border-bottom: 1px solid #A4A4A4;
 }

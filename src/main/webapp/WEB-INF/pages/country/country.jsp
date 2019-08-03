@@ -26,8 +26,8 @@
                     possimus quo.</p>
             </div>
             <h2>Міста</h2>
-            <form action="/city" method="POST">
-                <select name="cityId">
+            <form action="/city" method="GET">
+                <select name="id">
                     <c:forEach var="city" items="${country.cities}">
                         <option value="${city.id}">${city.name}</option>
                     </c:forEach>
