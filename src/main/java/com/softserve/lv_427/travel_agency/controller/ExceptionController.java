@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 @Controller
-public class GlobalControllerExceptionHandler {
+public class ExceptionController {
   @ExceptionHandler(Exception.class)
   public ModelAndView getException(Exception e) {
     ModelAndView model = new ModelAndView();
