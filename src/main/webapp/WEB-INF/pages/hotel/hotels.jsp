@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Сонечко - Hotels </title>
+    <title>The Sun - Hotels</title>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
@@ -21,7 +21,7 @@
                 <option value="${hotel.id}">${hotel.name}</option>
             </c:forEach>
         </select>
-        <button type="submit">Відкрити</button>
+        <button type="submit">Open</button>
     </form>
 </div>
 </body>

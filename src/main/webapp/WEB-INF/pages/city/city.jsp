@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Сонечко - ${city.name} </title>
+    <title>The Sun - ${city.name} </title>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
@@ -21,7 +21,7 @@
                 <a href="/country?id=${city.country.id}">${city.country.name}</a>
             </span>
             <div class="description">
-                <h2>Про місто</h2>
+                <h2>About</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto at commodi delectus
                     dolorem
                     harum illum inventore molestiae numquam odio, officia possimus quasi qui quisquam vero. Incidunt
@@ -29,14 +29,14 @@
                     possimus quo.</p>
             </div>
 
-            <h2>Готелі</h2>
+            <h2>Hotels</h2>
             <form action="${pageContext.request.contextPath}/hotel" method="GET">
                 <select name="id">
                     <c:forEach var="hotel" items="${city.hotels}">
                         <option value="${hotel.id}">${hotel.name}</option>
                     </c:forEach>
                 </select>
-                <button type="submit">Відкрити</button>
+                <button type="submit">Open</button>
             </form>
         </div>
         <img src="../../../res/img/city.jpg" alt="" width="500">

@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Сонечко - Countries </title>
+    <title>The Sun - Countries </title>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
@@ -22,7 +22,7 @@
             </c:forEach>
         </select>
 
-        <button type="submit">Відкрити</button>
+        <button type="submit">Open</button>
     </form>
 </div>
 </body>

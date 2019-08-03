@@ -61,11 +61,11 @@ public class RoomDaoImpl implements RoomDao {
     return session
         .createQuery(
             "SELECT r from Hotel h join h.rooms r left join r.roomBooks rb where "
-                + " (rb.orderStart > ?2 OR rb.orderEnd < ?1"
+                + " (rb.orderStart > ?1 OR rb.orderEnd < ?2"
                 + "OR rb.orderStart is null) AND h.id = ?3",
             Room.class)
-        .setParameter(1, startDate)
-        .setParameter(2, endDate)
+        .setParameter(1, endDate)
+        .setParameter(2, startDate)
         .setParameter(3, hotelId)
         .list();
   }
