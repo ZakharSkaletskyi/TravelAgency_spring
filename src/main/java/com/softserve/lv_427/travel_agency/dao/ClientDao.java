@@ -22,9 +22,11 @@ public interface ClientDao {
   public void edit(Client client);
 
   public int getClientId(String firstName, String lastName)
-      throws SQLException, ClassNotFoundException;
+      throws SQLException, ClassNotFoundException, SQLException;
 
   public Client getClient(int id) throws SQLException, ClassNotFoundException;
 
   List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException;
+
+  int getCountOfClients();
 }

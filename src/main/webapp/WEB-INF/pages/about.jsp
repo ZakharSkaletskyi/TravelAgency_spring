@@ -6,36 +6,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Про нас</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css" />
+    <title>Сонечко - Про нас</title>
+    <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
-<jsp:include page="modules/_header.jsp"/>
 <div class="content">
-    <h2>Про нас</h2>
+    <h1 class="header">Про нас</h1>
     <p>На ринку уже понад <b>10</b> років.</p>
-    <p><b>16</b> задоволених клієнтів</p>
+
+    <p><b>${aboutDto.countOfClient}</b> задоволених клієнтів</p>
+    <h2>Візи</h2>
+    <ul>
+        <c:forEach var="visa" items="${aboutDto.visas}">
+                <li><b>${visa.get(0)}</b> візи видано в <b>${visa.get(1)}</b> </li>
+        </c:forEach>
+    </ul>
     <br>
-
-    <%--<% CountryService countryService = new CountryServiceImpl();--%>
-        <%--VisaService visaService = new VisaServiceImpl();--%>
-
-        <%--List<Country> countries = countryService.getCountryList();--%>
-        <%--for (Country country : countries) {--%>
-    <%--%>--%>
-    <p>
-        <%--<%=visaService.getCountVisaForCountry(countryService.getCountryIdByName(country.getCountryName()))--%>
-        <%--%>--%>
-        <%--візи видано в--%>
-        <%--<%=country.getCountryName()%>--%>
-    </p>
-    <%--<%--%>
-        <%--}--%>
-    <%--%>--%>
-
 </div>
 </body>
 </html>

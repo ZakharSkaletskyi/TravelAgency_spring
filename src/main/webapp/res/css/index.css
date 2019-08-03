@@ -19,10 +19,92 @@ h2 {
     margin-top: 5px;
 }
 
+.info, .country, .visa {
+    font-size: 25px;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: 20px;
+}
+
+.infoParam{
+    text-align: left;
+    font-size: 35px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.profileContent {
+    width: 90%;
+    border: 3px solid #A4A4A4;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding: 20px;
+
+
+}
+.alien{
+    border-radius: 70%;
+    width: 300px;
+    height: 370px;
+    position:absolute;
+    top:20%;
+    right: 7%;
+}
+
+.buttonBack {
+    background-color: #EFEFEF;
+    border: 2px solid #555555;
+    color: black;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width:50%;
+    position: relative;
+    left: 25%;
+    border-radius: 5px;
+}
+.buttonBack:hover {
+    background-color: #555555;
+    color: white;
+}
+.listClient{
+    text-align: left;
+    text-decoration: none;
+    width:15%;
+    position: relative;
+    left: 50px;
+    border-radius: 5px;
+    margin-top: 1%;
+    display: inline-block;
+}
+.submitClient{
+    text-align: left;
+    text-decoration: none;
+    width: 400px;
+    position: inherit;
+    left: -102px;
+    border-radius: 5px;
+}
+
 header {
     background-color: #A4A4A4;
     height: 70px;
     padding: 15px;
+}
+
+hr {
+    color: #A4A4A4;
+    border-width: medium;
 }
 
 .flex-content {
@@ -54,6 +136,8 @@ header {
     margin-top: 0px;
     height: 30%;
     margin-bottom: 0;
+    text-decoration: none;
+    color: black;
 }
 
 .content {
@@ -81,7 +165,7 @@ header {
 .description {
     display: flex;
     flex-direction: column;
-    color:black;
+    color: black;
 }
 
 .content h2 {
@@ -109,7 +193,7 @@ header {
 }
 
 .content button:hover {
-    background-color:#DADADA;
+    background-color: #DADADA;
 }
 
 .content input, select {
@@ -118,4 +202,24 @@ header {
     border-radius: 5px;
     border: 2px solid #A4A4A4;
     background-color: #EFEFEF;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-name {
+    color: red;
+    padding-bottom: 10px;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.error-image {
+    width: 20%;
 }

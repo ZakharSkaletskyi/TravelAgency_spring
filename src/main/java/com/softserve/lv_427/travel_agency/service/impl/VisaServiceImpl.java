@@ -52,6 +52,12 @@ class VisaServiceImpl implements VisaService {
 
   @Override
   @Transactional
+  public List<Visa> findAll() {
+    return dao.findAll();
+  }
+
+  @Override
+  @Transactional
   public int getVisasCountForTheClient(int clientId) throws SQLException {
     return dao.getVisasCountForTheClient(clientId);
   }

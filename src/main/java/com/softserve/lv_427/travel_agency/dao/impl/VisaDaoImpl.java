@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.dao.impl;
 
 import com.softserve.lv_427.travel_agency.dao.VisaDao;
+import com.softserve.lv_427.travel_agency.entity.Country;
 import com.softserve.lv_427.travel_agency.entity.Visa;
 
 import java.sql.SQLException;
@@ -42,6 +43,12 @@ public class VisaDaoImpl implements VisaDao {
   public void edit(Visa visa) {
     Session session = sessionFactory.getCurrentSession();
     session.update(visa);
+  }
+
+  @Override
+  public List<Visa> findAll() {
+    Session session = sessionFactory.getCurrentSession();
+    return session.createQuery("from Visa", Visa.class).list();
   }
 
   @Override
