@@ -17,6 +17,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Service for Hotel using HotelDao.
+ *
+ * @author Nazar Vladyka
+ * @version 1.0
+ */
 @Service
 public class HotelServiceImpl implements HotelService {
   private final HotelDao dao;
@@ -28,137 +34,198 @@ public class HotelServiceImpl implements HotelService {
     this.roomService = roomService;
   }
 
+  /**
+   * Add Hotel entity to DB.
+   *
+   * @param hotel - Hotel entity.
+   */
   @Override
-  @Transactional
   public void add(Hotel hotel) {
     dao.add(hotel);
   }
 
+  /**
+   * Get hotel from DB by id.
+   *
+   * @param id - hotel id.
+   * @return Hotel entity.
+   */
   @Override
-  @Transactional
   public Hotel getById(int id) {
     return dao.getById(id);
   }
 
+  /**
+   * Delete hotel from DB.
+   *
+   * @param hotel - hotel entity.
+   */
   @Override
-  @Transactional
   public void delete(Hotel hotel) {
     dao.delete(hotel);
   }
 
+  /**
+   * Edit hotel in DB.
+   *
+   * @param hotel - hotel entity.
+   */
   @Override
-  @Transactional
   public void edit(Hotel hotel) {
     dao.edit(hotel);
   }
 
+  /**
+   * Get all hotels from DB.
+   *
+   * @return List of Hotels.
+   */
   @Override
-  @Transactional
-  public int getId(String name) {
-    return dao.getId(name);
-  }
-
-  @Override
-  @Transactional
   public List<Hotel> getAll() {
     return dao.getAll();
   }
 
+  /**
+   * Get count of clients on period in hotel.
+   *
+   * @param hotelId - hotel id.
+   * @param dateStart - start date.
+   * @param dateEnd - end date
+   * @return int - count of clients.
+   */
   @Override
-  @Transactional
   public int getClientCountForPeriod(int hotelId, String dateStart, String dateEnd) {
     return dao.getClientCountForPeriod(hotelId, dateStart, dateEnd);
   }
 
+  /**
+   * Get all available hotels no period.
+   *
+   * @param dateStart - start date.
+   * @param dateEnd - end date
+   * @return List of hotels.
+   */
   @Override
-  @Transactional
-  public List<Hotel> getAvailableHotelsOnDates(String startDate, String endDate) {
-    return dao.getAvailableHotelsOnDates(startDate, endDate);
+  public List<Hotel> getAvailableHotelsOnDates(String dateStart, String dateEnd) {
+    return dao.getAvailableHotelsOnDates(dateStart, dateEnd);
   }
 
+  /**
+   * Get average book time in hotel on period.
+   *
+   * @param hotelId - hotel id.
+   * @param dateStart - start date.
+   * @param dateEnd - end date
+   * @return average book time in days.
+   */
   @Override
-  @Transactional
   public int getAverageBookTime(int hotel_id, String dateStart, String dateEnd) {
     return dao.getAverageBookTime(hotel_id, dateStart, dateEnd);
   }
 
-  @Transactional
+  /**
+   * Get rooms in hotel.
+   *
+   * @param hotelId - hotel id.
+   * @return List of rooms.
+   */
+  @Override
+  public List<Room> getRoomsByHotel(int hotelId) {
+    return dao.getRoomsByHotel(hotelId);
+  }
+
+  /**
+   * Get HotelDto for main hotel page.
+   *
+   * @param hotelId - hotel id.
+   * @return HotelDto for controller.
+   */
   @Override
   public HotelDto getHotelDtoById(int hotelId) {
-    HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
+    Calendar nextYearC = Calendar.getInstance();
+    Calendar twoYearsAgoC = Calendar.getInstance();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    Calendar cal = Calendar.getInstance();
-    cal.add(Calendar.YEAR, 1);
-    Date nextYear = cal.getTime();
+    nextYearC.add(Calendar.YEAR, 1);
+    Date nextYear = nextYearC.getTime();
 
-    cal.add(Calendar.YEAR, -2);
-    Date twoYearsAgo = cal.getTime();
+    twoYearsAgoC.add(Calendar.YEAR, -2);
+    Date twoYearsAgo = twoYearsAgoC.getTime();
 
-    dto.setHotelId(hotel.getId());
-    dto.setHotelName(hotel.getName());
-    dto.setCountryName(hotel.getCity().getCountry().getName());
-    dto.setCityName(hotel.getCity().getName());
-    dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-    dto.setMinDate(new SimpleDateFormat("yyyy-MM-dd").format(twoYearsAgo));
-    dto.setMaxDate(new SimpleDateFormat("yyyy-MM-dd").format(nextYear));
-
-    return dto;
+    return new HotelDto(
+        hotel.getId(),
+        hotel.getName(),
+        hotel.getCity().getCountry(),
+        hotel.getCity(),
+        dateFormat.format(new Date()),
+        dateFormat.format(twoYearsAgo),
+        dateFormat.format(nextYear));
   }
 
-  @Transactional
+  /**
+   * Get HotelDto for hotel page which shows is hotel rooms are available.
+   *
+   * @param hotelId - hotel id.
+   * @return HotelDto for controller.
+   */
   @Override
   public HotelDto getHotelDtoWithAvailabilityById(int hotelId, String startDate, String endDate) {
-    HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    Calendar cal = Calendar.getInstance();
-    cal.add(Calendar.YEAR, -2);
-    Date twoYearsAgo = cal.getTime();
+    Calendar twoYearsAgoC = Calendar.getInstance();
+    twoYearsAgoC.add(Calendar.YEAR, -2);
+    Date twoYearsAgo = twoYearsAgoC.getTime();
 
-    dto.setHotelId(hotel.getId());
-    dto.setHotelName(hotel.getName());
-    dto.setCountryName(hotel.getCity().getCountry().getName());
-    dto.setCityName(hotel.getCity().getName());
-    dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-    dto.setMinDate(new SimpleDateFormat("yyyy-MM-dd").format(twoYearsAgo));
-    dto.setStartDate(startDate);
-    dto.setEndDate(endDate);
-    dto.setAvailableRooms(roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId));
-
-    return dto;
+    return new HotelDto(
+        hotel.getId(),
+        hotel.getName(),
+        hotel.getCity().getCountry(),
+        hotel.getCity(),
+        dateFormat.format(new Date()),
+        dateFormat.format(twoYearsAgo),
+        startDate,
+        endDate,
+        roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId));
   }
 
-  @Transactional
+  /**
+   * Get HotelDto for hotel page which shows hotel statistic for the period.
+   *
+   * @param hotelId - hotel id.
+   * @return HotelDto for controller.
+   */
   @Override
   public HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate) {
-    HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar nextYearC = Calendar.getInstance();
+    List<Room> rooms = getRoomsByHotel(hotelId);
+    List<int[]> roomLoading = new ArrayList<>();
 
-    Calendar cal = Calendar.getInstance();
-    cal.add(Calendar.YEAR, 1);
-    Date nextYear = cal.getTime();
+    nextYearC.add(Calendar.YEAR, 1);
+    Date nextYear = nextYearC.getTime();
 
-    //    List<Integer[]> roomLoading = new ArrayList<>();
+    for (Room room : rooms) {
+      roomLoading.add(roomService.loadingRoomsPeriod(startDate, endDate, room.getId()));
+    }
 
-    //    for (int i = 0; i < roomService.getRoomCount(hotelId); i++) {
-    //      roomLoading.add(roomService.getLoadingRoomsPeriod(startDate, endDate, i));
-    //    }
-
-    dto.setHotelId(hotel.getId());
-    dto.setHotelName(hotel.getName());
-    dto.setCountryName(hotel.getCity().getCountry().getName());
-    dto.setCityName(hotel.getCity().getName());
-    dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-    dto.setMaxDate(new SimpleDateFormat("yyyy-MM-dd").format(nextYear));
-    dto.setStartDate(startDate);
-    dto.setEndDate(endDate);
-    dto.setCountOfClient(getClientCountForPeriod(hotelId, startDate, endDate));
-    dto.setAverageBookTime(getAverageBookTime(hotelId, startDate, endDate));
-    //    dto.setRoomLoading(roomLoading);
-    return dto;
+    return new HotelDto(
+        hotel.getId(),
+        hotel.getName(),
+        hotel.getCity().getCountry(),
+        hotel.getCity(),
+        dateFormat.format(new Date()),
+        dateFormat.format(nextYear),
+        startDate,
+        endDate,
+        getClientCountForPeriod(hotelId, startDate, endDate),
+        getAverageBookTime(hotelId, startDate, endDate),
+        roomLoading);
   }
 
+<<<<<<< HEAD
   @Override
   @Transactional
   public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
@@ -175,4 +242,11 @@ public class HotelServiceImpl implements HotelService {
 //   
 //    findHotelDto.setAvaib numberleRoomsNumber();
 //  }
+=======
+  //  @Override
+  //  @Transactional
+  //  public int getId(String name) {
+  //    return dao.getId(name);
+  //  }
+>>>>>>> 2f437b61dd38c77799dd21ebfc2e9d15f86576be
 }

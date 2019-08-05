@@ -18,7 +18,7 @@ public interface CityDao {
 
   List<City> getCitiesWithAvailableHotels(int countryId, String startDate, String endDate);
 
-  int getId(String cityName);
-
   List<Hotel> getHotels(int cityId);
+
+  //  int getId(String cityName);
 }

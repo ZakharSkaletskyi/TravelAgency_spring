@@ -2,6 +2,7 @@ package com.softserve.lv_427.travel_agency.service;
 
 import com.softserve.lv_427.travel_agency.entity.Room;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,11 @@ public interface RoomService {
 
   int getLoadingRoomsPeriod(String startDate, String endDate, int roomId);
 
+  int getLoadingPeriod(String startDate, String endDate);
+
   int getRoomCount(int hotelId);
 
-  int getDaysFromPeriod(String dateStart, String dateEnd);
+  int[] loadingRoomsPeriod(String startDate, String endDate, int roomId);
+
+  //  int getDaysFromPeriod(String dateStart, String dateEnd);
 }

@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Controller for City logic.
+ *
+ * @author Nazar Vladyka
+ * @version 1.0
+ */
 @Controller
-@RequestMapping(value = "/city")
 public class CityController {
   private final CityService cityService;
 
@@ -19,16 +22,18 @@ public class CityController {
     this.cityService = cityService;
   }
 
-  @GetMapping
+  /** Method that returns all cities. */
+  @GetMapping(value = "/cities")
   public String getAllCities(ModelMap model) {
     model.addAttribute("cities", cityService.findAll());
 
     return "city/cities";
   }
 
-  @PostMapping
-  public String getCity(@RequestParam int cityId, ModelMap model) {
-    model.addAttribute("city", cityService.getCityDto(cityId));
+  /** Method that returns City by his id. */
+  @GetMapping(value = "/city")
+  public String getCity(@RequestParam int id, ModelMap model) {
+    model.addAttribute("city", cityService.getCityDto(id));
 
     return "city/city";
   }

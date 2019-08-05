@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Сонечко - ${hotelDto.hotelName} </title>
+    <title>The Sun - ${hotelDto.hotelName} </title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/hotel.css"/>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
@@ -18,9 +18,12 @@
     <div class="flex-content hotel">
         <div class="hotel-about">
             <h1 class="header hotel-name">${hotelDto.hotelName}</h1>
-            <span class="location hotel-location">${hotelDto.countryName}, ${hotelDto.cityName}</span>
+            <span class="location hotel-location">
+                <a href="/country?id=${hotelDto.country.id}">${hotelDto.country.name}</a>,
+                <a href="/city?id=${hotelDto.city.id}">${hotelDto.city.name}</a>
+            </span>
             <div class="description hotel-description">
-                <h2>Про готель</h2>
+                <h2>About</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto at commodi delectus
                     dolorem
                     harum illum inventore molestiae numquam odio, officia possimus quasi qui quisquam vero. Incidunt
@@ -30,17 +33,18 @@
 
             <c:if test="${hotelDto.availableRooms == null}">
                 <form action="/hotel/availability" method="POST">
-                    <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+                    <input type="hidden" name="id" value="${hotelDto.hotelId}"/>
 
-                    <h2>Перевірити доступні кімнати</h2>
+                    <h2>Check available rooms</h2>
                     <div class="hotel-form">
-                        <p>З: <input type="date" name="startDateAvail"
-                                     value=${hotelDto.currentDate} min= ${hotelDto.currentDate} max=${hotelDto.maxDate}>
-                            до: <input type="date" name="endDateAvail"
+                        <p>From: <input type="date" name="startDateAvail"
+                                        value=${hotelDto.currentDate} min= ${hotelDto.currentDate}
+                                        max=${hotelDto.maxDate}>
+                            to: <input type="date" name="endDateAvail"
                                        value=${hotelDto.currentDate} min= ${hotelDto.currentDate}
                                        max=${hotelDto.maxDate}>
                         </p>
-                        <button type="submit">Перевірити</button>
+                        <button type="submit">Check</button>
                     </div>
                 </form>
             </c:if>
@@ -48,26 +52,29 @@
             <c:if test="${hotelDto.availableRooms != null}">
                 <div class="hotel-availability">
                     <hr>
-                    Доступні кімнати в період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b> :
-                    <c:forEach var="room" items="${hotelDto.availableRooms}">
-                        ${room.number},
-                    </c:forEach>
+                    Available rooms from <b>${hotelDto.startDate}</b> to <b>${hotelDto.endDate}</b> :
+                    <ul>
+                        <c:forEach var="room" items="${hotelDto.availableRooms}">
+                            <li>${room.number}</li>
+                        </c:forEach>
+                    </ul>
                 </div>
             </c:if>
 
             <c:if test="${hotelDto.countOfClient == null}">
                 <form action="/hotel/statistic" method="POST">
-                    <input type="hidden" name="hotelId" value="${hotelDto.hotelId}"/>
+                    <input type="hidden" name="id" value="${hotelDto.hotelId}"/>
 
-                    <h2>Cтатистика</h2>
+                    <h2>Statistics</h2>
                     <div class="hotel-form">
-                        <p>З: <input type="date" name="startDateStat"
-                                     value=${hotelDto.currentDate} min=${hotelDto.minDate} max=${hotelDto.currentDate}>
-                            до: <input type="date" name="endDateStat"
+                        <p>From: <input type="date" name="startDateStat"
+                                        value=${hotelDto.currentDate} min=${hotelDto.minDate}
+                                        max=${hotelDto.currentDate}>
+                            to: <input type="date" name="endDateStat"
                                        value=${hotelDto.currentDate} min=${hotelDto.minDate}
                                        max=${hotelDto.currentDate}>
                         </p>
-                        <button type="submit">Отримати</button>
+                        <button type="submit">Get</button>
                     </div>
                 </form>
             </c:if>
@@ -75,15 +82,17 @@
             <c:if test="${hotelDto.countOfClient != null}">
                 <div class="hotel-statistic">
                     <hr>
-                    Статистика за період <b>${hotelDto.startDate}</b> до <b>${hotelDto.endDate}</b>
+                    Statistics for the period from <b>${hotelDto.startDate}</b> to <b>${hotelDto.endDate}</b>
                     <ul>
-                        <li> Кількість клієнтів: ${hotelDto.countOfClient} </li>
-                        <li> Середній час бронювання: ${hotelDto.averageBookTime} днів</li>
+                        <li> Number of customers: ${hotelDto.countOfClient} </li>
+                        <li> Average booking time: ${hotelDto.averageBookTime} days</li>
                         <li>
-                            Завантаженість кімнат:
+                            Rooms loading:
                             <ul>
+                                <c:set var="count" value="1"/>
                                 <c:forEach var="roomLoad" items="${hotelDto.roomLoading}">
-                                    <li>${roomLoad[0]} / ${roomLoad[1]} </li>
+                                    <li>room ${count}: ${roomLoad[0]} / ${roomLoad[1]} days</li>
+                                    <c:set var="count" value="${count + 1}"/>
                                 </c:forEach>
                             </ul>
                         </li>

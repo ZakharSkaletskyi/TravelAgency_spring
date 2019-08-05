@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Controller for Country logic.
+ *
+ * @author Nazar Vladyka
+ * @version 1.0
+ */
 @Controller
-@RequestMapping(value = "/country")
 public class CountryController {
   private final CountryService countryService;
 
@@ -19,16 +24,18 @@ public class CountryController {
     this.countryService = countryService;
   }
 
-  @GetMapping
+  /** Method that returns all countries. */
+  @GetMapping(value = "/countries")
   public String getAllCountries(ModelMap model) {
     model.addAttribute("countries", countryService.findAll());
 
     return "country/countries";
   }
 
-  @PostMapping
-  public String getCountry(@RequestParam int countryId, ModelMap model) {
-    model.addAttribute("country", countryService.getCountryDto(countryId));
+  /** Method that returns Country by his id. */
+  @GetMapping(value = "/country")
+  public String getCountry(@RequestParam int id, ModelMap model) {
+    model.addAttribute("country", countryService.getCountryDto(id));
 
     return "country/country";
   }

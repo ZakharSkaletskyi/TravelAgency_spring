@@ -9,13 +9,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Профіль</title>
+    <title>The Sun - Profile</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/profile.css"/>
     <jsp:include page="../modules/_header.jsp"/></head>
 <body>
 
 <div class="profileContent" >
-    <p>Виберіть клієнта по якому хочете отримати статистику</p>
+    <p>Select the client</p>
     <form action="/profile" method="Post" class="listClient">
         <select name="clientId">
             <c:forEach var="client" items="${clients}">
@@ -23,7 +23,7 @@
             </c:forEach>
         </select>
         <div class="submitClient">
-            <button type="submit" class="buttonBack">Відкрити</button>
+            <button type="submit" class="buttonBack">Open</button>
         </div>
     </form>
 </div>
