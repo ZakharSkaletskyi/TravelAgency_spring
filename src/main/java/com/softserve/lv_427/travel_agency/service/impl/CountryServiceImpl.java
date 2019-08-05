@@ -35,6 +35,7 @@ public class CountryServiceImpl implements CountryService {
    * @param country Country entity.
    */
   @Override
+  @Transactional
   public void add(Country country) {
     dao.add(country);
   }
@@ -46,6 +47,7 @@ public class CountryServiceImpl implements CountryService {
    * @return Country entity.
    */
   @Override
+  @Transactional
   public Country getById(int id) {
     return dao.getById(id);
   }
@@ -56,6 +58,7 @@ public class CountryServiceImpl implements CountryService {
    * @param country country entity.
    */
   @Override
+  @Transactional
   public void delete(Country country) {
     dao.delete(country);
   }
@@ -66,6 +69,7 @@ public class CountryServiceImpl implements CountryService {
    * @param country country entity.
    */
   @Override
+  @Transactional
   public void edit(Country country) {
     dao.edit(country);
   }
@@ -76,6 +80,7 @@ public class CountryServiceImpl implements CountryService {
    * @return List of Countries.
    */
   @Override
+  @Transactional
   public List<Country> findAll() {
     return dao.findAll();
   }
@@ -87,6 +92,7 @@ public class CountryServiceImpl implements CountryService {
    * @return List of Countries
    */
   @Override
+  @Transactional
   public List<Country> getVisitedCountries(int clientId) {
     return dao.getVisitedCountries(clientId);
   }
@@ -98,6 +104,7 @@ public class CountryServiceImpl implements CountryService {
    * @return List of Cities.
    */
   @Override
+  @Transactional
   public List<City> getCitiesByCountryId(int id) {
     return dao.getCitiesByCountryId(id);
   }
@@ -109,6 +116,7 @@ public class CountryServiceImpl implements CountryService {
    * @return CountryDto for the controller.
    */
   @Override
+  @Transactional
   public CountryDto getCountryDto(int countryId) {
     Country country = getById(countryId);
 

@@ -84,7 +84,7 @@
                     <hr>
                     Statistics for the period from <b>${hotelDto.startDate}</b> to <b>${hotelDto.endDate}</b>
                     <ul>
-                        <li> Number of customers: ${hotelDto.countOfClient} </li>
+                        <li> Number of clients: ${hotelDto.countOfClient} </li>
                         <li> Average booking time: ${hotelDto.averageBookTime} days</li>
                         <li>
                             Rooms loading:

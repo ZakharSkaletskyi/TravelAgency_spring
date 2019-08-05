@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
+/**
+ * Controller for Client logic.
+ *
+ * @author Oleksandr Agarkov
+ * @version 1.0
+ */
 @Controller
 @RequestMapping(value = "/profile")
 public class ProfileClientController {
@@ -18,6 +24,7 @@ public class ProfileClientController {
     this.clientService = clientService;
   }
 
+  /** Method that returns all clients. */
   @GetMapping
   public String getAllClient (ModelMap model) {
     model.addAttribute(
@@ -25,6 +32,7 @@ public class ProfileClientController {
 
     return "profile/profiles";
   }
+  /** Method that returns page with client statistic. */
   @PostMapping
   public String getClientStatistic(
           @RequestParam int clientId, ModelMap model) throws SQLException, ClassNotFoundException {

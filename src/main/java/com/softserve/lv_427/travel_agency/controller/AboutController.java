@@ -9,6 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLException;
 
+/**
+ * Controller for About page.
+ *
+ * @author Nazar Vladyka
+ * @version 1.0
+ */
 @Controller
 public class AboutController {
   private final AboutService aboutService;
@@ -18,6 +24,7 @@ public class AboutController {
     this.aboutService = aboutService;
   }
 
+  /** Method that returns about page */
   @GetMapping(value = "/about")
   public String about(ModelMap modelMap) throws SQLException {
     modelMap.addAttribute("aboutDto", aboutService.getAboutDto());

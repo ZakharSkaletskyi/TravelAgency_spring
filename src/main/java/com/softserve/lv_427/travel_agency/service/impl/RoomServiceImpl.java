@@ -18,6 +18,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Service for Room using RoomDao.
+ *
+ * @author Agarkov Oleksandr
+ * @version 1.0
+ */
 @Service
 public class RoomServiceImpl implements RoomService {
   private final RoomDao dao;
@@ -27,42 +33,87 @@ public class RoomServiceImpl implements RoomService {
     this.dao = dao;
   }
 
+  /**
+   * Add room to DB.
+   *
+   * @param room Room entity.
+   */
   @Override
   @Transactional
   public void add(Room room) {
     dao.add(room);
   }
 
+  /**
+   * Get room from DB by id.
+   *
+   * @param id room id.
+   * @return Room entity.
+   */
   @Override
   @Transactional
   public Room getById(int id) {
     return dao.getById(id);
   }
 
+  /**
+   * Delete room from DB.
+   *
+   * @param room Room entity.
+   */
   @Override
   @Transactional
   public void delete(Room room) {
     dao.delete(room);
   }
 
+  /**
+   * Edit room in DB.
+   *
+   * @param room Room entity.
+   */
   @Override
   @Transactional
   public void edit(Room room) {
     dao.edit(room);
   }
 
+  /**
+   * Get all available rooms in hotel in certain period.
+   *
+   * @param startDate - start date.
+   * @param endDate - end date
+   * @param hotelId - id hotel
+   * @return List of rooms.
+   */
   @Override
   @Transactional
   public List<Room> getAvailableRoomsOnDateInHotel(String startDate, String endDate, int hotelId) {
     return dao.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId);
   }
 
+  /**
+   * Get the loading of room in certain period.
+   *
+   * @param startDate - start date.
+   * @param endDate - end date
+   * @param roomId - id room
+   * @return loading of room in days.
+   */
   @Override
   @Transactional
   public int getLoadingRoomsPeriod(String startDate, String endDate, int roomId) {
     return dao.getLoadingRoomsPeriod(startDate, endDate, roomId);
   }
 
+  /**
+   * Get the loading of room in certain period.
+   *
+   * @param startDate - start date.
+   * @param endDate - end date
+   * @param roomId - id room
+   * @return array with rooms loading in days and loading period.
+   */
   @Override
   @Transactional
   public int[] loadingRoomsPeriod(String startDate, String endDate, int roomId) {
@@ -72,6 +123,13 @@ public class RoomServiceImpl implements RoomService {
     return loading;
   }
 
+  /**
+   * Get the loading period(difference between start and end date).
+   *
+   * @param startDate - start date.
+   * @param endDate - end date
+   * @return count of days.
+   */
   @Override
   @Transactional
   public int getLoadingPeriod(String startDate, String endDate) {
@@ -90,6 +148,12 @@ public class RoomServiceImpl implements RoomService {
       return periodL.intValue();
   }
 
+  /**
+   * Get the count of room in certain hotel.
+   *
+   * @param hotelId - id hotel
+   * @return the count of room in certain hotel.
+   */
   @Override
   @Transactional
   public int getRoomCount(int hotelId) {
