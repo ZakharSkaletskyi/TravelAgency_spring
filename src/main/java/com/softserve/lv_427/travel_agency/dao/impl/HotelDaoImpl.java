@@ -94,7 +94,7 @@ public class HotelDaoImpl implements HotelDao {
   @Override
   public List<Hotel> getAll() {
     try (Session session = sessionFactory.openSession()) {
-      List<Hotel> hotels = session.createQuery("FROM Hotel", Hotel.class).list();
+      List<Hotel> hotels = session.createQuery("from Hotel", Hotel.class).list();
 
       if (hotels == null) {
         throw new FieldNotFoundException("There is no hotels");
@@ -220,10 +220,9 @@ public class HotelDaoImpl implements HotelDao {
    * @return List of hotels.
    */
   @Override
-  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
-      throws ClassNotFoundException {
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) {
     List<Hotel> hotels;
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     List<Integer> bookedHotelsId =
         session
             .createQuery(
@@ -256,7 +255,7 @@ public class HotelDaoImpl implements HotelDao {
               .list();
     }
     if (hotels == null) {
-      throw new ClassNotFoundException("In DB no available countries for clientId= " + cityId);
+      throw new FieldNotFoundException("In DB no available countries for clientId= " + cityId);
     }
     return hotels;
   }

@@ -22,40 +22,40 @@ public class VisaDaoImpl implements VisaDao {
 
   @Override
   public void add(Visa visa) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     session.persist(visa);
   }
 
   @Override
   public Visa getById(int id) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     return session.get(Visa.class, id);
   }
 
   @Override
   public void delete(Visa visa) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     session.delete(visa);
   }
 
   @Override
   public void edit(Visa visa) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     session.update(visa);
   }
 
   @Override
   public List<Visa> findAll() {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     return session.createQuery("FROM Visa", Visa.class).list();
   }
 
   @Override
   public int getId(String name) throws SQLException, ClassNotFoundException {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     Integer id =
         session
-            .createQuery("SELECT id FROM Visa WHERE visa_name = ?1", Integer.class)
+            .createQuery("SELECT id FROM Visa WHERE name = ?1", Integer.class)
             .setParameter(1, name)
             .uniqueResult();
     if (id == null) throw new ClassNotFoundException("In DB no Visa row with name=" + name);
@@ -64,7 +64,7 @@ public class VisaDaoImpl implements VisaDao {
 
   @Override
   public int getVisasCountForTheClient(int clientId) throws SQLException {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     Long count =
         session
             .createQuery(
@@ -77,21 +77,22 @@ public class VisaDaoImpl implements VisaDao {
 
   @Override
   public List<Visa> getVisasForTheClient(int clientId) throws SQLException, ClassNotFoundException {
-    Session session = sessionFactory.getCurrentSession();
-    List<Visa> visas =
-        session
-            .createQuery("SELECT v FROM Visa v LEFT JOIN v.clients c WHERE c.id=?1", Visa.class)
-            .setParameter(1, clientId)
-            .list();
-    if (visas == null)
-      throw new ClassNotFoundException("In DB no Visa row with client_id=" + clientId);
-    return visas;
+    try (Session session = sessionFactory.openSession()) {
+      List<Visa> visas =
+          session
+              .createQuery("SELECT v FROM Visa v LEFT JOIN v.clients c WHERE c.id=?1", Visa.class)
+              .setParameter(1, clientId)
+              .list();
+      if (visas == null)
+        throw new ClassNotFoundException("In DB no Visa row with client_id=" + clientId);
+      return visas;
+    }
   }
 
   @Override
   public int CountVisaForCountry(int countryId) throws SQLException {
 
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     Long count =
         session
             .createQuery(

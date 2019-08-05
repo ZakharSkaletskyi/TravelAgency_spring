@@ -12,6 +12,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -112,9 +114,12 @@ public class CountryDaoImpl implements CountryDao {
    */
   @Override
   public List<Country> getVisitedCountries(int clientId) {
-    Client client = clientDao.getById(clientId);
-    Hibernate.initialize(client.getCountries());
-    return client.getCountries();
+    try (Session session = sessionFactory.openSession()) {
+      Client client = session.get(Client.class, clientId);
+      Hibernate.initialize(client.getCountries());
+
+      return client.getCountries();
+    }
   }
 
   /**

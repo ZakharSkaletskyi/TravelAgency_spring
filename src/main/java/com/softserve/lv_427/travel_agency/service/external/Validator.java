@@ -10,16 +10,16 @@ public class Validator {
   public void validateDateForAvailability(String startDate, String endDate) {
     if (isStartDateBiggerThanEndDate(startDate, endDate)) {
       throw new InvalidDatesException(
-          "Дата виїзду (" + endDate + ") має бути більшою за дату заїзду (" + startDate + ") !");
+          "Check out date (" + endDate + ") must be greater than the check-in date (" + startDate + ") !");
     }
   }
 
   public void validateDateForStatistic(String startDate, String endDate) {
     if (isStartDateBiggerThanEndDate(startDate, endDate)) {
       throw new InvalidDatesException(
-          "Кінцева дата ("
+          "End date ("
               + endDate
-              + ") статистики має бути меншою за початкову ("
+              + ")of statistics should be less than start date ("
               + startDate
               + ") !");
     }

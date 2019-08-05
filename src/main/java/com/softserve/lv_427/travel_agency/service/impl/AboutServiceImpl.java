@@ -8,6 +8,7 @@ import com.softserve.lv_427.travel_agency.service.CountryService;
 import com.softserve.lv_427.travel_agency.service.VisaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class AboutServiceImpl implements AboutService {
    * @return AboutDto object.
    */
   @Override
+  @Transactional
   public AboutDto getAboutDto() throws SQLException {
     AboutDto aboutDto = new AboutDto();
     List<Country> countries = countryService.findAll();

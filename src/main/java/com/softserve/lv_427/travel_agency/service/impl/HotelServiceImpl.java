@@ -40,6 +40,7 @@ public class HotelServiceImpl implements HotelService {
    * @param hotel - Hotel entity.
    */
   @Override
+  @Transactional
   public void add(Hotel hotel) {
     dao.add(hotel);
   }
@@ -51,6 +52,7 @@ public class HotelServiceImpl implements HotelService {
    * @return Hotel entity.
    */
   @Override
+  @Transactional
   public Hotel getById(int id) {
     return dao.getById(id);
   }
@@ -61,6 +63,7 @@ public class HotelServiceImpl implements HotelService {
    * @param hotel - hotel entity.
    */
   @Override
+  @Transactional
   public void delete(Hotel hotel) {
     dao.delete(hotel);
   }
@@ -71,6 +74,7 @@ public class HotelServiceImpl implements HotelService {
    * @param hotel - hotel entity.
    */
   @Override
+  @Transactional
   public void edit(Hotel hotel) {
     dao.edit(hotel);
   }
@@ -81,6 +85,7 @@ public class HotelServiceImpl implements HotelService {
    * @return List of Hotels.
    */
   @Override
+  @Transactional
   public List<Hotel> getAll() {
     return dao.getAll();
   }
@@ -94,6 +99,7 @@ public class HotelServiceImpl implements HotelService {
    * @return int - count of clients.
    */
   @Override
+  @Transactional
   public int getClientCountForPeriod(int hotelId, String dateStart, String dateEnd) {
     return dao.getClientCountForPeriod(hotelId, dateStart, dateEnd);
   }
@@ -106,6 +112,7 @@ public class HotelServiceImpl implements HotelService {
    * @return List of hotels.
    */
   @Override
+  @Transactional
   public List<Hotel> getAvailableHotelsOnDates(String dateStart, String dateEnd) {
     return dao.getAvailableHotelsOnDates(dateStart, dateEnd);
   }
@@ -119,6 +126,7 @@ public class HotelServiceImpl implements HotelService {
    * @return average book time in days.
    */
   @Override
+  @Transactional
   public int getAverageBookTime(int hotelId, String dateStart, String dateEnd) {
     return dao.getAverageBookTime(hotelId, dateStart, dateEnd);
   }
@@ -130,8 +138,23 @@ public class HotelServiceImpl implements HotelService {
    * @return List of rooms.
    */
   @Override
+  @Transactional
   public List<Room> getRoomsByHotel(int hotelId) {
     return dao.getRoomsByHotel(hotelId);
+  }
+
+  /**
+   * Get all hotels in city with available for booking rooms.
+   *
+   * @param cityId - city id.
+   * @param startDate - start date.
+   * @param endDate - end date.
+   * @return List of hotels.
+   */
+  @Override
+  @Transactional
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) {
+    return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
   }
 
   /**
@@ -141,6 +164,7 @@ public class HotelServiceImpl implements HotelService {
    * @return HotelDto for controller.
    */
   @Override
+  @Transactional
   public HotelDto getHotelDtoById(int hotelId) {
     Hotel hotel = getById(hotelId);
     Calendar nextYearC = Calendar.getInstance();
@@ -170,6 +194,7 @@ public class HotelServiceImpl implements HotelService {
    * @return HotelDto for controller.
    */
   @Override
+  @Transactional
   public HotelDto getHotelDtoWithAvailabilityById(int hotelId, String startDate, String endDate) {
     Hotel hotel = getById(hotelId);
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -197,6 +222,7 @@ public class HotelServiceImpl implements HotelService {
    * @return HotelDto for controller.
    */
   @Override
+  @Transactional
   public HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate) {
     Hotel hotel = getById(hotelId);
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -223,20 +249,6 @@ public class HotelServiceImpl implements HotelService {
         getClientCountForPeriod(hotelId, startDate, endDate),
         getAverageBookTime(hotelId, startDate, endDate),
         roomLoading);
-  }
-
-  /**
-   * Get all hotels in city with available for booking rooms.
-   *
-   * @param cityId - city id.
-   * @param startDate - start date.
-   * @param endDate - end date.
-   * @return List of hotels.
-   */
-  @Override
-  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
-      throws ClassNotFoundException {
-    return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
   }
 
   //  @Override

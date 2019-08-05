@@ -26,32 +26,32 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public Client getById(int id) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     return session.get(Client.class, id);
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public List<Client> getAllClient() {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     return session.createQuery("from Client").list();
   }
 
   @Override
   public void add(Client client) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     session.persist(client);
   }
 
   @Override
   public void delete(Client client) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     session.delete(client);
   }
 
   @Override
   public void edit(Client client) {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     session.update(client);
   }
   /**
@@ -65,7 +65,7 @@ public class ClientDaoImpl implements ClientDao {
   @Override
   public int getClientId(String firstName, String lastName)
       throws SQLException, ClassNotFoundException {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     return session
         .createQuery(
             "SELECT id FROM Client WHERE first_name = ?1 AND last_name = ?2", Integer.class)
@@ -84,20 +84,21 @@ public class ClientDaoImpl implements ClientDao {
    */
   @Override
   public Client getClient(int id) throws SQLException, ClassNotFoundException {
-    Session session = sessionFactory.getCurrentSession();
-    Client client =
-        session
-            .createQuery("FROM Client WHERE id = ?1", Client.class)
-            .setParameter(1, id)
-            .getResultList()
-            .get(0);
-    if (client == null) throw new ClassNotFoundException("In DB no row with id " + id);
-    return client;
+    try (Session session = sessionFactory.openSession()) {
+      Client client =
+          session
+              .createQuery("FROM Client WHERE id = ?1", Client.class)
+              .setParameter(1, id)
+              .getResultList()
+              .get(0);
+      if (client == null) throw new ClassNotFoundException("In DB no row with id " + id);
+      return client;
+    }
   }
 
   @Override
   public List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     List<Country> countries =
         session
             .createQuery(
@@ -112,7 +113,7 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public int getCountOfClients() {
-    Session session = sessionFactory.getCurrentSession();
+    Session session = sessionFactory.openSession();
     return session
         .createQuery("SELECT COUNT(id) FROM Client", Long.class)
         .uniqueResult()

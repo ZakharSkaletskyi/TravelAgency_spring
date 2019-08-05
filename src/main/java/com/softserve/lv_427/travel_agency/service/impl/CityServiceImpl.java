@@ -33,6 +33,7 @@ public class CityServiceImpl implements CityService {
    * @param city City entity.
    */
   @Override
+  @Transactional
   public void add(City city) {
     dao.add(city);
   }
@@ -44,6 +45,7 @@ public class CityServiceImpl implements CityService {
    * @return city entity of city.
    */
   @Override
+  @Transactional
   public City getById(int id) {
     return dao.getById(id);
   }
@@ -54,6 +56,7 @@ public class CityServiceImpl implements CityService {
    * @param city entity of City.
    */
   @Override
+  @Transactional
   public void delete(City city) {
     dao.delete(city);
   }
@@ -64,6 +67,7 @@ public class CityServiceImpl implements CityService {
    * @param city entity of City.
    */
   @Override
+  @Transactional
   public void edit(City city) {
     dao.edit(city);
   }
@@ -74,6 +78,7 @@ public class CityServiceImpl implements CityService {
    * @return List of City, all cities from DB.
    */
   @Override
+  @Transactional
   public List<City> findAll() {
     return dao.findAll();
   }
@@ -87,6 +92,7 @@ public class CityServiceImpl implements CityService {
    * @return List of cities.
    */
   @Override
+  @Transactional
   public List<City> getCitiesWithAvailableHotels(int countryId, String startDate, String endDate) {
     return dao.getCitiesWithAvailableHotels(countryId, startDate, endDate);
   }
@@ -98,6 +104,7 @@ public class CityServiceImpl implements CityService {
    * @return List of hotels.
    */
   @Override
+  @Transactional
   public List<Hotel> getHotels(int cityId) {
     return dao.getHotels(cityId);
   }
@@ -109,6 +116,7 @@ public class CityServiceImpl implements CityService {
    * @return CityDto.
    */
   @Override
+  @Transactional
   public CityDto getCityDto(int cityId) {
     City city = getById(cityId);
 
