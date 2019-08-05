@@ -27,13 +27,13 @@ public class HotelDto {
   private List<int[]> roomLoading;
 
   public HotelDto(
-      int hotelId,
-      String hotelName,
-      Country country,
-      City city,
-      String currentDate,
-      String minDate,
-      String maxDate) {
+          int hotelId,
+          String hotelName,
+          Country country,
+          City city,
+          String currentDate,
+          String minDate,
+          String maxDate) {
     this.hotelId = hotelId;
     this.hotelName = hotelName;
     this.country = country;
@@ -44,15 +44,15 @@ public class HotelDto {
   }
 
   public HotelDto(
-      int hotelId,
-      String hotelName,
-      Country country,
-      City city,
-      String currentDate,
-      String minDate,
-      String startDate,
-      String endDate,
-      List<Room> availableRooms) {
+          int hotelId,
+          String hotelName,
+          Country country,
+          City city,
+          String currentDate,
+          String minDate,
+          String startDate,
+          String endDate,
+          List<Room> availableRooms) {
     this.hotelId = hotelId;
     this.hotelName = hotelName;
     this.country = country;
@@ -65,17 +65,17 @@ public class HotelDto {
   }
 
   public HotelDto(
-      int hotelId,
-      String hotelName,
-      Country country,
-      City city,
-      String currentDate,
-      String maxDate,
-      String startDate,
-      String endDate,
-      int countOfClient,
-      int averageBookTime,
-      List<int[]> roomLoading) {
+          int hotelId,
+          String hotelName,
+          Country country,
+          City city,
+          String currentDate,
+          String maxDate,
+          String startDate,
+          String endDate,
+          int countOfClient,
+          int averageBookTime,
+          List<int[]> roomLoading) {
     this.hotelId = hotelId;
     this.hotelName = hotelName;
     this.country = country;

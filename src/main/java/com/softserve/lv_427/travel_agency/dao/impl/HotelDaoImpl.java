@@ -148,15 +148,11 @@ public class HotelDaoImpl implements HotelDao {
               .createQuery(
                   "SELECT room.id FROM RoomBook"
                       + " WHERE ((orderStart > ?1 AND orderStart < ?2)"
-                      + " OR (orderStart < ?3 AND orderEnd > ?4)"
-                      + " OR (orderEnd > ?5 AND orderEnd < ?6))",
+                      + " OR (orderStart < ?1 AND orderEnd > ?2)"
+                      + " OR (orderEnd > ?1 AND orderEnd < ?2))",
                   Integer.class)
               .setParameter(1, dateStart)
               .setParameter(2, dateEnd)
-              .setParameter(3, dateStart)
-              .setParameter(4, dateEnd)
-              .setParameter(5, dateStart)
-              .setParameter(6, dateEnd)
               .list();
 
       List<Integer> hotelIds =

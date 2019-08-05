@@ -115,15 +115,11 @@ public class CityDaoImpl implements CityDao {
               .createQuery(
                   "SELECT room.id FROM RoomBook"
                       + " WHERE ((orderStart > ?1 AND orderStart < ?2)"
-                      + " OR (orderStart < ?3 AND orderEnd > ?4)"
-                      + " OR (orderEnd > ?5 AND orderEnd < ?6))",
+                      + " OR (orderStart < ?1 AND orderEnd > ?2)"
+                      + " OR (orderEnd > ?1 AND orderEnd < ?2))",
                   Integer.class)
               .setParameter(1, startDate)
               .setParameter(2, endDate)
-              .setParameter(3, startDate)
-              .setParameter(4, endDate)
-              .setParameter(5, startDate)
-              .setParameter(6, endDate)
               .list();
 
       List<Integer> hotelIds =
