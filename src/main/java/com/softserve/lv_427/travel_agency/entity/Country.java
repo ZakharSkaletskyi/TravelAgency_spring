@@ -19,12 +19,12 @@ public class Country {
   @Column(name = "country_name", unique = true, nullable = false, length = 30)
   private String name;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   private Visa visa;
 
-  @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "country")
   private List<City> cities = new ArrayList<>();
 
-  @ManyToMany(mappedBy = "countries", fetch = FetchType.LAZY)
+  @ManyToMany(mappedBy = "countries")
   private List<Client> visitors = new ArrayList<>();
 }

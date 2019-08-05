@@ -22,6 +22,6 @@ public class Visa {
   @OneToMany(mappedBy = "visa", fetch = FetchType.LAZY)
   private List<Country> countries = new ArrayList<>();
 
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "visas")
+  @ManyToMany(mappedBy = "visas")
   private List<Client> clients = new ArrayList<>();
 }

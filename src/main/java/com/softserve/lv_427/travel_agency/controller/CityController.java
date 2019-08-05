@@ -23,13 +23,13 @@ public class CityController {
   public String getAllCities(ModelMap model) {
     model.addAttribute("cities", cityService.findAll());
 
-    return "cities";
+    return "city/cities";
   }
 
   @PostMapping
   public String getCity(@RequestParam int cityId, ModelMap model) {
     model.addAttribute("city", cityService.getCityDto(cityId));
 
-    return "city";
+    return "city/city";
   }
 }

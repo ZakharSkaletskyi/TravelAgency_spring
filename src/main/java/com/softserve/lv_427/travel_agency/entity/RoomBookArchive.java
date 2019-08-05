@@ -20,11 +20,11 @@ public class RoomBookArchive {
   @Column(name = "order_end", nullable = false)
   private String orderEnd;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "room_id", nullable = false)
   private Room room;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "client_id", nullable = false)
   private Client client;
 }

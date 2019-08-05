@@ -19,10 +19,10 @@ public class City {
   @Column(name = "city_name", nullable = false, length = 30)
   private String name;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "country_id", nullable = false)
   private Country country;
 
-  @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "city")
   private List<Hotel> hotels = new ArrayList<>();
 }

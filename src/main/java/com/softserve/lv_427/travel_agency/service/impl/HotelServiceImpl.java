@@ -3,6 +3,7 @@ package com.softserve.lv_427.travel_agency.service.impl;
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
 import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
+import com.softserve.lv_427.travel_agency.entity.Room;
 import com.softserve.lv_427.travel_agency.service.HotelService;
 import com.softserve.lv_427.travel_agency.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -84,43 +86,56 @@ public class HotelServiceImpl implements HotelService {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
 
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, 1);
+    Date nextYear = cal.getTime();
+
+    cal.add(Calendar.YEAR, -2);
+    Date twoYearsAgo = cal.getTime();
+
     dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
     dto.setCountryName(hotel.getCity().getCountry().getName());
     dto.setCityName(hotel.getCity().getName());
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+    dto.setMinDate(new SimpleDateFormat("yyyy-MM-dd").format(twoYearsAgo));
+    dto.setMaxDate(new SimpleDateFormat("yyyy-MM-dd").format(nextYear));
 
     return dto;
   }
 
   @Transactional
   @Override
-  public HotelDto getHotelDtoWithAvailabilityById(
-          int hotelId, String startDate, String endDate) {
+  public HotelDto getHotelDtoWithAvailabilityById(int hotelId, String startDate, String endDate) {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
 
-    //    List<Room> rooms = roomService.getAvailableRoomsOnDateInHotel(startDate, endDate,
-    // hotelId);
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, -2);
+    Date twoYearsAgo = cal.getTime();
 
     dto.setHotelId(hotel.getId());
     dto.setHotelName(hotel.getName());
     dto.setCountryName(hotel.getCity().getCountry().getName());
     dto.setCityName(hotel.getCity().getName());
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+    dto.setMinDate(new SimpleDateFormat("yyyy-MM-dd").format(twoYearsAgo));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
-    //    dto.setAvailableRooms(rooms);
+    dto.setAvailableRooms(roomService.getAvailableRoomsOnDateInHotel(startDate, endDate, hotelId));
 
     return dto;
   }
 
   @Transactional
   @Override
-  public HotelDto getHotelDtoWithStatisticById(
-          int hotelId, String startDate, String endDate) {
+  public HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate) {
     HotelDto dto = new HotelDto();
     Hotel hotel = getById(hotelId);
+
+    Calendar cal = Calendar.getInstance();
+    cal.add(Calendar.YEAR, 1);
+    Date nextYear = cal.getTime();
 
     //    List<Integer[]> roomLoading = new ArrayList<>();
 
@@ -133,13 +148,13 @@ public class HotelServiceImpl implements HotelService {
     dto.setCountryName(hotel.getCity().getCountry().getName());
     dto.setCityName(hotel.getCity().getName());
     dto.setCurrentDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+    dto.setMaxDate(new SimpleDateFormat("yyyy-MM-dd").format(nextYear));
     dto.setStartDate(startDate);
     dto.setEndDate(endDate);
     dto.setCountOfClient(getClientCountForPeriod(hotelId, startDate, endDate));
     dto.setAverageBookTime(getAverageBookTime(hotelId, startDate, endDate));
     //    dto.setRoomLoading(roomLoading);
     return dto;
-
   }
   @Override
   @Transactional

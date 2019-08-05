@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -57,7 +58,7 @@ public class RoomServiceImpl implements RoomService {
   @Override
   @Transactional
   public int getRoomCount(int hotelId) {
-    return getRoomCount(hotelId);
+    return dao.getRoomCount(hotelId);
   }
 
   @Override

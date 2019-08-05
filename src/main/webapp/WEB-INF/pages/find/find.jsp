@@ -12,15 +12,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<jsp:include page="../modules/_header.jsp" />
 
 <html>
 <head>
 <title>Знайти готель</title>
+<link rel="stylesheet" href="../../../res/css/index.css" />
 </head>
 <body>
-	<jsp:include page="../modules/_header.jsp" />
-	<div style="padding-left: 15px">
-
+	<div class="content">
 		<form action="/find_country" modelAttribute="ClientPeriodDto"
 			method="POST">
 
@@ -44,10 +48,11 @@
 			<input type="date" name="dateEnd"
 				value=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>
 				min=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>>
-				
+
 			<br> <input type="submit" value="Знайти">
 
 		</form>
 	</div>
+
 </body>
 </html>

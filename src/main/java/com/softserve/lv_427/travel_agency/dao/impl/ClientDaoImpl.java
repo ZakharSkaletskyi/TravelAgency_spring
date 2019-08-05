@@ -12,6 +12,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
+import java.util.List;
+
 @Repository
 public class ClientDaoImpl implements ClientDao {
   private SessionFactory sessionFactory;
@@ -84,7 +87,7 @@ public class ClientDaoImpl implements ClientDao {
     Session session = sessionFactory.getCurrentSession();
     Client client =
         session
-            .createQuery("SELECT * FROM Client WHERE id = ?1", Client.class)
+            .createQuery("FROM Client WHERE id = ?1", Client.class)
             .setParameter(1, id)
             .getResultList()
             .get(0);
@@ -109,5 +112,17 @@ public class ClientDaoImpl implements ClientDao {
     return countries;
   }
 
+  @Override
+  public int getCountOfClients() {
+    Session session = sessionFactory.getCurrentSession();
+    return session.createQuery("SELECT COUNT(id) FROM Client", Long.class)
+            .uniqueResult()
+            .intValue();
+
+  }
+
+  // "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id = ?1 ",
+  //                "FROM country c JOIN visa. v LEFT JOIN v.clients clns WHERE clns.id = ?1",
+  // "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1"
 
 }

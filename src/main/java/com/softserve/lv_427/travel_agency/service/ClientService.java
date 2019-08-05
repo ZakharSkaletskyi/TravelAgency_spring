@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.softserve.lv_427.travel_agency.dto.CityDto;
 import com.softserve.lv_427.travel_agency.dto.ClientPeriodDto;
+import com.softserve.lv_427.travel_agency.dto.ProfileClientDTO;
 import com.softserve.lv_427.travel_agency.entity.Client;
 import com.softserve.lv_427.travel_agency.entity.Country;
 
@@ -29,7 +30,11 @@ public interface ClientService {
 
   CityDto getCityDto(int cityId);
 
- // ClientPeriodDto getClientPeriodDto(int clientId, LocalDate dateStart, LocalDate dateEnd);
+  // ClientPeriodDto getClientPeriodDto(int clientId, LocalDate dateStart, LocalDate dateEnd);
 
-ClientPeriodDto getClientPeriodDto(int clientId,String dateStart,String dateEnd);
+  ClientPeriodDto getClientPeriodDto(int clientId, String dateStart, String dateEnd);
+
+  int getCountOfClients();
+
+  ProfileClientDTO getProfileClientDTO(int clientID) throws ClassNotFoundException, SQLException;
 }

@@ -10,12 +10,15 @@
 <html>
 
 <head>
-    <title>Header</title>
+    <title>Сонечко</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../res/img/sun.ico" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css"/>
 </head>
 
 <body>
 <header>
-    <p class="logo">TourAgency "Сонечко"</p>
+    <a href="/" class="logo">TourAgency "Сонечко"</a>
+    <%--<p class="logo">TourAgency "Сонечко"</p>--%>
     <div class="navigation">
         <a href="/find"> Знайти готель </a>
         <a href="/country"> Країни </a>
