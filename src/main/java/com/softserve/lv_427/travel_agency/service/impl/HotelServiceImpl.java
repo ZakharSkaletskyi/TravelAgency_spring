@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
+import com.softserve.lv_427.travel_agency.dto.FindHotelDto;
 import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -156,9 +158,21 @@ public class HotelServiceImpl implements HotelService {
     //    dto.setRoomLoading(roomLoading);
     return dto;
   }
+
   @Override
   @Transactional
-  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) throws ClassNotFoundException{
-	  return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
+      throws ClassNotFoundException {
+    return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
   }
+
+//  public FindHotelDto getFindHotelDto(FindHotelDto findHotelDto) {
+//    findHotelDto.setName(dao.getById(findHotelDto.getHotelID()).getName());
+//    findHotelDto.setRoomsCount(roomService.getRoomCount(findHotelDto.getHotelID()));
+//   List<Room>rooms=roomService.getAvailableRoomsOnDateInHotel(
+//           findHotelDto.getDateStart(), findHotelDto.getDateEnd(), findHotelDto.getHotelID());
+//   List<Integer> numbers =new ArrayList<integer>();
+//   
+//    findHotelDto.setAvaib numberleRoomsNumber();
+//  }
 }

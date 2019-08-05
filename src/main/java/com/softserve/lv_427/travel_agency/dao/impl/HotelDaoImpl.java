@@ -115,22 +115,20 @@ public class HotelDaoImpl implements HotelDao {
         .list();
   }
 
-  @Override // переробити - спочату вибрати всі зайняті, а потім серед всіх готелів в місті вибрати
-  // ті які не в списку зайнятих
+  @Override
   public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
       throws ClassNotFoundException {
-	  List<Hotel> hotels;
+    List<Hotel> hotels;
     Session session = sessionFactory.getCurrentSession();
     List<Integer> bookedHotelsId =
         session
             .createQuery(
                 "SELECT h.id FROM City c JOIN c.hotels h JOIN h.rooms r LEFT JOIN r.roomBooks rb WHERE "
-                + "(c.id= ?1 "
-//                + ")",  //test
-                + "AND ((rb.orderStart > ?2 AND rb.orderStart < ?3)"
-                		+ " OR (rb.orderStart < ?4 AND rb.orderEnd > ?5)"
-                		+ " OR (rb.orderEnd > ?6 AND rb.orderEnd < ?7)))",
-                Integer.class) // change
+                    + "(c.id= ?1 "
+                    + "AND ((rb.orderStart > ?2 AND rb.orderStart < ?3)"
+                    + " OR (rb.orderStart < ?4 AND rb.orderEnd > ?5)"
+                    + " OR (rb.orderEnd > ?6 AND rb.orderEnd < ?7)))",
+                Integer.class)
             .setParameter(1, cityId)
             .setParameter(2, startDate)
             .setParameter(3, endDate)
@@ -139,42 +137,28 @@ public class HotelDaoImpl implements HotelDao {
             .setParameter(6, startDate)
             .setParameter(7, endDate)
             .list();
-    {/////////////////////////////////////////////test
-    	System.out.println("hotels bookedId HDao" ); 
-    	bookedHotelsId.forEach(s->System.out.print(s+" | "));
+
+    if (bookedHotelsId.size() == 0) {
+      hotels =
+          session
+              .createQuery(
+                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 ", Hotel.class) // change
+              .setParameter(1, cityId)
+              .list();
+    } else {
+      hotels =
+          session
+              .createQuery(
+                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 AND h.id NOT IN (:bookedHotelsId) ",
+                  Hotel.class) // change
+              .setParameter(1, cityId)
+              .setParameterList("bookedHotelsId", bookedHotelsId)
+              .list();
     }
-    System.out.println("bookedHotelsId.size="+bookedHotelsId.size());
-    if(bookedHotelsId.size()==0)
-    {System.out.println("111111111111");
-	 hotels =
-	        session
-	            .createQuery(
-	                "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 ",
-	                Hotel.class) // change
-	            .setParameter(1, cityId)
-	            .list();
-    	
-    }
-    else
-    {System.out.println("2222222222222");
-     hotels =
-        session
-            .createQuery(
-                "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 AND h.id NOT IN (:bookedHotelsId) ",
-                Hotel.class) // change
-            .setParameter(1, cityId)
-            .setParameterList("bookedHotelsId", bookedHotelsId)
-            .list();
-  }
-    if (hotels == null){
+    if (hotels == null) {
       throw new ClassNotFoundException("In DB no avaible countries for clientId= " + cityId);
     }
-    {/////////////////////////////////////////////test
-    	System.out.println("hotels HDao" ); 
-    hotels.forEach(s->System.out.print(s+" | "));
-    }
     return hotels;
-    
   }
 
   @Override

@@ -18,23 +18,24 @@
 	<jsp:include page="../modules/_header.jsp" />
 	<div style="padding-left: 15px">
 		<h2>Країни</h2>
-		<form action="/find_city" method="POST" modelAttribute="ClientPeriodDto">
+		<form action="/find_city" method="POST"
+			modelAttribute="ClientPeriodDto">
 			<p style="font-size: 8px; color: red;">
-				*Доступні країни для <b>${ClientPeriodDto.firstName} ${ClientPeriodDto.lastName}  </b>
+				*Доступні країни для <b>${ClientPeriodDto.firstName}
+					${ClientPeriodDto.lastName} </b>
 				<%--*Доступні країни для ${clientWithPeriod.firstName} ${clientWithPeriod.lastName}  </b>--%>
 			</p>
 			<form:select path="countries" name="selectedCountry">
 				<c:forEach var="country" items="${countries}">
-					<form:option value="${country.id}"
-						label="${country.name}" />
+					<form:option value="${country.id}" label="${country.name}" />
 				</c:forEach>
 			</form:select>
 			<button type="submit">Знайти</button>
-			<form:hidden path="ClientPeriodDto.id"  />
+			<form:hidden path="ClientPeriodDto.id" />
 			<form:hidden path="ClientPeriodDto.dateStart" />
-			<form:hidden path="ClientPeriodDto.dateEnd"  />
-			<form:hidden path="ClientPeriodDto.firstName"  />
-			<form:hidden path="ClientPeriodDto.lastName"  />
+			<form:hidden path="ClientPeriodDto.dateEnd" />
+			<form:hidden path="ClientPeriodDto.firstName" />
+			<form:hidden path="ClientPeriodDto.lastName" />
 		</form>
 	</div>
 </body>

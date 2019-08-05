@@ -12,14 +12,16 @@
 <%@page pageEncoding="UTF-8"%>
 <html>
 <head>
-    <title>Міста</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css"/>
+<title>Міста</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/res/css/index.css" />
 </head>
 <body>
-<jsp:include page="../modules/_header.jsp"/>
-<div class="content">
-    <h2>Міста</h2>
-		<form action="/find_hotels" method="POST" modelAttribute="ClientPeriodDto">
+	<jsp:include page="../modules/_header.jsp" />
+	<div class="content">
+		<h2>Міста</h2>
+		<form action="/find_hotels" method="POST"
+			modelAttribute="ClientPeriodDto">
 			<p style="font-size: 8px; color: red;">
 				*Доступні міста для <b>${ClientPeriodDto.firstName}
 					${ClientPeriodDto.lastName}</b> в період з ${ClientPeriodDto.dateStart}
