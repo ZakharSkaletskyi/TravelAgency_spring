@@ -10,7 +10,8 @@
 <html>
 <head>
     <title>The Sun - Profile</title>
-    <link rel="stylesheet" href="../../../res/css/index.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/profile.css"/>
+    <%--<link rel="stylesheet" href="../../../res/css/index.css"/>--%>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>

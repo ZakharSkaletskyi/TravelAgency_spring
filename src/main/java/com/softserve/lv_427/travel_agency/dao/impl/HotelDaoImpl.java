@@ -212,12 +212,61 @@ public class HotelDaoImpl implements HotelDao {
   }
 
   /**
-   * Get rooms in hotel.
+   * Get hotels with available rooms in city.
+   *
+   * @param cityId - city id.
+   * @param startDate - start date.
+   * @param endDate - end date.
+   * @return List of hotels.
+   */
+  @Override
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
+      throws ClassNotFoundException {
+    List<Hotel> hotels;
+    Session session = sessionFactory.getCurrentSession();
+    List<Integer> bookedHotelsId =
+        session
+            .createQuery(
+                "SELECT h.id FROM City c JOIN c.hotels h JOIN h.rooms r LEFT JOIN r.roomBooks rb WHERE "
+                    + "(c.id= ?1 "
+                    + "AND ((rb.orderStart > ?2 AND rb.orderStart < ?3)"
+                    + " OR (rb.orderStart < ?2 AND rb.orderEnd > ?3)"
+                    + " OR (rb.orderEnd > ?2 AND rb.orderEnd < ?3)))",
+                Integer.class)
+            .setParameter(1, cityId)
+            .setParameter(2, startDate)
+            .setParameter(3, endDate)
+            .list();
+
+    if (bookedHotelsId.size() == 0) {
+      hotels =
+          session
+              .createQuery(
+                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 ", Hotel.class) // change
+              .setParameter(1, cityId)
+              .list();
+    } else {
+      hotels =
+          session
+              .createQuery(
+                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 AND h.id NOT IN (:bookedHotelsId) ",
+                  Hotel.class) // change
+              .setParameter(1, cityId)
+              .setParameterList("bookedHotelsId", bookedHotelsId)
+              .list();
+    }
+    if (hotels == null) {
+      throw new ClassNotFoundException("In DB no available countries for clientId= " + cityId);
+    }
+    return hotels;
+  }
+
+  /**
+   * Get all rooms in hotel.
    *
    * @param hotelId - hotel id.
    * @return List of rooms.
    */
-  @Override
   public List<Room> getRoomsByHotel(int hotelId) {
     try (Session session = sessionFactory.openSession()) {
       Hotel hotel = session.get(Hotel.class, hotelId);
@@ -229,6 +278,7 @@ public class HotelDaoImpl implements HotelDao {
       } else {
         return rooms;
       }
+
     }
   }
 

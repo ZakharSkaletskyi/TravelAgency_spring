@@ -8,7 +8,7 @@
 <%@page pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Сонечко</title>
+    <title>The Sun</title>
     <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>

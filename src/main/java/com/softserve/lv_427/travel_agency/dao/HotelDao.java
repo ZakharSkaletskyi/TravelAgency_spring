@@ -22,7 +22,9 @@ public interface HotelDao {
 
   int getAverageBookTime(int hotel_id, String dateStart, String dateEnd);
 
+  List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
+      throws ClassNotFoundException;
+
   List<Room> getRoomsByHotel(int hotelId);
 
-  //  int getId(String name);
 }

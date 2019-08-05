@@ -34,8 +34,9 @@ public class CityDaoImpl implements CityDao {
    */
   @Override
   public void add(City city) {
-    Session session = sessionFactory.getCurrentSession();
-    session.persist(city);
+    try (Session session = sessionFactory.openSession()) {
+      session.persist(city);
+    }
   }
 
   /**

@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
+import com.softserve.lv_427.travel_agency.dto.FindHotelDto;
 import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
@@ -118,8 +119,8 @@ public class HotelServiceImpl implements HotelService {
    * @return average book time in days.
    */
   @Override
-  public int getAverageBookTime(int hotel_id, String dateStart, String dateEnd) {
-    return dao.getAverageBookTime(hotel_id, dateStart, dateEnd);
+  public int getAverageBookTime(int hotelId, String dateStart, String dateEnd) {
+    return dao.getAverageBookTime(hotelId, dateStart, dateEnd);
   }
 
   /**
@@ -222,6 +223,20 @@ public class HotelServiceImpl implements HotelService {
         getClientCountForPeriod(hotelId, startDate, endDate),
         getAverageBookTime(hotelId, startDate, endDate),
         roomLoading);
+  }
+
+  /**
+   * Get all hotels in city with available for booking rooms.
+   *
+   * @param cityId - city id.
+   * @param startDate - start date.
+   * @param endDate - end date.
+   * @return List of hotels.
+   */
+  @Override
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
+      throws ClassNotFoundException {
+    return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
   }
 
   //  @Override

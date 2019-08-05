@@ -15,6 +15,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Service implementation for About page logic.
+ *
+ * @author Nazar Vladyka
+ * @version 1.0
+ */
 @Service
 public class AboutServiceImpl implements AboutService {
   private final ClientService clientService;
@@ -29,6 +35,11 @@ public class AboutServiceImpl implements AboutService {
     this.countryService = countryService;
   }
 
+  /**
+   * Get AboutDto.
+   *
+   * @return AboutDto object.
+   */
   @Override
   public AboutDto getAboutDto() throws SQLException {
     AboutDto aboutDto = new AboutDto();
