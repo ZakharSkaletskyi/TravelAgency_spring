@@ -13,8 +13,8 @@
 </head>
 <body>
 <div class="content">
-    <h1>Привіт, наш любий друг</h1>
-    <p class="description">З нами подорожувати легко. Приєднуйся до нас</p>
+    <h1>Hello, our dear friend</h1>
+    <p class="description">Traveling with us is easy. Join us!</p>
 </div>
 </body>
 </html>

@@ -15,8 +15,6 @@ public interface CityService {
 
   void edit(City city);
 
-  int getId(String cityName);
-
   List<City> findAll();
 
   List<City> getCitiesWithAvailableHotels(int countryId, String startDate, String endDate);
@@ -24,4 +22,6 @@ public interface CityService {
   List<Hotel> getHotels(int cityId);
 
   CityDto getCityDto(int cityId);
+
+  //  int getId(String cityName);
 }

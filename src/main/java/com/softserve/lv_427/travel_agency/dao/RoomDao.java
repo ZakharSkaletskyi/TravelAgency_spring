@@ -2,7 +2,6 @@ package com.softserve.lv_427.travel_agency.dao;
 
 import com.softserve.lv_427.travel_agency.entity.Room;
 
-import java.util.Date;
 import java.util.List;
 
 public interface RoomDao {
@@ -19,8 +18,4 @@ public interface RoomDao {
   int getLoadingRoomsPeriod(String startDate, String endDate, int roomId);
 
   int getRoomCount(int hotelId);
-
-  int[] get3Int(String s);
-
-  int getDaysFromPeriod(String dateStart, String dateEnd);
 }

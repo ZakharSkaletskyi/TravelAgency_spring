@@ -1,5 +1,6 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
+import com.softserve.lv_427.travel_agency.dao.RoomDao;
 import com.softserve.lv_427.travel_agency.dao.impl.RoomDaoImpl;
 import com.softserve.lv_427.travel_agency.entity.Room;
 import com.softserve.lv_427.travel_agency.service.RoomService;
@@ -7,12 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class RoomServiceImpl implements RoomService {
-  private final RoomDaoImpl dao;
+  private final RoomDao dao;
 
   @Autowired
   public RoomServiceImpl(RoomDaoImpl dao) {
@@ -57,12 +65,39 @@ public class RoomServiceImpl implements RoomService {
 
   @Override
   @Transactional
+  public int[] loadingRoomsPeriod(String startDate, String endDate, int roomId) {
+    int[] loading = new int[2];
+    loading[0] = dao.getLoadingRoomsPeriod(startDate, endDate, roomId);
+    loading[1] = getLoadingPeriod(startDate, endDate);
+    return loading;
+  }
+
+  @Override
+  @Transactional
+  public int getLoadingPeriod(String startDate, String endDate) {
+      SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+      Long periodL = null;
+
+      try {
+          Date date1 = myFormat.parse(startDate);
+          Date date2 = myFormat.parse(endDate);
+          Long diff = date2.getTime() - date1.getTime();
+          periodL = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+
+      return periodL.intValue();
+  }
+
+  @Override
+  @Transactional
   public int getRoomCount(int hotelId) {
     return dao.getRoomCount(hotelId);
   }
 
-  @Override
-  public int getDaysFromPeriod(String dateStart, String dateEnd) {
-    return dao.getDaysFromPeriod(dateStart, dateEnd);
-  }
+//  @Override
+//  public int getDaysFromPeriod(String dateStart, String dateEnd) {
+//    return dao.getDaysFromPeriod(dateStart, dateEnd);
+//  }
 }

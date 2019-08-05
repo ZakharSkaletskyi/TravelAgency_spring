@@ -1,4 +1,4 @@
-package com.softserve.lv_427.travel_agency;
+package com.softserve.lv_427.travel_agency.service.external;
 
 import com.softserve.lv_427.travel_agency.exception.InvalidDatesException;
 

@@ -1,17 +1,21 @@
 package com.softserve.lv_427.travel_agency.controller;
 
-import com.softserve.lv_427.travel_agency.Validator;
+import com.softserve.lv_427.travel_agency.service.external.Validator;
 import com.softserve.lv_427.travel_agency.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Controller for Hotel logic.
+ *
+ * @author Nazar Vladyka
+ * @version 1.0
+ */
 @Controller
-@RequestMapping("/hotel")
 public class HotelController {
   private final HotelService hotelService;
   private Validator validator = new Validator();
@@ -21,37 +25,40 @@ public class HotelController {
     this.hotelService = hotelService;
   }
 
-  @GetMapping
+  /** Method that returns all hotels. */
+  @GetMapping(value = "/hotels")
   public String getAllHotels(ModelMap model) {
     model.addAttribute("hotels", hotelService.getAll());
 
     return "hotel/hotels";
   }
 
-  @PostMapping
-  public String getHotel(@RequestParam int hotelId, ModelMap model) {
-    model.addAttribute("hotelDto", hotelService.getHotelDtoById(hotelId));
+  /** Method that returns Hotel by his id. */
+  @GetMapping(value = "/hotel")
+  public String getHotel(@RequestParam int id, ModelMap model) {
+    model.addAttribute("hotelDto", hotelService.getHotelDtoById(id));
 
     return "hotel/hotel";
   }
 
-  @PostMapping("/availability")
+  /** Method that returns page with information about available rooms. */
+  @PostMapping("/hotel/availability")
   public String getHotelWithAvailability(
-      @RequestParam int hotelId, String startDateAvail, String endDateAvail, ModelMap model) {
+      @RequestParam int id, String startDateAvail, String endDateAvail, ModelMap model) {
     validator.validateDateForAvailability(startDateAvail, endDateAvail);
     model.addAttribute(
-        "hotelDto",
-        hotelService.getHotelDtoWithAvailabilityById(hotelId, startDateAvail, endDateAvail));
+        "hotelDto", hotelService.getHotelDtoWithAvailabilityById(id, startDateAvail, endDateAvail));
 
     return "hotel/hotel";
   }
 
-  @PostMapping("/statistic")
+  /** Method that returns page with hotel statistic for the period of time. */
+  @PostMapping("/hotel/statistic")
   public String getHotelWithStatistic(
-      @RequestParam int hotelId, String startDateStat, String endDateStat, ModelMap model) {
+      @RequestParam int id, String startDateStat, String endDateStat, ModelMap model) {
     validator.validateDateForStatistic(startDateStat, endDateStat);
     model.addAttribute(
-        "hotelDto", hotelService.getHotelDtoWithStatisticById(hotelId, startDateStat, endDateStat));
+        "hotelDto", hotelService.getHotelDtoWithStatisticById(id, startDateStat, endDateStat));
 
     return "hotel/hotel";
   }

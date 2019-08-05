@@ -10,22 +10,21 @@
 <html>
 
 <head>
-    <title>Сонечко</title>
+    <title>The Sun</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../../res/img/sun.ico" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css"/>
 </head>
 
 <body>
 <header>
-    <a href="/" class="logo">TourAgency "Сонечко"</a>
-    <%--<p class="logo">TourAgency "Сонечко"</p>--%>
+    <a href="/" class="logo">TourAgency "The Sun"</a>
     <div class="navigation">
-        <a href="/find"> Знайти готель </a>
-        <a href="/country"> Країни </a>
-        <a href="/city"> Міста </a>
-        <a href="/hotel"> Готелі </a>
-        <a href="/about"> Про нас </a>
-        <a href="/profile"> Профіль </a>
+        <a href="/find"> Find hotel </a>
+        <a href="/countries"> Countries </a>
+        <a href="/cities"> Cities </a>
+        <a href="/hotels"> Hotels </a>
+        <a href="/about"> About </a>
+        <a href="/profile"> Profile </a>
     </div>
 </header>
 

@@ -9,19 +9,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Сонечко - Hotels </title>
+    <title>The Sun - Hotels</title>
     <jsp:include page="../modules/_header.jsp"/>
 </head>
 <body>
 <div class="content">
     <h2>Hotels</h2>
-    <form action="/hotel" method="POST">
-        <select name="hotelId">
+    <form action="/hotel" method="GET">
+        <select name="id">
             <c:forEach var="hotel" items="${hotels}">
                 <option value="${hotel.id}">${hotel.name}</option>
             </c:forEach>
         </select>
-        <button type="submit">Відкрити</button>
+        <button type="submit">Open</button>
     </form>
 </div>
 </body>
