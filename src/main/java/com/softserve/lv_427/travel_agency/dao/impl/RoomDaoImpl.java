@@ -102,4 +102,7 @@ public class RoomDaoImpl implements RoomDao {
         .uniqueResult()
         .intValue();
   }
+  public List<Integer> getAvaibleRoomsNumber(int id){
+ 	 
+  }
 }

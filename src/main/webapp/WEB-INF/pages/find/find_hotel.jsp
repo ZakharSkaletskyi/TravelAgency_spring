@@ -1,9 +1,4 @@
-<%@ page import="com.sofserve.lv_427.tourfirm.model.Room" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.RoomService" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.RoomServiceImpl" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.HotelService" %>
-<%@ page import="com.sofserve.lv_427.tourfirm.service.impl.HotelServiceImpl" %>
+
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %>
 <%--

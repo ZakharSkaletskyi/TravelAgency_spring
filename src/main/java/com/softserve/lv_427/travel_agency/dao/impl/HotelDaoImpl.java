@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.dao.impl;
 
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
+import com.softserve.lv_427.travel_agency.entity.Country;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
 import com.softserve.lv_427.travel_agency.exception.FieldNotFoundException;
@@ -222,6 +223,72 @@ public class HotelDaoImpl implements HotelDao {
    * @return List of rooms.
    */
   @Override
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
+      throws ClassNotFoundException {
+    List<Hotel> hotels;
+    Session session = sessionFactory.getCurrentSession();
+    List<Integer> bookedHotelsId =
+        session
+            .createQuery(
+                "SELECT h.id FROM City c JOIN c.hotels h JOIN h.rooms r LEFT JOIN r.roomBooks rb WHERE "
+                    + "(c.id= ?1 "
+                    + "AND ((rb.orderStart > ?2 AND rb.orderStart < ?3)"
+                    + " OR (rb.orderStart < ?4 AND rb.orderEnd > ?5)"
+                    + " OR (rb.orderEnd > ?6 AND rb.orderEnd < ?7)))",
+                Integer.class)
+            .setParameter(1, cityId)
+            .setParameter(2, startDate)
+            .setParameter(3, endDate)
+            .setParameter(4, startDate)
+            .setParameter(5, endDate)
+            .setParameter(6, startDate)
+            .setParameter(7, endDate)
+            .list();
+
+    if (bookedHotelsId.size() == 0) {
+      hotels =
+          session
+              .createQuery(
+                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 ", Hotel.class) // change
+              .setParameter(1, cityId)
+              .list();
+    } else {
+      hotels =
+          session
+              .createQuery(
+                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 AND h.id NOT IN (:bookedHotelsId) ",
+                  Hotel.class) // change
+              .setParameter(1, cityId)
+              .setParameterList("bookedHotelsId", bookedHotelsId)
+              .list();
+    }
+    if (hotels == null) {
+      throw new ClassNotFoundException("In DB no avaible countries for clientId= " + cityId);
+    }
+    return hotels;
+  }
+
+//  @Override
+//  public int getAverageBookTime(int hotel_id, String dateStart, String dateEnd) {
+//    Session session = sessionFactory.getCurrentSession();
+//
+//    List<Object[]> bookDaysArchive =
+//        new ArrayList<Object[]>(
+//            session
+//                .createQuery(
+//                    "SELECT orderStart, orderEnd FROM RoomBookArchive WHERE "
+//                        + "(orderStart >= ?1  AND orderEnd <= ?2 AND room.id IN "
+//                        + "(SELECT id FROM Room where hotel.id = ?3))",
+//                    Object[].class)
+//                .setParameter(1, dateStart)
+//                .setParameter(2, dateEnd)
+//                .setParameter(3, hotel_id)
+//                .list());
+//
+//    List<Integer> dateDifference1 = new ArrayList<>();
+//    for (Object[] date : bookDaysArchive) {
+//      dateDifference1.add(getDaysFromPeriod((String) date[0], (String) date[1]));
+
   public List<Room> getRoomsByHotel(int hotelId) {
     try (Session session = sessionFactory.openSession()) {
       Hotel hotel = session.get(Hotel.class, hotelId);
@@ -233,8 +300,10 @@ public class HotelDaoImpl implements HotelDao {
       } else {
         return rooms;
       }
+
     }
   }
+  getAvaibleRoomsNumber
 
   //  @Override
   //  public int getId(String name) {

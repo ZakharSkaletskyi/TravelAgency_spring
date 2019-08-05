@@ -1,6 +1,7 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
+import com.softserve.lv_427.travel_agency.dto.FindHotelDto;
 import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
@@ -224,9 +225,28 @@ public class HotelServiceImpl implements HotelService {
         roomLoading);
   }
 
+<<<<<<< HEAD
+  @Override
+  @Transactional
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
+      throws ClassNotFoundException {
+    return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
+  }
+
+//  public FindHotelDto getFindHotelDto(FindHotelDto findHotelDto) {
+//    findHotelDto.setName(dao.getById(findHotelDto.getHotelID()).getName());
+//    findHotelDto.setRoomsCount(roomService.getRoomCount(findHotelDto.getHotelID()));
+//   List<Room>rooms=roomService.getAvailableRoomsOnDateInHotel(
+//           findHotelDto.getDateStart(), findHotelDto.getDateEnd(), findHotelDto.getHotelID());
+//   List<Integer> numbers =new ArrayList<integer>();
+//   
+//    findHotelDto.setAvaib numberleRoomsNumber();
+//  }
+=======
   //  @Override
   //  @Transactional
   //  public int getId(String name) {
   //    return dao.getId(name);
   //  }
+>>>>>>> 2f437b61dd38c77799dd21ebfc2e9d15f86576be
 }

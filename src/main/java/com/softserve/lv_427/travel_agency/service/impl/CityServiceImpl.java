@@ -102,6 +102,10 @@ public class CityServiceImpl implements CityService {
     return dao.getHotels(cityId);
   }
 
+<<<<<<< HEAD
+  @Override
+  @Transactional
+=======
   /**
    * Get CityDto for response.
    *
@@ -109,6 +113,7 @@ public class CityServiceImpl implements CityService {
    * @return CityDto.
    */
   @Override
+>>>>>>> 2f437b61dd38c77799dd21ebfc2e9d15f86576be
   public CityDto getCityDto(int cityId) {
     City city = getById(cityId);
 

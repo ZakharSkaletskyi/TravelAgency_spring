@@ -31,5 +31,6 @@ public interface HotelService {
 
   HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate);
 
-  //  int getId(String name);
+  List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) throws ClassNotFoundException;
+
 }

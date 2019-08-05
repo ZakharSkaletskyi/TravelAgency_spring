@@ -96,14 +96,14 @@ public class ClientDaoImpl implements ClientDao {
   }
 
   @Override
-  public List<Country> getAvailableCountries(int clientId)
-      throws ClassNotFoundException { // int progress
+  public List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException {
     Session session = sessionFactory.getCurrentSession();
     List<Country> countries =
         session
             .createQuery(
-                "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr  ", Country.class) // change
-            // .setParameter(1, clientId)
+                "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ",
+                Country.class) // change
+            .setParameter(1, clientId)
             .list();
     if (countries == null)
       throw new ClassNotFoundException("In DB no avaible countries for clientId= " + clientId);
@@ -113,25 +113,9 @@ public class ClientDaoImpl implements ClientDao {
   @Override
   public int getCountOfClients() {
     Session session = sessionFactory.getCurrentSession();
-    return session.createQuery("SELECT COUNT(id) FROM Client", Long.class)
-            .uniqueResult()
-            .intValue();
-
+    return session
+        .createQuery("SELECT COUNT(id) FROM Client", Long.class)
+        .uniqueResult()
+        .intValue();
   }
-
-  // "FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id = ?1 ",
-  //                "FROM country c JOIN visa. v LEFT JOIN v.clients clns WHERE clns.id = ?1",
-  // "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1"
-
-  // public List<Country> getAvailableCountries(int clientId)
-  //  throws SQLException, ClassNotFoundException {
-  // List<Country> countries = new ArrayList<>();
-  // List<Visa> visas = visaService.getVisasForTheClient(clientId);
-  //
-  // for (Visa visa : visas) {
-  //  countries.add(countryService.findById(visa.getCountryId()));
-  // }
-  //
-  // return countries;
-  // }
 }
