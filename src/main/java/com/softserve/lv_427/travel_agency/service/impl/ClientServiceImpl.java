@@ -1,16 +1,21 @@
 package com.softserve.lv_427.travel_agency.service.impl;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserve.lv_427.travel_agency.dao.ClientDao;
+import com.softserve.lv_427.travel_agency.dto.CityDto;
+import com.softserve.lv_427.travel_agency.dto.ClientPeriodDto;
 import com.softserve.lv_427.travel_agency.entity.Client;
 import com.softserve.lv_427.travel_agency.entity.Country;
+import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.service.ClientService;
 
 @Service
@@ -69,4 +74,24 @@ public class ClientServiceImpl implements ClientService {
   public List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException {
     return dao.getAvailableCountries(clientId);
   }
+
+//  @Override
+//  @Transactional
+//  public ClientPeriodDto getClientPeriodDto(
+//      int clientId,
+//      @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateStart,
+//      @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateEnd) {
+//	  return  new ClientPeriodDto(getById(clientId),dateStart,dateEnd);
+//  }
+  @Override
+  @Transactional
+  public ClientPeriodDto getClientPeriodDto(
+      int clientId,
+      String dateStart,
+      String dateEnd) {
+	  return  new ClientPeriodDto(getById(clientId),dateStart,dateEnd);
+  }
+
+@Override public CityDto getCityDto(int cityId){// TODO Auto-generated method stub
+return null;}
 }

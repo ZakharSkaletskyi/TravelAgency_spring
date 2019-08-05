@@ -5,44 +5,40 @@
   Time: 10:00
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.util.List" %>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page pageEncoding="UTF-8" %>
+<%@ page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page pageEncoding="UTF-8"%>
 <html>
 <head>
-    <title>Міста</title>
+<title>Міста</title>
 </head>
 <body>
-<jsp:include page="../modules/_header.jsp"/>
-<div style="padding-left: 15px">
-    <h2>Міста</h2>
-    <form action="/find_city" method="get">
-        <p style="font-size: 8px; color: red;">
-            *Доступні міста для <b><%=session.getAttribute("client")%>
-        </b>
-            в <b><%=session.getAttribute("country")%>
-        </b>
-            в період <b><%=session.getAttribute("startDate")%>
-        </b>
-            до <b><%=session.getAttribute("endDate")%>
-        </b>
+	<jsp:include page="../modules/_header.jsp" />
+	<div style="padding-left: 15px">
+		<h2>Міста</h2>
 
-        </p>
-      
-        <form action="/find_city" method="GET">
+
+		<form action="/find_hotels" method="POST" modelAttribute="ClientPeriodDto">
 			<p style="font-size: 8px; color: red;">
-				*Доступні міста ля обраного клієнта в період з ${dateStart} по ${dateEnd} }  
+				*Доступні міста для <b>${ClientPeriodDto.firstName}
+					${ClientPeriodDto.lastName}</b> в період з ${ClientPeriodDto.dateStart}
+				по ${ClientPeriodDto.dateEnd}
 			</p>
-			<form:select path="countries" name="selectedCity">
+			<form:select path="cities" name="selectedCity">
 				<c:forEach var="city" items="${cities}">
-					<form:option value="${city.id}"
-						label="${city.name}" />
+					<form:option value="${city.id}" label="${city.name}" />
 				</c:forEach>
 			</form:select>
 
-        <button type="submit">Знайти</button>
-    </form>
-</div>
+			<button type="submit">Знайти</button>
+			<form:hidden path="ClientPeriodDto.id" />
+			<form:hidden path="ClientPeriodDto.dateStart" />
+			<form:hidden path="ClientPeriodDto.dateEnd" />
+			<form:hidden path="ClientPeriodDto.firstName" />
+			<form:hidden path="ClientPeriodDto.lastName" />
+		</form>
+	</div>
 </body>
 </html>

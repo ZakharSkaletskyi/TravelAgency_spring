@@ -68,6 +68,7 @@ public class CityServiceImpl implements CityService {
     return dao.getHotels(cityId);
   }
 
+  @Override
   @Transactional
   public CityDto getCityDto(int cityId) {
     CityDto dto = new CityDto();

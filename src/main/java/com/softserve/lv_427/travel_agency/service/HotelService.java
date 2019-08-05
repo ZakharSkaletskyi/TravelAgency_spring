@@ -29,4 +29,6 @@ public interface HotelService {
   HotelDto getHotelDtoWithAvailabilityById(int hotelId, String startDate, String endDate);
 
   HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate);
+
+  List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) throws ClassNotFoundException;
 }

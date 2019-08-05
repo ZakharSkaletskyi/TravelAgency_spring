@@ -141,4 +141,9 @@ public class HotelServiceImpl implements HotelService {
     return dto;
 
   }
+  @Override
+  @Transactional
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) throws ClassNotFoundException{
+	  return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
+  }
 }

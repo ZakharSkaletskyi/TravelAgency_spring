@@ -94,7 +94,7 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public List<Country> getAvailableCountries(int clientId)
-      throws ClassNotFoundException { // int progress
+      throws ClassNotFoundException { 
     Session session = sessionFactory.getCurrentSession();
     List<Country> countries =
         session
@@ -109,6 +109,5 @@ public class ClientDaoImpl implements ClientDao {
     return countries;
   }
 
- // "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ", Country.class) // change
 
 }

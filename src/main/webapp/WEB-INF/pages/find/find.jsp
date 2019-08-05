@@ -11,6 +11,8 @@
 <%@page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <html>
 <head>
 <title>Знайти готель</title>
@@ -19,10 +21,11 @@
 	<jsp:include page="../modules/_header.jsp" />
 	<div style="padding-left: 15px">
 
-		<form action="/find_country" method="GET">
+		<form action="/find_country" modelAttribute="ClientPeriodDto"
+			method="POST">
 
 			<h2>Знайти готель</h2>
-			<form:select path="clients" name="selectedClient">
+			<form:select path="clients" name="id">
 				<c:forEach var="name" items="${clients}">
 					<form:option value="${name.id}"
 						label="${name.firstName} ${name.lastName}" />
@@ -31,14 +34,19 @@
 
 
 			<h3>Дата заїзду</h3>
+
 			<input type="date" name="dateStart"
 				value=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>
 				min=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>>
 
 			<h3>Дата виїзду</h3>
-			<input type="date" name="dateEnd" value="2019-08-03"
+
+			<input type="date" name="dateEnd"
+				value=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>
 				min=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>>
+				
 			<br> <input type="submit" value="Знайти">
+
 		</form>
 	</div>
 </body>
