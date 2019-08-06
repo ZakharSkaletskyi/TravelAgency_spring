@@ -33,8 +33,9 @@ public class ClientDaoImpl implements ClientDao {
   @Override
   @SuppressWarnings("unchecked")
   public List<Client> getAllClient() {
-    Session session = sessionFactory.openSession();
-    return session.createQuery("from Client").list();
+    try (Session session = sessionFactory.openSession()) {
+      return session.createQuery("from Client").list();
+    }
   }
 
   @Override
@@ -98,25 +99,27 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException {
-    Session session = sessionFactory.openSession();
-    List<Country> countries =
-        session
-            .createQuery(
-                "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ",
-                Country.class) // change
-            .setParameter(1, clientId)
-            .list();
-    if (countries == null)
-      throw new ClassNotFoundException("In DB no avaible countries for clientId= " + clientId);
-    return countries;
+    try (Session session = sessionFactory.openSession()) {
+      List<Country> countries =
+          session
+              .createQuery(
+                  "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ",
+                  Country.class) // change
+              .setParameter(1, clientId)
+              .list();
+      if (countries == null)
+        throw new ClassNotFoundException("In DB no avaible countries for clientId= " + clientId);
+      return countries;
+    }
   }
 
   @Override
   public int getCountOfClients() {
-    Session session = sessionFactory.openSession();
-    return session
-        .createQuery("SELECT COUNT(id) FROM Client", Long.class)
-        .uniqueResult()
-        .intValue();
+    try (Session session = sessionFactory.openSession()) {
+      return session
+          .createQuery("SELECT COUNT(id) FROM Client", Long.class)
+          .uniqueResult()
+          .intValue();
+    }
   }
 }

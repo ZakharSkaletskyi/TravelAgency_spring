@@ -28,10 +28,18 @@ import com.softserve.lv_427.travel_agency.service.VisaService;
 
 @Controller
 public class FindController {
-  @Autowired private ClientService clientService;
-  @Autowired private VisaService visaService;
-  @Autowired private CityService cityService;
-  @Autowired private HotelService hotelService;
+  private final ClientService clientService;
+  private final VisaService visaService;
+  private final CityService cityService;
+  private final HotelService hotelService;
+
+  @Autowired
+  public FindController(ClientService clientService, VisaService visaService, CityService cityService, HotelService hotelService) {
+    this.clientService = clientService;
+    this.visaService = visaService;
+    this.cityService = cityService;
+    this.hotelService = hotelService;
+  }
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public ModelAndView mainPage() {
