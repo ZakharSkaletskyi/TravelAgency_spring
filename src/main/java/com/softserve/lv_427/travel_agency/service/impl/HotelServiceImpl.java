@@ -2,6 +2,7 @@ package com.softserve.lv_427.travel_agency.service.impl;
 
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
 import com.softserve.lv_427.travel_agency.dto.FindHotelDto;
+import com.softserve.lv_427.travel_agency.dto.FindHotelStatDto;
 import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
@@ -225,7 +226,6 @@ public class HotelServiceImpl implements HotelService {
         roomLoading);
   }
 
-<<<<<<< HEAD
   @Override
   @Transactional
   public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
@@ -233,20 +233,38 @@ public class HotelServiceImpl implements HotelService {
     return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
   }
 
-//  public FindHotelDto getFindHotelDto(FindHotelDto findHotelDto) {
-//    findHotelDto.setName(dao.getById(findHotelDto.getHotelID()).getName());
-//    findHotelDto.setRoomsCount(roomService.getRoomCount(findHotelDto.getHotelID()));
-//   List<Room>rooms=roomService.getAvailableRoomsOnDateInHotel(
-//           findHotelDto.getDateStart(), findHotelDto.getDateEnd(), findHotelDto.getHotelID());
-//   List<Integer> numbers =new ArrayList<integer>();
-//   
-//    findHotelDto.setAvaib numberleRoomsNumber();
-//  }
-=======
-  //  @Override
-  //  @Transactional
-  //  public int getId(String name) {
-  //    return dao.getId(name);
-  //  }
->>>>>>> 2f437b61dd38c77799dd21ebfc2e9d15f86576be
+  @Override
+  @Transactional
+  public void fillFindHotelDtoWithHotelsAtributes(FindHotelDto findHotelDto) {
+    Hotel hotel = dao.getById(findHotelDto.getHotelId());
+    findHotelDto.setName(hotel.getName());
+    findHotelDto.setRoomsCount(roomService.getRoomCount(findHotelDto.getHotelId()));
+    findHotelDto.setRoomsCount(roomService.getRoomCount(findHotelDto.getHotelId()));
+
+    findHotelDto.setAvaibleRoomsNumber(
+        roomService.getAvaibleRoomsNumber(
+            findHotelDto.getHotelId(), findHotelDto.getDateStart(), findHotelDto.getDateEnd()));
+  }
+
+  @Override
+  public void fillFindHotelStatDto(
+      FindHotelStatDto findHotelStatDto, String dateStart, String dateEnd) {
+    findHotelStatDto.setStartDateHotelStat(dateStart);
+    findHotelStatDto.setEndDateHotelStat(dateEnd);
+    findHotelStatDto.setClientsCountsForPeriod(
+        getClientCountForPeriod(findHotelStatDto.getHotelId(), dateStart, dateEnd));
+    findHotelStatDto.setAverageBookTimeForPeriod(
+        getAverageBookTime(findHotelStatDto.getHotelId(), dateStart, dateEnd));
+    findHotelStatDto.setRoomsLoadingForPeriod(
+        getRoomsLoadingForPeriod(findHotelStatDto.getHotelId(), dateStart, dateEnd));
+  }
+
+  @Override
+  public List<Integer> getRoomsLoadingForPeriod(int hotelId, String dateStart, String dateEnd) {
+    List<Integer> roomsLoading = new ArrayList<Integer>();
+    for (int roomId : roomService.getRoomsId(hotelId)) {
+      roomsLoading.add(roomService.loadingRoomsPeriod(dateStart, dateEnd, roomId)[0]);
+    }
+    return roomsLoading;
+  }
 }

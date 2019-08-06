@@ -5,10 +5,8 @@ import com.softserve.lv_427.travel_agency.dto.CityDto;
 import com.softserve.lv_427.travel_agency.entity.City;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.service.CityService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -102,10 +100,7 @@ public class CityServiceImpl implements CityService {
     return dao.getHotels(cityId);
   }
 
-<<<<<<< HEAD
-  @Override
-  @Transactional
-=======
+
   /**
    * Get CityDto for response.
    *
@@ -113,16 +108,10 @@ public class CityServiceImpl implements CityService {
    * @return CityDto.
    */
   @Override
->>>>>>> 2f437b61dd38c77799dd21ebfc2e9d15f86576be
   public CityDto getCityDto(int cityId) {
     City city = getById(cityId);
 
     return new CityDto(city.getName(), city.getCountry(), getHotels(cityId));
   }
 
-  //  @Override
-  //  @Transactional
-  //  public int getId(String cityName) {
-  //    return dao.getId(cityName);
-  //  }
 }

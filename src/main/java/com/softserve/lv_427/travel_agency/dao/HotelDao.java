@@ -22,11 +22,8 @@ public interface HotelDao {
 
   int getAverageBookTime(int hotel_id, String dateStart, String dateEnd);
 
-  // переробити - спочату вибрати всі зайняті, а потім серед всіх готелів в місті вибрати
-  // ті які не в списку зайнятих
   List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
       throws ClassNotFoundException;
 
   List<Room> getRoomsByHotel(int hotelId);
-
 }

@@ -18,15 +18,14 @@
 	<jsp:include page="../modules/_header.jsp" />
 	<div style="padding-left: 15px">
 		<h2>Готелі</h2>
-		<form action="/find_hotel" method="post"
-			modelAttribute="ClientPeriodDto">
+		<form action="/find_hotel" method="POST" modelAttribute="findHotelDto">
 			<p style="font-size: 8px; color: red;">
 				*Доступні міста для <b>${ClientPeriodDto.firstName}
 					${ClientPeriodDto.lastName}</b> в період з ${ClientPeriodDto.dateStart}
 				по ${ClientPeriodDto.dateEnd}
 
 			</p>
-			<form:select path="hotels" name="hotelID">
+			<form:select path="hotels" name="hotelId">
 				<c:forEach var="hotel" items="${hotels}">
 					<form:option value="${hotel.id}" label="${hotel.name}" />
 				</c:forEach>

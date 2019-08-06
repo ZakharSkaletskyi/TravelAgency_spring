@@ -114,10 +114,4 @@ public class CountryServiceImpl implements CountryService {
 
     return new CountryDto(country.getName(), getCitiesByCountryId(countryId));
   }
-
-  //  @Override
-  //  @Transactional
-  //  public int getId(String countryName) {
-  //    return dao.getId(countryName);
-  //  }
 }

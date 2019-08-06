@@ -137,14 +137,4 @@ public class CountryDaoImpl implements CountryDao {
       return cities;
     }
   }
-
-  //  @Override
-  //  public int getId(String countryName) {
-  //    Session session = sessionFactory.getCurrentSession();
-  //    return (Integer)
-  //        session
-  //            .createQuery("Select id from Country where name = ?1")
-  //            .setParameter(1, countryName)
-  //            .uniqueResult();
-  //  }
 }

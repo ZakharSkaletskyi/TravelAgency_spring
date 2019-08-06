@@ -1,6 +1,6 @@
 
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Calendar" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Calendar"%>
 <%--
   Created by IntelliJ IDEA.
   User: Nazar
@@ -8,82 +8,63 @@
   Time: 14:22
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<%@page pageEncoding="UTF-8"%>
 <html>
 <head>
-    <title>
-        <%=session.getAttribute("hotel")%>
-    </title>
+<title>${findHotelDto.name}
 </head>
 <body>
-<jsp:include page="../modules/_header.jsp"/>
-<div style="padding-left: 15px">
-    <h2>Hotel "<%=session.getAttribute("hotel")%>"
-    </h2>
+	<jsp:include page="../modules/_header.jsp" />
+	<div style="padding-left: 15px">
+		<h2>Hotel ${findHotelDto.name}</h2>
 
-    <% RoomService roomService = new RoomServiceImpl();
-        HotelService hotelService = new HotelServiceImpl();
 
-        List<Room> rooms = roomService.getAvailableRoomsByHotel(
-                session.getAttribute("startDate").toString(),
-                session.getAttribute("endDate").toString(),
-                hotelService.getHotelIdByName(session.getAttribute("hotel").toString())
-        );%>
-    <p>К-сть кімнат: <b><%=roomService.getRoomCount(Integer.parseInt(session.getAttribute("hotelId").toString()))%></b></p>
+		<p>
+			К-сть кімнат: <b>${findHotelDto.roomsCount}</b>
+		</p>
 
-    <p style="font-size: 12px;">
-        Доступні кімнати
-        в період <b><%=session.getAttribute("startDate")%>
-    </b>
-        до <b><%=session.getAttribute("endDate")%>
-    </b> :
+		<p style="font-size: 12px;">
+			Доступні кімнати в період <b>${findHotelDto.dateStart} </b> до <b>${findHotelDto.dateEnd}
+			</b> :
+			<c:forEach var="room" items="${findHotelDto.avaibleRoomsNumber}">
+				<b><c:out value="№${room} " /></b>
+			</c:forEach>
 
-        <%
-            for (Room room : rooms) { %>
-        <b>
-            <%=room.getRoomNumber()%>,
-        </b>
-        <% } %>
-    </p>
-    <% if ((session.getAttribute("start_date_hotel_stat") == null) && (session.getAttribute("end_date_hotel_stat") == null)) { %>
-    <form action="/find_hotel" method="post">
-        <p>Cтатистика</p>
-        <p>З: <input type="date" name="start_date_hotel_stat"
-                     value=
-            <%= new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) %>>
-            до: <input type="date" name="end_date_hotel_stat"
-                       value=
-                <%= new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) %>></p>
-        <button type="submit">Отримати</button>
-    </form>
 
-    <% } else {%>
-    <p>Статистика за період <b><%=session.getAttribute("start_date_hotel_stat")%>
-    </b>
-        до <b><%=session.getAttribute("end_date_hotel_stat")%>
-        </b>
-    </p>
-    <ul>
-        <li>
-            Кількість клієнтів: <%=hotelService.getClientCountForPeriod(
-                hotelService.getHotelIdByName(session.getAttribute("hotel").toString()),
-                session.getAttribute("start_date_hotel_stat").toString(),
-                session.getAttribute("end_date_hotel_stat").toString()
-        )%>
-        </li>
 
-        <li>
-            Середній час
-            бронювання: <%=hotelService.getAverageBookTime(hotelService.getHotelIdByName(session.getAttribute("hotel").toString()),
-                session.getAttribute("start_date_hotel_stat").toString(),
-                session.getAttribute("end_date_hotel_stat").toString())%> днів
-        </li>
+		</p>
+		<form action="find_hotel" method="GET"
+			modelAttribute="findHotelStatDto">
+			<%--  edit path get method , edit button   --%>
+			<p>Cтатистика</p>
+			<p>
+				З: <input type="date" name="start_date_hotel_stat"
+					value=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>>
+				до: <input type="date" name="end_date_hotel_stat"
+					value=<%=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())%>>
+			</p>
+			<input type="submit" name="action1" value="Отримати" />
+			<form:hidden path="findHotelDto.hotelId" />
 
-        <li>
-            Завантаженість кімнат:
-            <ul>
-                <%
+		</form>
+
+		
+		<li>Кількість клієнтів:
+		${findHotelStatDto.clientsCountsForPeriod}
+		</li>
+
+		<li>Середній час бронювання: 
+		${findHotelStatDto.AverageBookTimeForPeriod}
+
+		</li>
+
+		<%--<li>Завантаженість кімнат:
+			<ul>
+				<%
                     for (int i = 0; i < roomService.getRoomCount(Integer.parseInt(session.getAttribute("hotelId").toString())); i++) {
                         int[] roomsLoading = roomService.LoadingRoomsPeriod(
                                 session.getAttribute("start_date_hotel_stat").toString(),
@@ -91,19 +72,19 @@
                                 roomService.getRoomIdByNumber(i + 1,
                                         Integer.parseInt(session.getAttribute("hotelId").toString())));
                 %>
-                <li><%=i + 1%> кімната: <%=roomsLoading[0]%> / <%=roomsLoading[1]%>
-                </li>
-                <%
+				<li><%=i + 1%> кімната: <%=roomsLoading[0]%> / <%=roomsLoading[1]%>
+				</li>
+				<%
                     }
                     session.setAttribute("start_date_hotel_stat", null);
                     session.setAttribute("end_date_hotel_stat", null);
                 %>
-            </ul>
-        </li>
-    </ul>
+			</ul>
+		</li>
+		</ul>
 
-    <%}%>
+		--%>
 
-</div>
+	</div>
 </body>
 </html>

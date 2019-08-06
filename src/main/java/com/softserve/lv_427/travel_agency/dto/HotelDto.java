@@ -6,7 +6,6 @@ import com.softserve.lv_427.travel_agency.entity.Room;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter

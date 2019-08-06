@@ -22,6 +22,4 @@ public interface CountryService {
   List<City> getCitiesByCountryId(int id);
 
   CountryDto getCountryDto(int countryId);
-
-  //  int getId(String countryName);
 }

@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -75,19 +76,19 @@ public class RoomServiceImpl implements RoomService {
   @Override
   @Transactional
   public int getLoadingPeriod(String startDate, String endDate) {
-      SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
-      Long periodL = null;
+    SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Long periodL = null;
 
-      try {
-          Date date1 = myFormat.parse(startDate);
-          Date date2 = myFormat.parse(endDate);
-          Long diff = date2.getTime() - date1.getTime();
-          periodL = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-      } catch (ParseException e) {
-          e.printStackTrace();
-      }
+    try {
+      Date date1 = myFormat.parse(startDate);
+      Date date2 = myFormat.parse(endDate);
+      Long diff = date2.getTime() - date1.getTime();
+      periodL = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
 
-      return periodL.intValue();
+    return periodL.intValue();
   }
 
   @Override
@@ -95,9 +96,16 @@ public class RoomServiceImpl implements RoomService {
   public int getRoomCount(int hotelId) {
     return dao.getRoomCount(hotelId);
   }
+  @Override
+  @Transactional
+  public List<Integer> getAvaibleRoomsNumber(int hotelId, String dateStart, String dateEnd) {
+    return dao.getAvaibleRoomsNumber(hotelId, dateStart, dateEnd);
+  }
 
-//  @Override
-//  public int getDaysFromPeriod(String dateStart, String dateEnd) {
-//    return dao.getDaysFromPeriod(dateStart, dateEnd);
-//  }
+  @Override
+  @Transactional
+  public List<Integer> getRoomsId(int hotelId) {
+    return dao.getRoomsId(hotelId);
+  }
+
 }
