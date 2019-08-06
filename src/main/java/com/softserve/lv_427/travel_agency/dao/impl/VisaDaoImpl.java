@@ -22,57 +22,64 @@ public class VisaDaoImpl implements VisaDao {
 
   @Override
   public void add(Visa visa) {
-    Session session = sessionFactory.openSession();
-    session.persist(visa);
+    try (Session session = sessionFactory.openSession()) {
+      session.persist(visa);
+    }
   }
 
   @Override
   public Visa getById(int id) {
-    Session session = sessionFactory.openSession();
-    return session.get(Visa.class, id);
+    try (Session session = sessionFactory.openSession()) {
+      return session.get(Visa.class, id);
+    }
   }
 
   @Override
   public void delete(Visa visa) {
-    Session session = sessionFactory.openSession();
-    session.delete(visa);
+    try (Session session = sessionFactory.openSession()) {
+      session.delete(visa);
+    }
   }
 
   @Override
   public void edit(Visa visa) {
-    Session session = sessionFactory.openSession();
-    session.update(visa);
+    try (Session session = sessionFactory.openSession()) {
+      session.update(visa);
+    }
   }
 
   @Override
   public List<Visa> findAll() {
-    Session session = sessionFactory.openSession();
-    return session.createQuery("FROM Visa", Visa.class).list();
+    try (Session session = sessionFactory.openSession()) {
+      return session.createQuery("FROM Visa", Visa.class).list();
+    }
   }
 
   @Override
   public int getId(String name) throws SQLException, ClassNotFoundException {
-    Session session = sessionFactory.openSession();
-    Integer id =
-        session
-            .createQuery("SELECT id FROM Visa WHERE name = ?1", Integer.class)
-            .setParameter(1, name)
-            .uniqueResult();
-    if (id == null) throw new ClassNotFoundException("In DB no Visa row with name=" + name);
-    return id;
+    try (Session session = sessionFactory.openSession()) {
+      Integer id =
+              session
+                      .createQuery("SELECT id FROM Visa WHERE name = ?1", Integer.class)
+                      .setParameter(1, name)
+                      .uniqueResult();
+      if (id == null) throw new ClassNotFoundException("In DB no Visa row with name=" + name);
+      return id;
+    }
   }
 
   @Override
   public int getVisasCountForTheClient(int clientId) throws SQLException {
-    Session session = sessionFactory.openSession();
-    Long count =
-        session
-            .createQuery(
-                "SELECT COUNT(v.id) FROM Visa v LEFT JOIN v.clients c WHERE c.id=?1", Long.class)
-            .setParameter(1, clientId)
-            .uniqueResult();
+    try (Session session = sessionFactory.openSession()) {
+      Long count =
+          session
+              .createQuery(
+                  "SELECT COUNT(v.id) FROM Visa v LEFT JOIN v.clients c WHERE c.id=?1", Long.class)
+              .setParameter(1, clientId)
+              .uniqueResult();
 
-    return count.intValue();
+      return count.intValue();
+    }
   }
 
   @Override
@@ -91,16 +98,16 @@ public class VisaDaoImpl implements VisaDao {
 
   @Override
   public int CountVisaForCountry(int countryId) throws SQLException {
+    try (Session session = sessionFactory.openSession()) {
+      Long count =
+              session
+                      .createQuery(
+                              "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1",
+                              Long.class)
+                      .setParameter(1, countryId)
+                      .uniqueResult();
 
-    Session session = sessionFactory.openSession();
-    Long count =
-        session
-            .createQuery(
-                "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1",
-                Long.class)
-            .setParameter(1, countryId)
-            .uniqueResult();
-
-    return count.intValue();
+      return count.intValue();
+    }
   }
 }

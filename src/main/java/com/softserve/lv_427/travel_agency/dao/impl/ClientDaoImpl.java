@@ -12,9 +12,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
-import java.util.List;
-
 @Repository
 public class ClientDaoImpl implements ClientDao {
   private SessionFactory sessionFactory;
@@ -26,8 +23,9 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public Client getById(int id) {
-    Session session = sessionFactory.openSession();
-    return session.get(Client.class, id);
+    try (Session session = sessionFactory.openSession()) {
+      return session.get(Client.class, id);
+    }
   }
 
   @Override
@@ -40,20 +38,23 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public void add(Client client) {
-    Session session = sessionFactory.openSession();
-    session.persist(client);
+    try (Session session = sessionFactory.openSession()) {
+      session.persist(client);
+    }
   }
 
   @Override
   public void delete(Client client) {
-    Session session = sessionFactory.openSession();
-    session.delete(client);
+    try (Session session = sessionFactory.openSession()) {
+      session.delete(client);
+    }
   }
 
   @Override
   public void edit(Client client) {
-    Session session = sessionFactory.openSession();
-    session.update(client);
+    try (Session session = sessionFactory.openSession()) {
+      session.update(client);
+    }
   }
   /**
    * Method that find and return client id by his firstName and lastName.
@@ -66,13 +67,14 @@ public class ClientDaoImpl implements ClientDao {
   @Override
   public int getClientId(String firstName, String lastName)
       throws SQLException, ClassNotFoundException {
-    Session session = sessionFactory.openSession();
-    return session
-        .createQuery(
-            "SELECT id FROM Client WHERE first_name = ?1 AND last_name = ?2", Integer.class)
-        .setParameter(1, firstName)
-        .setParameter(2, lastName)
-        .uniqueResult();
+    try (Session session = sessionFactory.openSession()) {
+      return session
+              .createQuery(
+                      "SELECT id FROM Client WHERE first_name = ?1 AND last_name = ?2", Integer.class)
+              .setParameter(1, firstName)
+              .setParameter(2, lastName)
+              .uniqueResult();
+    }
   }
 
   /**

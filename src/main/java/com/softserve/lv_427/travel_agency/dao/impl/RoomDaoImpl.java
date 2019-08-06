@@ -1,6 +1,8 @@
 package com.softserve.lv_427.travel_agency.dao.impl;
 
 import com.softserve.lv_427.travel_agency.dao.RoomDao;
+import com.softserve.lv_427.travel_agency.entity.Country;
+import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
 import com.softserve.lv_427.travel_agency.exception.FieldNotFoundException;
 import com.softserve.lv_427.travel_agency.service.external.DaysService;
@@ -166,4 +168,81 @@ public class RoomDaoImpl implements RoomDao {
         .uniqueResult()
         .intValue();
   }
+  // Zakhar
+  @Override
+  public List<Integer> getAvaibleRoomsNumber(int hotelId, String dateStart, String dateEnd) {
+    try (Session session = sessionFactory.openSession()) {
+      List<Integer> numbersOfBookedRooms =
+          session
+              .createQuery(
+                  "SELECT r.number FROM Hotel h JOIN h.rooms r join r.roomBooks rb"
+                      + " WHERE (((rb.orderStart > ?1 AND rb.orderStart < ?2)"
+                      + " OR (rb.orderStart < ?3 AND rb.orderEnd > ?4)"
+                      + " OR (rb.orderEnd > ?5 AND rb.orderEnd < ?6)) AND h.id=?7)",
+                  Integer.class)
+              .setParameter(1, dateStart)
+              .setParameter(2, dateEnd)
+              .setParameter(3, dateStart)
+              .setParameter(4, dateEnd)
+              .setParameter(5, dateStart)
+              .setParameter(6, dateEnd)
+              .setParameter(7, hotelId)
+              .list();
+
+      List<Integer> numbersOfAvaibleRooms;
+      if (numbersOfBookedRooms.size() == 0) {
+        numbersOfAvaibleRooms =
+            session
+                .createQuery(
+                    "SELECT r.number FROM Hotel h" + " JOIN h.rooms r " + "WHERE h.id =?1",
+                    Integer.class)
+                .setParameter(1, hotelId)
+                .list();
+      } else {
+        numbersOfAvaibleRooms =
+            session
+                .createQuery(
+                    "SELECT r.number FROM Hotel h"
+                        + " JOIN h.rooms r "
+                        + "WHERE ( r.number NOT IN (:bookedNumbers) "
+                        + "AND h.id =?1)",
+                    Integer.class)
+                .setParameterList("bookedNumbers", numbersOfBookedRooms)
+                .setParameter(1, hotelId)
+                .list();
+      }
+      return numbersOfAvaibleRooms;
+      //
+    }
+  }
+  // Zakhar
+  @Override
+  public List<Integer> getRoomsId(int hotelId) {
+    try (Session session = sessionFactory.openSession()) {
+      List<Integer> roomsId =
+          session
+              .createQuery(
+                  "SELECT r.id FROM Hotel h JOIN h.rooms r WHERE h.id = ?1", Integer.class)
+              .setParameter(1, hotelId)
+              .list();
+      if (roomsId == null) {
+        throw new FieldNotFoundException("There is no rooms in this hotel");
+      }
+      return roomsId;
+    }
+  }
+  ///////////////////////////////////////////
+  //  @Override
+  //  public List<Room> test() {
+  //    Session session = sessionFactory.getCurrentSession();
+  //    List<Room> testList =
+  //        session
+  //            .createQuery(
+  //                "select r from Room r where r.id not in (select r.id from room r where r.id>4)",
+  //                Room.class)
+  //            .list();
+  //    testList.forEach(s -> System.out.print(s.getId() + "|"));
+  //    System.out.println();
+  //    return testList;
+  //  }
 }

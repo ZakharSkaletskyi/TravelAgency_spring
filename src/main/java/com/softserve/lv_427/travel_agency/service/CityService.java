@@ -22,6 +22,4 @@ public interface CityService {
   List<Hotel> getHotels(int cityId);
 
   CityDto getCityDto(int cityId);
-
-  //  int getId(String cityName);
 }

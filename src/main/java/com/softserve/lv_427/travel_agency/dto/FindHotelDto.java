@@ -8,10 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FindHotelDto {
-  int hotelID; // ////////
-  String name;
-  int roomsCount; // К-сть кімнат: <b><%=roomService.getRoomCount
-  List<Integer> avaibleRoomsNumber; // Доступні кімнати
-  String dateStart; // book///////
-  String dateEnd; // book////////
+	private int hotelId; 
+	private String name; 
+	private int roomsCount; 
+	private List<Integer> avaibleRoomsNumber; 
+	private String dateStart; 
+	private String dateEnd; 
 }

@@ -18,4 +18,11 @@ public interface RoomDao {
   int getLoadingRoomsPeriod(String startDate, String endDate, int roomId);
 
   int getRoomCount(int hotelId);
+
+  // List<Room> test();////////////
+
+  List<Integer> getAvaibleRoomsNumber(int hotelId, String dateStart, String dateEnd);
+
+  List<Integer> getRoomsId(int hotelId);
+ 
 }
