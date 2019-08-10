@@ -173,13 +173,4 @@ public class CityDaoImpl implements CityDao {
       return hotels;
     }
   }
-
-  //  @Override
-  //  public int getId(String cityName) {
-  //    Session session = sessionFactory.getCurrentSession();
-  //    return session
-  //        .createQuery("Select id from City where name = ?1", Integer.class)
-  //        .setParameter(1, cityName)
-  //        .uniqueResult();
-  //  }
 }

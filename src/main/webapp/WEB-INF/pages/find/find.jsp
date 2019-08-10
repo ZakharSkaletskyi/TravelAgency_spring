@@ -28,7 +28,7 @@
 			<form:select path="clients" name="id">
 				<c:forEach var="name" items="${clients}">
 					<form:option value="${name.id}"
-						label="${name.firstName} ${name.lastName}" />
+						label="${name.id} ${name.firstName} ${name.lastName}" />
 				</c:forEach>
 			</form:select>
 

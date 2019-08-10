@@ -59,10 +59,10 @@ public class VisaDaoImpl implements VisaDao {
   public int getId(String name) throws SQLException, ClassNotFoundException {
     try (Session session = sessionFactory.openSession()) {
       Integer id =
-              session
-                      .createQuery("SELECT id FROM Visa WHERE name = ?1", Integer.class)
-                      .setParameter(1, name)
-                      .uniqueResult();
+          session
+              .createQuery("SELECT id FROM Visa WHERE name = ?1", Integer.class)
+              .setParameter(1, name)
+              .uniqueResult();
       if (id == null) throw new ClassNotFoundException("In DB no Visa row with name=" + name);
       return id;
     }
@@ -100,12 +100,12 @@ public class VisaDaoImpl implements VisaDao {
   public int CountVisaForCountry(int countryId) throws SQLException {
     try (Session session = sessionFactory.openSession()) {
       Long count =
-              session
-                      .createQuery(
-                              "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1",
-                              Long.class)
-                      .setParameter(1, countryId)
-                      .uniqueResult();
+          session
+              .createQuery(
+                  "SELECT COUNT(c.id) FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE ctr.id = ?1",
+                  Long.class)
+              .setParameter(1, countryId)
+              .uniqueResult();
 
       return count.intValue();
     }

@@ -2,6 +2,7 @@ package com.softserve.lv_427.travel_agency.controller;
 
 import java.util.List;
 
+import com.softserve.lv_427.travel_agency.service.external.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,6 +30,7 @@ public class FindController {
   @Autowired private ClientService clientService;
   @Autowired private CityService cityService;
   @Autowired private HotelService hotelService;
+  private Validator validator = new Validator();
 
   @ModelAttribute("findHotelDto")
   public FindHotelDto findHotelDto() {
@@ -53,6 +55,7 @@ public class FindController {
   public String findCountryPage(
       ModelMap model, @ModelAttribute("ClientPeriodDto") ClientPeriodDto clientPeriodDto)
       throws ClassNotFoundException {
+    validator.validateDateForStatistic(clientPeriodDto.getDateStart(), clientPeriodDto.getDateEnd());
     model.addAttribute(
         "ClientPeriodDto",
         clientService.getClientPeriodDto(
@@ -105,6 +108,7 @@ public class FindController {
       @RequestParam("start_date_hotel_stat") String startDateHotelStat,
       @RequestParam("end_date_hotel_stat") String endDateHotelStat,
       @ModelAttribute("findHotelStatDto") FindHotelStatDto findHotelStatDto) {
+    validator.validateDateForStatistic(startDateHotelStat, endDateHotelStat);
 
     System.out.println("Button was pressed!!!");
     System.out.println(

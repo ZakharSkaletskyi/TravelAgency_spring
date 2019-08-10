@@ -8,10 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FindHotelDto {
-	private int hotelId; 
-	private String name; 
-	private int roomsCount; 
-	private List<Integer> avaibleRoomsNumber; 
-	private String dateStart; 
-	private String dateEnd; 
+  private int hotelId;
+  private String name;
+  private int roomsCount;
+  private List<Integer> avaibleRoomsNumber;
+  private String dateStart;
+  private String dateEnd;
 }

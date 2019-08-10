@@ -56,33 +56,17 @@
     </li>
 
     <li>Середній час бронювання:
-        ${findHotelStatDto.AverageBookTimeForPeriod}
+        ${findHotelStatDto.averageBookTimeForPeriod}
 
     </li>
 
-    <%--<li>Завантаженість кімнат:
-        <ul>
-            <%
-                for (int i = 0; i < roomService.getRoomCount(Integer.parseInt(session.getAttribute("hotelId").toString())); i++) {
-                    int[] roomsLoading = roomService.LoadingRoomsPeriod(
-                            session.getAttribute("start_date_hotel_stat").toString(),
-                            session.getAttribute("end_date_hotel_stat").toString(),
-                            roomService.getRoomIdByNumber(i + 1,
-                                    Integer.parseInt(session.getAttribute("hotelId").toString())));
-            %>
-            <li><%=i + 1%> кімната: <%=roomsLoading[0]%> / <%=roomsLoading[1]%>
-            </li>
-            <%
-                }
-                session.setAttribute("start_date_hotel_stat", null);
-                session.setAttribute("end_date_hotel_stat", null);
-            %>
-        </ul>
-    </li>
-    </ul>
-
-    --%>
-
+    <li>Завантаженість кімнат:</li>
+    <ol>
+        <c:forEach var="findHotelStatDto"
+                   items="${findHotelStatDto.roomsLoadingForPeriod}">
+            <li> ${findHotelStatDto}</li>
+        </c:forEach>
+    </ol>
 </div>
 </body>
 </html>

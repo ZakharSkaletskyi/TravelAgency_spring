@@ -285,13 +285,4 @@ public class HotelDaoImpl implements HotelDao {
       }
     }
   }
-
-  //  @Override
-  //  public int getId(String name) {
-  //    Session session = sessionFactory.getCurrentSession();
-  //    return session
-  //        .createQuery("Select id from Hotel where name = ?1", Integer.class)
-  //        .setParameter(1, name)
-  //        .uniqueResult();
-  //  }
 }

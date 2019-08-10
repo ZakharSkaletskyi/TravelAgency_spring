@@ -12,6 +12,6 @@ public class FindHotelStatDto {
   private String startDateHotelStat;
   private String endDateHotelStat;
   private int clientsCountsForPeriod;
-  private int AverageBookTimeForPeriod;
+  private int averageBookTimeForPeriod;
   private List<Integer> roomsLoadingForPeriod;
 }

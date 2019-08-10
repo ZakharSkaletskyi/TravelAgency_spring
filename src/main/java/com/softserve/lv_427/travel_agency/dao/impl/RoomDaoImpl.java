@@ -113,7 +113,7 @@ public class RoomDaoImpl implements RoomDao {
               .setParameter(3, hotelId)
               .list();
       if (rooms == null) {
-        throw new FieldNotFoundException("There is no available rooms");
+        throw new FieldNotFoundException("There is no rooms");
       } else {
         return rooms;
       }
@@ -161,14 +161,23 @@ public class RoomDaoImpl implements RoomDao {
    */
   @Override
   public int getRoomCount(int hotelId) {
-    Session session = sessionFactory.openSession();
-    return session
-        .createQuery("select count (id) from Room where hotel.id = ?1", Long.class)
-        .setParameter(1, hotelId)
-        .uniqueResult()
-        .intValue();
+    try (Session session = sessionFactory.openSession()) {
+      return session
+          .createQuery("select count (id) from Room where hotel.id = ?1", Long.class)
+          .setParameter(1, hotelId)
+          .uniqueResult()
+          .intValue();
+    }
   }
-  // Zakhar
+
+  /**
+   * Get available rooms in hotel.
+   *
+   * @param hotelId - hotel id.
+   * @param dateStart - start date.
+   * @param dateEnd - end date
+   * @return List of rooms.
+   */
   @Override
   public List<Integer> getAvaibleRoomsNumber(int hotelId, String dateStart, String dateEnd) {
     try (Session session = sessionFactory.openSession()) {
@@ -215,14 +224,19 @@ public class RoomDaoImpl implements RoomDao {
       //
     }
   }
-  // Zakhar
+
+  /**
+   * Get available rooms in hotel.
+   *
+   * @param hotelId - hotel id.
+   * @return List of rooms.
+   */
   @Override
   public List<Integer> getRoomsId(int hotelId) {
     try (Session session = sessionFactory.openSession()) {
       List<Integer> roomsId =
           session
-              .createQuery(
-                  "SELECT r.id FROM Hotel h JOIN h.rooms r WHERE h.id = ?1", Integer.class)
+              .createQuery("SELECT r.id FROM Hotel h JOIN h.rooms r WHERE h.id = ?1", Integer.class)
               .setParameter(1, hotelId)
               .list();
       if (roomsId == null) {
@@ -231,18 +245,4 @@ public class RoomDaoImpl implements RoomDao {
       return roomsId;
     }
   }
-  ///////////////////////////////////////////
-  //  @Override
-  //  public List<Room> test() {
-  //    Session session = sessionFactory.getCurrentSession();
-  //    List<Room> testList =
-  //        session
-  //            .createQuery(
-  //                "select r from Room r where r.id not in (select r.id from room r where r.id>4)",
-  //                Room.class)
-  //            .list();
-  //    testList.forEach(s -> System.out.print(s.getId() + "|"));
-  //    System.out.println();
-  //    return testList;
-  //  }
 }
