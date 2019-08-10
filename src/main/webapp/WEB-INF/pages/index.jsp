@@ -5,12 +5,16 @@
   Time: 9:33
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Main Page</title>
+    <title>The Sun</title>
+    <jsp:include page="modules/_header.jsp"/>
 </head>
 <body>
-
+<div class="content">
+    <h1>Hello, our dear friend</h1>
+    <p class="description">Traveling with us is easy. Join us!</p>
+</div>
 </body>
 </html>

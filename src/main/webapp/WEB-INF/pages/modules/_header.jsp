@@ -10,23 +10,21 @@
 <html>
 
 <head>
-    <title>Header</title>
+    <title>The Sun</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../res/img/sun.ico" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/index.css"/>
 </head>
 
-<body style="padding: 0; margin: 0">
+<body>
 <header>
-    <div style="background: #E0E0E0; height: 55px; padding: 5px;">
-        <div style="float: left">
-            <h1>TourAgency "Сонечко"</h1>
-        </div>
-        <div style="float: right; padding: 10px; text-align: right; font-size: 15px">
-            <a href="/find" style="padding-left: 15px"> Знайти готель </a>
-            <a href="/countries" style="padding-left: 15px"> Країни </a>
-            <a href="/cities" style="padding-left: 15px"> Міста </a>
-            <a href="/hotels" style="padding-left: 15px"> Готелі </a>
-            <a href="/about" style="padding-left: 15px"> Про нас </a>
-            <a href="/profile" style="padding-left: 15px"> Профіль </a>
-        </div>
+    <a href="/" class="logo">TourAgency "The Sun"</a>
+    <div class="navigation">
+        <a href="/find"> Find hotel </a>
+        <a href="/countries"> Countries </a>
+        <a href="/cities"> Cities </a>
+        <a href="/hotels"> Hotels </a>
+        <a href="/about"> About </a>
+        <a href="/profile"> Profile </a>
     </div>
 </header>
 
