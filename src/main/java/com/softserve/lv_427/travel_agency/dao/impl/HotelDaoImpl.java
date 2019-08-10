@@ -94,7 +94,7 @@ public class HotelDaoImpl implements HotelDao {
   @Override
   public List<Hotel> getAll() {
     try (Session session = sessionFactory.openSession()) {
-      List<Hotel> hotels = session.createQuery("from Hotel", Hotel.class).list();
+      List<Hotel> hotels = session.createQuery("FROM Hotel", Hotel.class).list();
 
       if (hotels == null) {
         throw new FieldNotFoundException("There is no hotels");
@@ -148,11 +148,15 @@ public class HotelDaoImpl implements HotelDao {
               .createQuery(
                   "SELECT room.id FROM RoomBook"
                       + " WHERE ((orderStart > ?1 AND orderStart < ?2)"
-                      + " OR (orderStart < ?1 AND orderEnd > ?2)"
-                      + " OR (orderEnd > ?1 AND orderEnd < ?2))",
+                      + " OR (orderStart < ?3 AND orderEnd > ?4)"
+                      + " OR (orderEnd > ?5 AND orderEnd < ?6))",
                   Integer.class)
               .setParameter(1, dateStart)
               .setParameter(2, dateEnd)
+              .setParameter(3, dateStart)
+              .setParameter(4, dateEnd)
+              .setParameter(5, dateStart)
+              .setParameter(6, dateEnd)
               .list();
 
       List<Integer> hotelIds =
@@ -221,43 +225,45 @@ public class HotelDaoImpl implements HotelDao {
    */
   @Override
   public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) {
-    List<Hotel> hotels;
-    Session session = sessionFactory.openSession();
-    List<Integer> bookedHotelsId =
-        session
-            .createQuery(
-                "SELECT h.id FROM City c JOIN c.hotels h JOIN h.rooms r LEFT JOIN r.roomBooks rb WHERE "
-                    + "(c.id= ?1 "
-                    + "AND ((rb.orderStart > ?2 AND rb.orderStart < ?3)"
-                    + " OR (rb.orderStart < ?2 AND rb.orderEnd > ?3)"
-                    + " OR (rb.orderEnd > ?2 AND rb.orderEnd < ?3)))",
-                Integer.class)
-            .setParameter(1, cityId)
-            .setParameter(2, startDate)
-            .setParameter(3, endDate)
-            .list();
+    try (Session session = sessionFactory.openSession()) {
+      List<Hotel> hotels;
+      List<Integer> bookedHotelsRooms =
+          session
+              .createQuery(
+                  "SELECT r.id FROM City c JOIN c.hotels h JOIN h.rooms r LEFT JOIN r.roomBooks rb WHERE "
+                      + "(c.id= ?1 "
+                      + "AND ((rb.orderStart > ?2 AND rb.orderStart < ?3)"
+                      + " OR (rb.orderStart < ?2 AND rb.orderEnd > ?3)"
+                      + " OR (rb.orderEnd > ?2 AND rb.orderEnd < ?3)))",
+                  Integer.class)
+              .setParameter(1, cityId)
+              .setParameter(2, startDate)
+              .setParameter(3, endDate)
+              .list();
 
-    if (bookedHotelsId.size() == 0) {
-      hotels =
-          session
-              .createQuery(
-                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 ", Hotel.class) // change
-              .setParameter(1, cityId)
-              .list();
-    } else {
-      hotels =
-          session
-              .createQuery(
-                  "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 AND h.id NOT IN (:bookedHotelsId) ",
-                  Hotel.class) // change
-              .setParameter(1, cityId)
-              .setParameterList("bookedHotelsId", bookedHotelsId)
-              .list();
+      if (bookedHotelsRooms.size() == 0) {
+        hotels =
+            session
+                .createQuery(
+                    "SELECT h FROM City c JOIN c.hotels h JOIN h.rooms r WHERE c.id= ?1 ",
+                    Hotel.class)
+                .setParameter(1, cityId)
+                .list();
+      } else {
+        hotels =
+            session
+                .createQuery(
+                    "SELECT h FROM City c JOIN c.hotels h WHERE c.id= ?1 AND h.id NOT IN (:bookedHotelsRooms) ",
+                    Hotel.class)
+                .setParameter(1, cityId)
+                .setParameterList("bookedHotelsRooms", bookedHotelsRooms)
+                .list();
+      }
+      if (hotels == null) {
+        throw new FieldNotFoundException("In DB no available countries for clientId= " + cityId);
+      }
+      return hotels;
     }
-    if (hotels == null) {
-      throw new FieldNotFoundException("In DB no available countries for clientId= " + cityId);
-    }
-    return hotels;
   }
 
   /**
@@ -277,16 +283,6 @@ public class HotelDaoImpl implements HotelDao {
       } else {
         return rooms;
       }
-
     }
   }
-
-  //  @Override
-  //  public int getId(String name) {
-  //    Session session = sessionFactory.getCurrentSession();
-  //    return session
-  //        .createQuery("Select id from Hotel where name = ?1", Integer.class)
-  //        .setParameter(1, name)
-  //        .uniqueResult();
-  //  }
 }

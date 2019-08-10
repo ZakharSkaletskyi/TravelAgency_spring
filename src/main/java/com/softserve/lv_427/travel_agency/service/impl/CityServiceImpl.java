@@ -5,7 +5,6 @@ import com.softserve.lv_427.travel_agency.dto.CityDto;
 import com.softserve.lv_427.travel_agency.entity.City;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.service.CityService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

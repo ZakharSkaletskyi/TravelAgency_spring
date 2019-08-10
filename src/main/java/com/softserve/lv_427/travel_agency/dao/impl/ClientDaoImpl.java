@@ -12,9 +12,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
-import java.util.List;
-
 @Repository
 public class ClientDaoImpl implements ClientDao {
   private SessionFactory sessionFactory;
@@ -26,33 +23,38 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public Client getById(int id) {
-    Session session = sessionFactory.openSession();
-    return session.get(Client.class, id);
+    try (Session session = sessionFactory.openSession()) {
+      return session.get(Client.class, id);
+    }
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public List<Client> getAllClient() {
-    Session session = sessionFactory.openSession();
-    return session.createQuery("from Client").list();
+    try (Session session = sessionFactory.openSession()) {
+      return session.createQuery("from Client").list();
+    }
   }
 
   @Override
   public void add(Client client) {
-    Session session = sessionFactory.openSession();
-    session.persist(client);
+    try (Session session = sessionFactory.openSession()) {
+      session.persist(client);
+    }
   }
 
   @Override
   public void delete(Client client) {
-    Session session = sessionFactory.openSession();
-    session.delete(client);
+    try (Session session = sessionFactory.openSession()) {
+      session.delete(client);
+    }
   }
 
   @Override
   public void edit(Client client) {
-    Session session = sessionFactory.openSession();
-    session.update(client);
+    try (Session session = sessionFactory.openSession()) {
+      session.update(client);
+    }
   }
   /**
    * Method that find and return client id by his firstName and lastName.
@@ -65,13 +67,14 @@ public class ClientDaoImpl implements ClientDao {
   @Override
   public int getClientId(String firstName, String lastName)
       throws SQLException, ClassNotFoundException {
-    Session session = sessionFactory.openSession();
-    return session
-        .createQuery(
-            "SELECT id FROM Client WHERE first_name = ?1 AND last_name = ?2", Integer.class)
-        .setParameter(1, firstName)
-        .setParameter(2, lastName)
-        .uniqueResult();
+    try (Session session = sessionFactory.openSession()) {
+      return session
+              .createQuery(
+                      "SELECT id FROM Client WHERE first_name = ?1 AND last_name = ?2", Integer.class)
+              .setParameter(1, firstName)
+              .setParameter(2, lastName)
+              .uniqueResult();
+    }
   }
 
   /**
@@ -98,25 +101,27 @@ public class ClientDaoImpl implements ClientDao {
 
   @Override
   public List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException {
-    Session session = sessionFactory.openSession();
-    List<Country> countries =
-        session
-            .createQuery(
-                "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ",
-                Country.class) // change
-            .setParameter(1, clientId)
-            .list();
-    if (countries == null)
-      throw new ClassNotFoundException("In DB no avaible countries for clientId= " + clientId);
-    return countries;
+    try (Session session = sessionFactory.openSession()) {
+      List<Country> countries =
+          session
+              .createQuery(
+                  "SELECT ctr FROM Client c JOIN c.visas v LEFT JOIN v.countries ctr WHERE c.id= ?1 ",
+                  Country.class) // change
+              .setParameter(1, clientId)
+              .list();
+      if (countries == null)
+        throw new ClassNotFoundException("In DB no avaible countries for clientId= " + clientId);
+      return countries;
+    }
   }
 
   @Override
   public int getCountOfClients() {
-    Session session = sessionFactory.openSession();
-    return session
-        .createQuery("SELECT COUNT(id) FROM Client", Long.class)
-        .uniqueResult()
-        .intValue();
+    try (Session session = sessionFactory.openSession()) {
+      return session
+          .createQuery("SELECT COUNT(id) FROM Client", Long.class)
+          .uniqueResult()
+          .intValue();
+    }
   }
 }

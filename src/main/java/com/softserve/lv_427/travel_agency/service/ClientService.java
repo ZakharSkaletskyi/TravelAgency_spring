@@ -1,7 +1,6 @@
 package com.softserve.lv_427.travel_agency.service;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import com.softserve.lv_427.travel_agency.dto.CityDto;
@@ -29,8 +28,6 @@ public interface ClientService {
   List<Country> getAvailableCountries(int clientId) throws ClassNotFoundException;
 
   CityDto getCityDto(int cityId);
-
-  // ClientPeriodDto getClientPeriodDto(int clientId, LocalDate dateStart, LocalDate dateEnd);
 
   ClientPeriodDto getClientPeriodDto(int clientId, String dateStart, String dateEnd);
 

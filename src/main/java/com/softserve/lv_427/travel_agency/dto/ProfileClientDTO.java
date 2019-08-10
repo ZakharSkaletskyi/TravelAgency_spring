@@ -10,10 +10,9 @@ import java.util.List;
 @Getter
 @Setter
 public class ProfileClientDTO {
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private List<Country> countries;
-    private List<Visa> visas;
-
+  private String firstName;
+  private String lastName;
+  private String phoneNumber;
+  private List<Country> countries;
+  private List<Visa> visas;
 }

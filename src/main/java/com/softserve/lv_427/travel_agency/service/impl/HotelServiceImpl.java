@@ -2,6 +2,7 @@ package com.softserve.lv_427.travel_agency.service.impl;
 
 import com.softserve.lv_427.travel_agency.dao.HotelDao;
 import com.softserve.lv_427.travel_agency.dto.FindHotelDto;
+import com.softserve.lv_427.travel_agency.dto.FindHotelStatDto;
 import com.softserve.lv_427.travel_agency.dto.HotelDto;
 import com.softserve.lv_427.travel_agency.entity.Hotel;
 import com.softserve.lv_427.travel_agency.entity.Room;
@@ -40,7 +41,6 @@ public class HotelServiceImpl implements HotelService {
    * @param hotel - Hotel entity.
    */
   @Override
-  @Transactional
   public void add(Hotel hotel) {
     dao.add(hotel);
   }
@@ -144,27 +144,12 @@ public class HotelServiceImpl implements HotelService {
   }
 
   /**
-   * Get all hotels in city with available for booking rooms.
-   *
-   * @param cityId - city id.
-   * @param startDate - start date.
-   * @param endDate - end date.
-   * @return List of hotels.
-   */
-  @Override
-  @Transactional
-  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate) {
-    return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
-  }
-
-  /**
    * Get HotelDto for main hotel page.
    *
    * @param hotelId - hotel id.
    * @return HotelDto for controller.
    */
   @Override
-  @Transactional
   public HotelDto getHotelDtoById(int hotelId) {
     Hotel hotel = getById(hotelId);
     Calendar nextYearC = Calendar.getInstance();
@@ -194,7 +179,6 @@ public class HotelServiceImpl implements HotelService {
    * @return HotelDto for controller.
    */
   @Override
-  @Transactional
   public HotelDto getHotelDtoWithAvailabilityById(int hotelId, String startDate, String endDate) {
     Hotel hotel = getById(hotelId);
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -222,7 +206,6 @@ public class HotelServiceImpl implements HotelService {
    * @return HotelDto for controller.
    */
   @Override
-  @Transactional
   public HotelDto getHotelDtoWithStatisticById(int hotelId, String startDate, String endDate) {
     Hotel hotel = getById(hotelId);
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -251,6 +234,47 @@ public class HotelServiceImpl implements HotelService {
         roomLoading);
   }
 
+  @Override
+  @Transactional
+  public List<Hotel> getAvailableHotelsOnDatesInCity(int cityId, String startDate, String endDate)
+      throws ClassNotFoundException {
+    return dao.getAvailableHotelsOnDatesInCity(cityId, startDate, endDate);
+  }
+
+  @Override
+  @Transactional
+  public void fillFindHotelDtoWithHotelsAtributes(FindHotelDto findHotelDto) {
+    Hotel hotel = dao.getById(findHotelDto.getHotelId());
+    findHotelDto.setName(hotel.getName());
+    findHotelDto.setRoomsCount(roomService.getRoomCount(findHotelDto.getHotelId()));
+    findHotelDto.setRoomsCount(roomService.getRoomCount(findHotelDto.getHotelId()));
+
+    findHotelDto.setAvaibleRoomsNumber(
+        roomService.getAvaibleRoomsNumber(
+            findHotelDto.getHotelId(), findHotelDto.getDateStart(), findHotelDto.getDateEnd()));
+  }
+
+  @Override
+  public void fillFindHotelStatDto(
+      FindHotelStatDto findHotelStatDto, String dateStart, String dateEnd) {
+    findHotelStatDto.setStartDateHotelStat(dateStart);
+    findHotelStatDto.setEndDateHotelStat(dateEnd);
+    findHotelStatDto.setClientsCountsForPeriod(
+        getClientCountForPeriod(findHotelStatDto.getHotelId(), dateStart, dateEnd));
+    findHotelStatDto.setAverageBookTimeForPeriod(
+        getAverageBookTime(findHotelStatDto.getHotelId(), dateStart, dateEnd));
+    findHotelStatDto.setRoomsLoadingForPeriod(
+        getRoomsLoadingForPeriod(findHotelStatDto.getHotelId(), dateStart, dateEnd));
+  }
+
+  @Override
+  public List<Integer> getRoomsLoadingForPeriod(int hotelId, String dateStart, String dateEnd) {
+    List<Integer> roomsLoading = new ArrayList<Integer>();
+    for (int roomId : roomService.getRoomsId(hotelId)) {
+      roomsLoading.add(roomService.loadingRoomsPeriod(dateStart, dateEnd, roomId)[0]);
+    }
+    return roomsLoading;
+  }
   //  @Override
   //  @Transactional
   //  public int getId(String name) {

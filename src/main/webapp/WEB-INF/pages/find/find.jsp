@@ -11,7 +11,6 @@
 <%@page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <jsp:include page="../modules/_header.jsp" />
 
@@ -29,7 +28,7 @@
 			<form:select path="clients" name="id">
 				<c:forEach var="name" items="${clients}">
 					<form:option value="${name.id}"
-						label="${name.firstName} ${name.lastName}" />
+						label="${name.id} ${name.firstName} ${name.lastName}" />
 				</c:forEach>
 			</form:select>
 
