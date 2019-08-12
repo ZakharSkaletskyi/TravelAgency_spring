@@ -7,7 +7,7 @@ addons:
       secure: "3215046d97c64441cd26c8cc645720ffcd9cf6d4"
 
 jdk:
-  - oraclejdk9
+  - oraclejdk8
   
 script:
 # other script steps might be done before running the actual analysis
