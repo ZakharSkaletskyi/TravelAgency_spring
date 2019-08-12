@@ -13,6 +13,11 @@ script:
   # other script steps might be done before running the actual analysis
   - sonar-scanner
   
- cache:
+cache:
   directories:
+    - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
+
+script:
+# other script steps might be done before running the actual analysis
+- sonar-scanner
