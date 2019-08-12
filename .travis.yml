@@ -10,14 +10,11 @@ jdk:
   - oraclejdk8
   
 script:
-  # other script steps might be done before running the actual analysis
-  - sonar-scanner
-  
+# other script steps might be done before running the actual analysis
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
 
-script:
-# other script steps might be done before running the actual analysis
-- sonar-scanner
