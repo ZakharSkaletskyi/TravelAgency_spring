@@ -3,7 +3,7 @@ dist: trusty
 
 addons:
   sonarcloud:
-    organization: " zakharskaletskyi"
+    organization: "zakharskaletskyi"
     token:
       secure: "3215046d97c64441cd26c8cc645720ffcd9cf6d4"
 
@@ -16,6 +16,4 @@ script:
 
 cache:
   directories:
-    - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
-
