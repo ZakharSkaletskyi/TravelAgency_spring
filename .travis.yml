@@ -1,0 +1,23 @@
+language: java
+
+addons:
+  sonarcloud:
+    organization: " zakharskaletskyi"
+    token:
+      secure: "c3897139b6a73f395200f4827aaedfb62a9f44c9"
+
+jdk:
+  - oraclejdk8
+  
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
+  
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+
+script:
+# other script steps might be done before running the actual analysis
+- sonar-scanner
