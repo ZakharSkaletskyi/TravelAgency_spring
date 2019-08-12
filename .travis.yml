@@ -4,7 +4,7 @@ addons:
   sonarcloud:
     organization: " zakharskaletskyi"
     token:
-      secure: "c3897139b6a73f395200f4827aaedfb62a9f44c9"
+      secure: "3215046d97c64441cd26c8cc645720ffcd9cf6d4"
 
 jdk:
   - oraclejdk8
