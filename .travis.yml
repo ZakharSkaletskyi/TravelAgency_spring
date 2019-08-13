@@ -20,7 +20,7 @@ script:
 #mvn clean package sonar:sonar
 #mvn sonar:sonar
 # - mvn sonar:sonar 
-mvn clean build sonar:sonar
+mvn build sonar:sonar
 
 #- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
