@@ -14,7 +14,7 @@ jdk:
   - oraclejdk8
   
 script:
-- mvn install 
+- mvn clean install sonar:sonar
 #- sonar-scanner
 #- mvn install
 #mvn clean package sonar:sonar
