@@ -8,17 +8,18 @@ addons:
   sonarcloud:
     organization: "zakharskaletskyi"
     token:
-      secure: "3215046d97c64441cd26c8cc645720ffcd9cf6d4"
+      secure: "06fa959b4e3ac274b4913e13ea2da2465993a699"
 
 jdk:
   - oraclejdk8
   
 script:
 #- sonar-scanner
+
 - mvn install
 #mvn clean package sonar:sonar
 #mvn sonar:sonar
-
+ - mvn clean sonar:sonar 
 #- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
 # other script steps might be done before running the actual analysis
@@ -26,7 +27,6 @@ script:
 
 cache:
   directories:
-    - '$HOME/.sonar/cache'
     - '$HOME/.m2/repository' #work without this, maybe delete
-
+    - '$HOME/.sonar/cache'
     
