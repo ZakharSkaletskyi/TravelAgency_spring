@@ -1,7 +1,7 @@
 language: java
 dist: trusty  
 sudo: required
-install: true
+#install: true
 
 addons:
   sonarcloud:
@@ -13,8 +13,9 @@ jdk:
   - oraclejdk8
   
 script:
+  - sonar-scanner
 
-- mvn install
+#- mvn install
 
 #- mvn clean verify sonar:sonar 
 
@@ -24,6 +25,6 @@ script:
 cache:
   directories:
     - '$HOME/.sonar/cache'
-    - '$HOME/.m2/repository' #work without this, maybe delete
+   # - '$HOME/.m2/repository' #work without this, maybe delete
 
     
