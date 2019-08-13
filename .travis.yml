@@ -17,7 +17,8 @@ script:
 #- sonar-scanner
 
 #- mvn install
-mvn clean package sonar:sonar
+#mvn clean package sonar:sonar
+mvn clean deploy sonar:sonar
 
 #- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
