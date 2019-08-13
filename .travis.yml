@@ -19,7 +19,7 @@ script:
 - mvn install
 #mvn clean package sonar:sonar
 #mvn sonar:sonar
- - mvn clean sonar:sonar 
+ - mvn sonar:sonar 
 #- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
 # other script steps might be done before running the actual analysis
@@ -30,3 +30,4 @@ cache:
     - '$HOME/.m2/repository' #work without this, maybe delete
     - '$HOME/.sonar/cache'
     
+
