@@ -1,6 +1,8 @@
 language: java
 dist: trusty
 sudo: required
+install: true
+
 
 
 
@@ -15,7 +17,8 @@ jdk:
   
 script:
 #- mvn install
-- sonar-scanner
+- mvn clean verify sonar:sonar 
+
 
 
 # other script steps might be done before running the actual analysis
