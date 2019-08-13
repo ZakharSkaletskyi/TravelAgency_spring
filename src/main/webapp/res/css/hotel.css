@@ -1,0 +1,23 @@
+.hotel-description {
+    display: flex;
+    flex-direction: column;
+    color:black;
+}
+
+.hotel-form {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.hotel-statistic, .hotel-availability{
+    font-size: 25px;
+}
+
+.hotel-statistic ul {
+    font-size: 20px;
+}
+
+.hotel-statistic ul li {
+    margin-top: 5px;
+}
