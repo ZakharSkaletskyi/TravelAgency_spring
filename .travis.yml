@@ -15,9 +15,10 @@ jdk:
   
 script:
 - sonar-scanner
+- mvn install
+
 # other script steps might be done before running the actual analysis
 #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-
 
 cache:
   directories:
