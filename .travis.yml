@@ -1,7 +1,8 @@
 language: java
-dist: trusty  
+#dist: trusty  
+sudo: false
 #sudo: required
-#install: true
+install: true
 
 addons:
   sonarcloud:
@@ -13,7 +14,7 @@ jdk:
   - oraclejdk8
   
 script:
-- sonar-scanner
+#- sonar-scanner
 
 #- mvn install
 
