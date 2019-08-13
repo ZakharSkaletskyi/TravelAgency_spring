@@ -17,8 +17,9 @@ script:
 #- sonar-scanner
 
 #- mvn install
+mvn clean package sonar:sonar
 
-- mvn clean verify sonar:sonar 
+#- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
 # other script steps might be done before running the actual analysis
 #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
