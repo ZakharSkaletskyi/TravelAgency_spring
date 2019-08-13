@@ -16,9 +16,9 @@ jdk:
 script:
 #- sonar-scanner
 
-#- mvn install
+- mvn install
 #mvn clean package sonar:sonar
-mvn clean sonar:sonar
+mvn sonar:sonar
 
 #- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
