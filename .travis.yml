@@ -21,7 +21,7 @@ script:
 #mvn sonar:sonar
 # - mvn sonar:sonar 
 -mvn install 
--mvn sonar:sonar
+
 #- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
 # other script steps might be done before running the actual analysis
