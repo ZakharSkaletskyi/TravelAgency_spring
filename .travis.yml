@@ -3,9 +3,6 @@ dist: trusty
 sudo: required
 install: true
 
-
-
-
 addons:
   sonarcloud:
     organization: "zakharskaletskyi"
@@ -16,10 +13,10 @@ jdk:
   - oraclejdk8
   
 script:
+
 - mvn install
+
 #- mvn clean verify sonar:sonar 
-
-
 
 # other script steps might be done before running the actual analysis
 #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
@@ -28,4 +25,5 @@ cache:
   directories:
     - '$HOME/.sonar/cache'
     - '$HOME/.m2/repository'
+
     
