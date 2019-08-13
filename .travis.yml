@@ -1,5 +1,6 @@
 language: java
 dist: trusty
+sudo: required
 install: true
 
 
@@ -15,9 +16,9 @@ jdk:
 script:
 - sonar-scanner
 # other script steps might be done before running the actual analysis
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-
+#- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 
 cache:
   directories:
     - '$HOME/.sonar/cache'
+    
