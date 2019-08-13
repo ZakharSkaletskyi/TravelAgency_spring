@@ -14,13 +14,12 @@ jdk:
   - oraclejdk8
   
 script:
+- mvn install 
 #- sonar-scanner
 #- mvn install
 #mvn clean package sonar:sonar
 #mvn sonar:sonar
 # - mvn sonar:sonar 
--mvn install 
-
 #- mvn clean verify sonar:sonar 
 #- mvn sonar:sonar
 # other script steps might be done before running the actual analysis
