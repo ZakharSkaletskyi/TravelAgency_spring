@@ -11,7 +11,7 @@ token:
 secure: "06fa959b4e3ac274b4913e13ea2da2465993a699"
 
 jdk:
-    oraclejdk8
+    - oraclejdk8
 
 script:
     - mvn clean sonar:sonar 
