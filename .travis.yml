@@ -1,7 +1,7 @@
 language: java
 dist: trusty
-#sudo: true
-sudo: required
+sudo: true
+#sudo: required
 install: true
 
 addons:
@@ -13,7 +13,7 @@ jdk:
     - oraclejdk8
 
 script:
-    - mvn clean sonar:sonar #-Dsonar.host.url=https://sonarcloud.io
+    - mvn clean install sonar:sonar #-Dsonar.host.url=https://sonarcloud.io
 #- Dsonar.projectKey=test_sonar 
 #-Dsonar.organization=zakharskaletskyi 
 #-Dsonar.login=06fa959b4e3ac274b4913e13ea2da2465993a699
