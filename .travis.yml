@@ -9,7 +9,6 @@ addons:
         organization: "zakharskaletskyi"
         token:
             secure: "9f00f8fcb16cc950633536d42717f81fca1c1781"
-            secure: "470aaf3cde4f916561373c15f0a0d6d3e5196589"
 jdk:
     - oraclejdk8
 
