@@ -5,16 +5,15 @@ sudo: required
 install: true
 
 addons:
-sonarcloud:
-organization: "zakharskaletskyi"
-token:
-secure: "9f00f8fcb16cc950633536d42717f81fca1c1781"
-
+    sonarcloud:
+        organization: "zakharskaletskyi"
+        token:
+            secure: "9f00f8fcb16cc950633536d42717f81fca1c1781"
 jdk:
     - oraclejdk8
 
 script:
-    - mvn clean install sonar:sonar -Dsonar.host.url=https://sonarcloud.io
+    - mvn clean sonar:sonar -Dsonar.host.url=https://sonarcloud.io
 #- Dsonar.projectKey=test_sonar 
 #-Dsonar.organization=zakharskaletskyi 
 #-Dsonar.login=06fa959b4e3ac274b4913e13ea2da2465993a699
