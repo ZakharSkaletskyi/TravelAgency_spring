@@ -1,32 +1,28 @@
 language: java
-dist: trusty  
-#sudo: false
-sudo: required
+dist: trusty
+sudo: true
+#sudo: required
 install: true
 
 addons:
-  sonarcloud:
-    organization: "zakharskaletskyi"
-    token:
-      secure: "06fa959b4e3ac274b4913e13ea2da2465993a699"
+sonarcloud:
+organization: "zakharskaletskyi"
+token:
+secure: "06fa959b4e3ac274b4913e13ea2da2465993a699"
 
 jdk:
-  - oraclejdk8
-  
-script:
-#- sonar-scanner
 
-- mvn install
+oraclejdk8
+script:
+
+mvn clean sonar:sonar 
+-Dsonar.projectKey=test_sonar 
+-Dsonar.organization=zakharskaletskyi 
+-Dsonar.login=84dc48202fc50fe5c8fe73c6712a7075aacfc9d2
+#-Dsonar.login=84dc48202fc50fe5c8fe73c6712a7075aacfc9d2
+#- mvn clean build sonar:sonar
+#- mvn clean install sonar:sonar
+#- sonar-scanner
+#- mvn install
 #mvn clean package sonar:sonar
 #mvn sonar:sonar
- - mvn clean sonar:sonar 
-#- mvn clean verify sonar:sonar 
-#- mvn sonar:sonar
-# other script steps might be done before running the actual analysis
-#- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-
-cache:
-  directories:
-    - '$HOME/.m2/repository' #work without this, maybe delete
-    - '$HOME/.sonar/cache'
-    
