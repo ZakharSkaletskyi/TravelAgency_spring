@@ -11,12 +11,11 @@ token:
 secure: "06fa959b4e3ac274b4913e13ea2da2465993a699"
 
 jdk:
+    oraclejdk8
 
-oraclejdk8
 script:
-
-- mvn clean sonar:sonar 
-- Dsonar.projectKey=test_sonar 
+    - mvn clean sonar:sonar 
+#- Dsonar.projectKey=test_sonar 
 #-Dsonar.organization=zakharskaletskyi 
 #-Dsonar.login=06fa959b4e3ac274b4913e13ea2da2465993a699
 #- Dsonar.login=84dc48202fc50fe5c8fe73c6712a7075aacfc9d2a
