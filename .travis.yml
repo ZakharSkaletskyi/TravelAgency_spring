@@ -8,13 +8,13 @@ addons:
 sonarcloud:
 organization: "zakharskaletskyi"
 token:
-secure: "06fa959b4e3ac274b4913e13ea2da2465993a699"
+secure: "ccf99e7306a67fdcb8ef55149b279003319a12a2"
 
 jdk:
     - oraclejdk8
 
 script:
-    - mvn clean install sonar:sonar #-Dsonar.host.url=https://sonarcloud.io
+    - mvn clean install sonar:sonar -Dsonar.host.url=https://sonarcloud.io
 #- Dsonar.projectKey=test_sonar 
 #-Dsonar.organization=zakharskaletskyi 
 #-Dsonar.login=06fa959b4e3ac274b4913e13ea2da2465993a699
