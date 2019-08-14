@@ -14,7 +14,14 @@ jdk:
   - oraclejdk8
   
 script:
-- mvn clean install sonar:sonar
+- mvn clean sonar:sonar \
+  -Dsonar.projectKey=test_sonar \
+  -Dsonar.organization=zakharskaletskyi \
+  -Dsonar.host.url=https://sonarcloud.io \
+  -Dsonar.login=84dc48202fc50fe5c8fe73c6712a7075aacfc9d2 
+  #-Dsonar.login=84dc48202fc50fe5c8fe73c6712a7075aacfc9d2 
+#- mvn clean build sonar:sonar
+#- mvn clean install sonar:sonar
 #- sonar-scanner
 #- mvn install
 #mvn clean package sonar:sonar
